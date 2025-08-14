@@ -1,4 +1,17 @@
 baseURL = 'https://example.org/'
-languageCode = 'en-us'
+languageCode = 'ar'
 title = 'MBT'
-theme = 'stack'
+theme = 'PaperMod'
+
+[params]
+defaultTheme = 'dark'
+disableThemeToggle = false
+favicon = "images/logo.png"
+
+[params.profileMode]
+enabled = true
+title = "MBT"
+subtitle = "الموقع تحت الصيانة"
+imageUrl = "images/logo.png"
+imageWidth = 120
+imageHeight = 120
