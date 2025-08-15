@@ -1,17 +1,38 @@
-baseURL = 'https://example.org/'
-languageCode = 'ar'
-title = 'MBT'
-theme = 'PaperMod'
-
-[params]
-defaultTheme = 'dark'
-disableThemeToggle = false
-favicon = "images/logo.png"
-
-[params.profileMode]
-enabled = true
+baseURL = "https://mbteemm.com/"
+theme = "PaperMod"
 title = "MBT"
-subtitle = "الموقع تحت الصيانة"
-imageUrl = "images/logo.png"
-imageWidth = 120
-imageHeight = 120
+defaultContentLanguage = "ar"
+
+# --- إعدادات اللغة العربية (لضمان اتجاه النص الصحيح) ---
+[languages]
+  [languages.ar]
+    languageCode = "ar"
+    direction = "rtl"
+    weight = 1
+
+# --- إعدادات رئيسية للموقع ---
+[params]
+  # هذا السطر يقوم بإخفاء التاريخ ووقت القراءة من جميع المنشورات
+  hideMeta = true
+
+  # --- تفعيل وضع الصيانة (Profile Mode) ---
+  # هذا القسم هو المسؤول عن إخفاء المنشورات وعرض رسالة الصيانة
+  [params.profileMode]
+    enabled = true
+    title = "الموقع تحت الصيانة"
+    subtitle = " " # يمكنك إضافة نص فرعي هنا إذا أردت
+    imageUrl = "images/logo.png" # تأكد من وجود هذا الملف في مجلد assets/images
+    imageWidth = 200
+    imageHeight = 200
+	
+	[[menu.main]]
+  identifier = "whatsapp"
+  name = "الواتساب"
+  url = "https://wa.me/9647872840590" # قم بتغيير هذا الرقم إلى رقمك الخاص
+  weight = 10
+
+[[menu.main]]
+  identifier = "prices"
+  name = "الاسعار"
+  url = "/prices/" # تأكد من أن لديك صفحة بهذا المسار
+  weight = 20
