@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on MBT</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://mbteemm.com/posts/</link>
     <description>Recent content in Posts on MBT</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>ar</language>
     <lastBuildDate>Thu, 14 Aug 2025 14:12:37 +0300</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mbteemm.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>اختيار الشعار</title>
-      <link>http://localhost:1313/posts/logo-tipes/1/</link>
+      <link>https://mbteemm.com/posts/logo-tipes/</link>
       <pubDate>Thu, 14 Aug 2025 14:12:37 +0300</pubDate>
-      <guid>http://localhost:1313/posts/logo-tipes/1/</guid>
+      <guid>https://mbteemm.com/posts/logo-tipes/</guid>
       <description>تعرّف على أهمية الشعار وتأثيره في جذب العملاء، واستكشف أشهر أنواعه (النصي، الرمزي، المركب، والحرفي) مع أمثلة عملية لمساعدتك على اختيار التصميم الأنسب لعلامتك التجارية. اكتشف كيف يمكن للشعار أن يروي قصة مشروعك ويترك انطباعًا لا يُنسى.</description>
     </item>
   </channel>

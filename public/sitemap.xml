@@ -2,17 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://mbteemm.com/prices/</loc>
+    <lastmod>2025-08-16T17:49:19+03:00</lastmod>
+  </url><url>
+    <loc>https://mbteemm.com/prices/pdf-price/</loc>
+    <lastmod>2025-08-16T17:49:19+03:00</lastmod>
+  </url><url>
+    <loc>https://mbteemm.com/prices/logo-price/</loc>
+    <lastmod>2025-08-16T17:49:19+03:00</lastmod>
+  </url><url>
+    <loc>https://mbteemm.com/</loc>
     <lastmod>2025-08-14T19:13:53+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://mbteemm.com/34345464/996756/</loc>
     <lastmod>2025-08-14T14:12:37+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/logo-tipes/1/</loc>
+    <loc>https://mbteemm.com/46457657/575676/</loc>
     <lastmod>2025-08-14T14:12:37+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://mbteemm.com/34345464/</loc>
+    <lastmod>2025-08-14T14:12:37+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://mbteemm.com/46457657/</loc>
+    <lastmod>2025-08-14T14:12:37+03:00</lastmod>
+  </url><url>
+    <loc>https://mbteemm.com/posts/</loc>
+    <lastmod>2025-08-14T14:12:37+03:00</lastmod>
+  </url><url>
+    <loc>https://mbteemm.com/posts/logo-tipes/</loc>
+    <lastmod>2025-08-14T14:12:37+03:00</lastmod>
+  </url><url>
+    <loc>https://mbteemm.com/categories/</loc>
+  </url><url>
+    <loc>https://mbteemm.com/tags/</loc>
   </url>
 </urlset>
