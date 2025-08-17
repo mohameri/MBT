@@ -32,7 +32,7 @@ defaultContentLanguage = "ar"
   weight = 10
 
 [[menu.main]]
-  identifier = "prices"
-  name = "الاسعار"
-  url = "/prices/" # تأكد من أن لديك صفحة بهذا المسار
+  identifier = "Services"
+  name = "خدماتنا"
+  url = "/Services/" # تأكد من أن لديك صفحة بهذا المسار
   weight = 20
