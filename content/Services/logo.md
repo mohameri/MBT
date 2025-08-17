@@ -8,7 +8,7 @@ ShowToc = false
 tags = []
 categories = []
 [cover]
-    image = "/images/logo-price.webp"
+    image = "/images/logo.webp"
     alt = ""
     caption = ""
 +++
