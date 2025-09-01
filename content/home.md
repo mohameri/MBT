@@ -1,6 +1,7 @@
 +++
 title = ''
 date = '2025-08-14T14:12:37+03:00'
+description = 'جميع روابط وحسابات شركة mbt للتصكيك والمونتاج والموشن كرافيك.'
 draft = false
 hidden = true
 ShowToc = false
@@ -17,4 +18,7 @@ categories = []
 [![روابط صفحاتنا](/images/43543545.webp)](http://facebook.com/mbteemm)
 {{< figure src="/images/s.webp" width="30" >}}
 
-[![روابط صفحاتنا](/images/6767.webp)](Services/)
+[![خدناتنا](/images/67677.webp)](Services/)
+{{< figure src="/images/s.webp" width="30" >}}
+
+[![معرض اعمالنا](/images/3546544.webp)](Gallery/)

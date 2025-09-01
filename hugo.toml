@@ -35,4 +35,10 @@ defaultContentLanguage = "ar"
   identifier = "Services"
   name = "خدماتنا"
   url = "/Services/" # تأكد من أن لديك صفحة بهذا المسار
+  weight = 30
+  
+  [[menu.main]]
+  identifier = "gallery"
+  name = "اعمالنا"
+  url = "/gallery/" # تأكد من أن لديك صفحة بهذا المسار
   weight = 20
