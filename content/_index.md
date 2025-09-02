@@ -1,5 +1,6 @@
 +++
-date = '2025-08-14T19:13:53+03:00'
-draft = false
-title = 'تحت الصيانة'
+title = "Home"
+url = "/"
+aliases = ["/index.html"]
+layout = "redirect"
 +++
