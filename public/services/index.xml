@@ -14,18 +14,11 @@
     <lastBuildDate>Sun, 17 Aug 2025 20:58:33 +0300</lastBuildDate>
     <atom:link href="https://mbteemm.com/services/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>تشكيلة من الخدمات</title>
-      <link>https://mbteemm.com/services/others/</link>
-      <pubDate>Sun, 17 Aug 2025 20:58:33 +0300</pubDate>
-      <guid>https://mbteemm.com/services/others/</guid>
-      <description>قصير.</description>
-    </item>
-    <item>
-      <title>الفيديوهات</title>
-      <link>https://mbteemm.com/services/video/</link>
+      <title>شعار احترافي</title>
+      <link>https://mbteemm.com/services/logo/</link>
       <pubDate>Sat, 16 Aug 2025 17:49:19 +0300</pubDate>
-      <guid>https://mbteemm.com/services/video/</guid>
-      <description>  كيفية تحديد أسعار خدمات التصميم مثل البرزنتيشن، البروفايل، والكتالوجات عند شركتنا بناءً على عوامل رئيسية مثل تعقيد التصميم، عدد الصفحات، والمحتوى البصري.</description>
+      <guid>https://mbteemm.com/services/logo/</guid>
+      <description>إليك دليلك الشامل حول آلية تسعير تصميم الشعارات الاحترافية بشركة MBT. اكتشف كيف يتم تحديد التكلفة بناءً على عوامل مثل تعقيد الفكرة ونوع الشعار، وتعرف على أمثلة لأسعار الشعارات المبتكرة التي نقدمها.</description>
     </item>
     <item>
       <title>بروفايل, كتالوك او برزنتيشن</title>
@@ -35,11 +28,18 @@
       <description>  كيفية تحديد أسعار خدمات التصميم مثل البرزنتيشن، البروفايل، والكتالوجات عند شركتنا بناءً على عوامل رئيسية مثل تعقيد التصميم، عدد الصفحات، والمحتوى البصري.</description>
     </item>
     <item>
-      <title>شعار احترافي</title>
-      <link>https://mbteemm.com/services/logo/</link>
+      <title>الفيديوهات</title>
+      <link>https://mbteemm.com/services/video/</link>
       <pubDate>Sat, 16 Aug 2025 17:49:19 +0300</pubDate>
-      <guid>https://mbteemm.com/services/logo/</guid>
-      <description>إليك دليلك الشامل حول آلية تسعير تصميم الشعارات الاحترافية بشركة MBT. اكتشف كيف يتم تحديد التكلفة بناءً على عوامل مثل تعقيد الفكرة ونوع الشعار، وتعرف على أمثلة لأسعار الشعارات المبتكرة التي نقدمها.</description>
+      <guid>https://mbteemm.com/services/video/</guid>
+      <description>  كيفية تحديد أسعار خدمات التصميم مثل البرزنتيشن، البروفايل، والكتالوجات عند شركتنا بناءً على عوامل رئيسية مثل تعقيد التصميم، عدد الصفحات، والمحتوى البصري.</description>
+    </item>
+    <item>
+      <title>تشكيلة من الخدمات</title>
+      <link>https://mbteemm.com/services/others/</link>
+      <pubDate>Sun, 17 Aug 2025 20:58:33 +0300</pubDate>
+      <guid>https://mbteemm.com/services/others/</guid>
+      <description>قصير.</description>
     </item>
   </channel>
 </rss>
