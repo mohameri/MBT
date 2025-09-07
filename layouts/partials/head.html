@@ -151,6 +151,16 @@
     {{- end }}
 </noscript>
 
+<!-- Force Dark Mode -->
+<script>
+  (function(){
+    try {
+      localStorage.removeItem('pref-theme'); // يحذف أي اختيار سابق
+      localStorage.setItem('pref-theme','dark'); // يفرض الداكن
+    } catch(e) {}
+  })();
+</script>
+
 {{- partial "extend_head.html" . -}}
 
 {{- /* Misc */}}

@@ -9,7 +9,7 @@ ShowToc = false
 tags = []
 categories = []
 [cover]
-    image = "/images/654765768.webp"
+    image = "/images/6457568768.webp"
     alt = ""
     caption = ""
 	hiddenInSingle = true
@@ -60,7 +60,7 @@ categories = []
 {{< figure src="/images/s.webp" width="30" >}}
 
 {{< figure src="/images/4645756768.webp" >}} 
-واجهات, اقسام, عروض واي تصميم لمواقعك بطابع وهوية موحدة جذابة.
+واجهات, اقسام, عروض واي تصميم لموقعك بطابع وهوية موحدة جذابة.
 
 السعر للتصميم الواحد من 3 الى 10  حسب التفاصيل المطلوبة وتعقيد الفكرة.
 

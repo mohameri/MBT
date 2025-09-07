@@ -12,6 +12,9 @@ defaultContentLanguage = "ar"
 
 # --- إعدادات رئيسية للموقع ---
 [params]
+  defaultTheme = "dark"
+  disableThemeToggle = true
+
   images = ["/images/preview.png"]
   # هذا السطر يقوم بإخفاء التاريخ ووقت القراءة من جميع المنشورات
   hideMeta = true
