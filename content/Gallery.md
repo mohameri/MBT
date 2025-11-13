@@ -16,5 +16,3 @@ categories = []
 [![روابط صفحاتنا](/images/55655445655.webp)](https://gallery.mbteemm.com/logo/)
 
 [![روابط صفحاتنا](/images/547567568.webp)](https://gallery.mbteemm.com/poster/)	
-
-[![روابط صفحاتنا](/images/4233423424.svg)](https://wa.me/+9647872840590?text=السلام%20عليكم%20اريد%20تصميم%20خاتمة%20ولدي%20كود%20تصميم%20عينة%20مجاني%20%20%200015)
