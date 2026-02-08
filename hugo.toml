@@ -16,6 +16,9 @@ publishDir = "docs"
 [params]
   defaultTheme = "dark"
   disableThemeToggle = true
+  
+  [params.assets]
+    disableFingerprinting = true
 
   images = ["/images/preview.png"]
   # هذا السطر يقوم بإخفاء التاريخ ووقت القراءة من جميع المنشورات
