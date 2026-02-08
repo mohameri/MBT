@@ -3,6 +3,8 @@ theme = "PaperMod"
 title = "MBT"
 defaultContentLanguage = "ar"
 
+publishDir = "docs"
+
 # --- إعدادات اللغة العربية (لضمان اتجاه النص الصحيح) ---
 [languages]
   [languages.ar]
