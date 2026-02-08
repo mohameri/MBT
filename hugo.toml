@@ -53,3 +53,7 @@ publishDir = "docs"
   name = "اعمالنا"
   url = "/gallery/" # تأكد من أن لديك صفحة بهذا المسار
   weight = 20
+  
+  [[cascade]]
+  [cascade.params]
+    hidemeta = true
