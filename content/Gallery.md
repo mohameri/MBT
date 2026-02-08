@@ -13,8 +13,8 @@ categories = []
     caption = ""
 +++
 
-[![روابط صفحاتنا](/images/46546456.webp)](https://gallery.mbteemm.com/vedio/)
+[![روابط صفحاتنا](/images/46546456.webp)](https://gallery.mbt.ad/vedio/)
 
-[![روابط صفحاتنا](/images/55655445655.webp)](https://gallery.mbteemm.com/logo/)
+[![روابط صفحاتنا](/images/55655445655.webp)](https://gallery.mbt.ad/logo/)
 
-[![روابط صفحاتنا](/images/547567568.webp)](https://gallery.mbteemm.com/poster/)	
+[![روابط صفحاتنا](/images/547567568.webp)](https://gallery.mbt.ad/poster/)	
