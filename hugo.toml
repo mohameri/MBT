@@ -17,6 +17,8 @@ publishDir = "docs"
   defaultTheme = "dark"
   disableThemeToggle = true
   
+  hideMeta = true
+  
   [params.assets]
     disableFingerprinting = true
 
