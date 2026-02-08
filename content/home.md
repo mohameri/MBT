@@ -19,5 +19,5 @@ categories = []
 [![معرض اعمالنا](/images/3546544.webp)](Gallery/)
 
 [![روابط صفحاتنا](/images/64576575.webp)](https://wa.me/message/T56M4Q4ET4H2H1)
-[![روابط صفحاتنا](/images/76867987980.webp)](https://www.instagram.com/mbteemm/)
-[![روابط صفحاتنا](/images/43543545.webp)](http://facebook.com/mbteemm)
+[![روابط صفحاتنا](/images/76867987980.webp)](https://www.instagram.com/mbt_ad/)
+[![روابط صفحاتنا](/images/43543545.webp)](http://facebook.com/mbtadvertising)
