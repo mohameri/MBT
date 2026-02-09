@@ -177,107 +177,51 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            
             <a href="/home/" accesskey="h" title="MBT (Alt + H)">MBT</a>
-            <div class="logo-switches">
-				
-				<style>
-    #currency-selector {
-         
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-
-         
-        background-color: rgba(20, 20, 20, 0.9);
-        color: #e1c443;
-        border: 1px solid #e1c443;
-        
-         
-        padding-top: 7px;
-        padding-bottom: 10px;
-        padding-right: 15px;    
-        padding-left: 15px;      
-        
-        min-width: 70px;
-        border-radius: 50px;
-        
-        font-family: inherit;
-        font-weight: bold;
-        font-size: 0.95rem;
-        cursor: pointer;
-        outline: none;
-        transition: all 0.3s ease;
-        text-align: center;  
-
-         
-        
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-
-    #currency-selector:hover {
-        background-color: #000;
-        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
-        transform: translateY(-1px);
-    }
-
-    #currency-selector option {
-        background-color: #222;
-        color: #fff;
-        padding: 10px;
-    }
-</style>
-
-<style>
-     
-
-     
-    @media screen and (max-width: 600px) {
-        
-         
-        .logo {
-            display: flex !important;
-            align-items: center !important;  
-            gap: 8px;  
-        }
-
-        .logo a {
-            display: flex;
-            align-items: center;
-        }
-
-         
-        #currency-selector {
-            font-size: 13px !important;  
-            font-weight: 800 !important;  
-            padding-top: 5px !important;
-            padding-bottom: 5px !important;
-            padding-right: 10px !important;
-            padding-left: 10px !important;  
             
-            min-width: auto !important;
-            height: auto !important;
-            margin: 0 !important;  
-            border-width: 1px !important;
-            line-height: 1 !important;  
-        }
-        
-         
-        .logo-switches {
-             margin-top: 0 !important;
-        }
-    }
-</style>
+            <div class="logo-switches">
+                
+                <style>
+                    #currency-selector {
+                        appearance: none; -webkit-appearance: none; -moz-appearance: none;
+                        background-color: rgba(20, 20, 20, 0.9);
+                        color: #e1c443;
+                        border: 1px solid #e1c443;
+                        padding-top: 7px; padding-bottom: 10px;
+                        padding-right: 15px; padding-left: 15px;
+                        min-width: 70px;
+                        border-radius: 50px;
+                        font-family: inherit; font-weight: bold; font-size: 0.95rem;
+                        cursor: pointer; outline: none; transition: all 0.3s ease;
+                        text-align: center;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                    }
+                    #currency-selector:hover {
+                        background-color: #000;
+                        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
+                        transform: translateY(-1px);
+                    }
+                    #currency-selector option {
+                        background-color: #222; color: #fff; padding: 10px;
+                    }
+                </style>
 
-<select id="currency-selector" onchange="changeCurrency()">
-    <option value="IQD">🇮🇶 دينار</option>
-    <option value="USD">🇺🇸 دولار</option>
-    <option value="AED">🇦🇪 درهم</option>
-    <option value="SAR">🇸🇦 ريال</option>
-</select>
+                <select id="currency-selector" onchange="changeCurrency()">
+                    <option value="IQD">🇮🇶 دينار</option>
+                    <option value="USD">🇺🇸 دولار</option>
+                    <option value="AED">🇦🇪 درهم</option>
+                    <option value="SAR">🇸🇦 ريال</option>
+                </select>
             </div>
+            
+            <button id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
         <ul id="menu">
+            <li class="menu-close-btn" onclick="toggleMobileMenu()">✕ إغلاق</li>
             <li>
                 <a href="https://wa.me/9647872840590" title="الواتساب">
                     <span>الواتساب</span>&nbsp;
@@ -302,7 +246,57 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+
+<style>
+     
+    #hamburger-btn {
+        display: none;  
+        background: none; border: none; cursor: pointer;
+        flex-direction: column; gap: 5px; padding: 5px;
+        margin-right: 15px;  
+    }
+    #hamburger-btn span {
+        display: block; width: 25px; height: 3px;
+        background-color: var(--primary);  
+        border-radius: 2px;
+    }
+
+     
+    .menu-close-btn { display: none; }
+
+     
+    @media screen and (max-width: 768px) {
+        #hamburger-btn { display: flex; }  
+
+         
+        #menu {
+            position: fixed; top: 0; right: -280px;  
+            width: 260px; height: 100vh;
+            background-color: var(--entry);  
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            flex-direction: column; padding-top: 60px;
+            transition: right 0.4s ease-in-out;
+            z-index: 9999; display: block !important;
+        }
+         
+        #menu.menu-open { right: 0; }
+
+        #menu li { width: 100%; text-align: right; border-bottom: 1px solid var(--border); }
+        #menu a { display: block; padding: 15px 25px; font-size: 16px; }
+
+        .menu-close-btn {
+            display: block !important; position: absolute;
+            top: 20px; left: 20px; color: #ff5555;
+            font-weight: bold; cursor: pointer;
+        }
+    }
+</style>
+
+<script>
+    function toggleMobileMenu() {
+        document.getElementById('menu').classList.toggle('menu-open');
+    }
+</script><main class="main">
 
 <article class="post-single">
   <header class="post-header">

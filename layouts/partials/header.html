@@ -6,7 +6,6 @@
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
     }
-
 </script>
 {{- /* theme is dark */}}
 {{- else if (eq site.Params.defaultTheme "dark") }}
@@ -14,7 +13,6 @@
     if (localStorage.getItem("pref-theme") === "light") {
         document.body.classList.remove('dark')
     }
-
 </script>
 {{- else }}
 {{- /* theme is auto */}}
@@ -26,7 +24,6 @@
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
     }
-
 </script>
 {{- end }}
 {{- /* theme-toggle is disabled and theme is auto */}}
@@ -35,7 +32,6 @@
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
     }
-
 </script>
 {{- end }}
 
@@ -44,7 +40,6 @@
         <div class="logo">
             {{- $label_text := (site.Params.label.text | default site.Title) }}
             {{- if site.Title }}
-            <!-- ثابت: رابط اسم الموقع يذهب إلى /gallery/ -->
             <a href="{{ "home/" | relLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)">
                 {{- if site.Params.label.icon }}
                 {{- $img := resources.Get site.Params.label.icon }}
@@ -73,6 +68,7 @@
                 {{- $label_text -}}
             </a>
             {{- end }}
+            
             <div class="logo-switches">
                 {{- if (not site.Params.disableThemeToggle) }}
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -96,101 +92,38 @@
                     </svg>
                 </button>
                 {{- end }}
-				
-				<style>
-    #currency-selector {
-        /* 1. إخفاء شكل النظام */
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
+                
+                <style>
+                    #currency-selector {
+                        appearance: none; -webkit-appearance: none; -moz-appearance: none;
+                        background-color: rgba(20, 20, 20, 0.9);
+                        color: #e1c443;
+                        border: 1px solid #e1c443;
+                        padding-top: 7px; padding-bottom: 10px;
+                        padding-right: 15px; padding-left: 15px;
+                        min-width: 70px;
+                        border-radius: 50px;
+                        font-family: inherit; font-weight: bold; font-size: 0.95rem;
+                        cursor: pointer; outline: none; transition: all 0.3s ease;
+                        text-align: center;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                    }
+                    #currency-selector:hover {
+                        background-color: #000;
+                        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
+                        transform: translateY(-1px);
+                    }
+                    #currency-selector option {
+                        background-color: #222; color: #fff; padding: 10px;
+                    }
+                </style>
 
-        /* 2. الألوان (نفس ألوانك المعدلة) */
-        background-color: rgba(20, 20, 20, 0.9);
-        color: #e1c443;
-        border: 1px solid #e1c443;
-        
-        /* 3. القياسات والمساحات */
-        padding-top: 7px;
-        padding-bottom: 10px;
-        padding-right: 15px;    
-        padding-left: 15px;     /* عدلتها لتساوي اليمين (كانت 25) لأن السهم اختفى */
-        
-        min-width: 70px;
-        border-radius: 50px;
-        
-        font-family: inherit;
-        font-weight: bold;
-        font-size: 0.95rem;
-        cursor: pointer;
-        outline: none;
-        transition: all 0.3s ease;
-        text-align: center; /* لضمان توسيط النص */
-
-        /* تم حذف كود السهم (background-image) من هنا */
-        
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-
-    #currency-selector:hover {
-        background-color: #000;
-        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
-        transform: translateY(-1px);
-    }
-
-    #currency-selector option {
-        background-color: #222;
-        color: #fff;
-        padding: 10px;
-    }
-</style>
-
-<style>
-    /* ... (اترك الأكواد العلوية كما هي) ... */
-
-    /* === حل مشكلة الموبايل (التوسيط والوضوح) === */
-    @media screen and (max-width: 600px) {
-        
-        /* 1. إصلاح محاذاة الهيدر بالكامل (الحل السحري للاعوجاج) */
-        .logo {
-            display: flex !important;
-            align-items: center !important; /* يجبر النص والزر أن يكونا على خط واحد */
-            gap: 8px; /* مسافة نظيفة بين اللوغو والزر */
-        }
-
-        .logo a {
-            display: flex;
-            align-items: center;
-        }
-
-        /* 2. تصميم الزر للموبايل (واضح وليس ناعم) */
-        #currency-selector {
-            font-size: 13px !important; /* تكبير الخط */
-            font-weight: 800 !important; /* خط سميك جداً للوضوح */
-            padding-top: 5px !important;
-            padding-bottom: 5px !important;
-            padding-right: 10px !important;
-            padding-left: 10px !important; /* مسافات متساوية */
-            
-            min-width: auto !important;
-            height: auto !important;
-            margin: 0 !important; /* إزالة أي هوامش تسبب الاعوجاج */
-            border-width: 1px !important;
-            line-height: 1 !important; /* ضبط ارتفاع السطر */
-        }
-        
-        /* 3. منع زر القائمة (الموبايل) من الالتصاق */
-        .logo-switches {
-             margin-top: 0 !important;
-        }
-    }
-</style>
-
-<select id="currency-selector" onchange="changeCurrency()">
-    <option value="IQD">🇮🇶 دينار</option>
-    <option value="USD">🇺🇸 دولار</option>
-    <option value="AED">🇦🇪 درهم</option>
-    <option value="SAR">🇸🇦 ريال</option>
-</select>
+                <select id="currency-selector" onchange="changeCurrency()">
+                    <option value="IQD">🇮🇶 دينار</option>
+                    <option value="USD">🇺🇸 دولار</option>
+                    <option value="AED">🇦🇪 درهم</option>
+                    <option value="SAR">🇸🇦 ريال</option>
+                </select>
 
                 {{- $lang := .Lang}}
                 {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
@@ -214,9 +147,18 @@
                 </ul>
                 {{- end }}
             </div>
+            
+            <button id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
+
         {{- $currentPage := . }}
         <ul id="menu">
+            <li class="menu-close-btn" onclick="toggleMobileMenu()">✕ إغلاق</li>
+
             {{- range site.Menus.main }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
             {{- $page_url:= $currentPage.Permalink | absLangURL }}
@@ -243,3 +185,54 @@
         </ul>
     </nav>
 </header>
+
+<style>
+    /* زر الهامبرغر */
+    #hamburger-btn {
+        display: none; /* مخفي في الكمبيوتر */
+        background: none; border: none; cursor: pointer;
+        flex-direction: column; gap: 5px; padding: 5px;
+        margin-right: 15px; /* مسافة عن العملة */
+    }
+    #hamburger-btn span {
+        display: block; width: 25px; height: 3px;
+        background-color: var(--primary); /* يأخذ لون الثيم */
+        border-radius: 2px;
+    }
+
+    /* زر الإغلاق */
+    .menu-close-btn { display: none; }
+
+    /* شاشة الموبايل فقط */
+    @media screen and (max-width: 768px) {
+        #hamburger-btn { display: flex; } /* إظهار الزر */
+
+        /* تحويل القائمة إلى درج جانبي */
+        #menu {
+            position: fixed; top: 0; right: -280px; /* مخفية يميناً */
+            width: 260px; height: 100vh;
+            background-color: var(--entry); /* لون خلفية مناسب للثيم */
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            flex-direction: column; padding-top: 60px;
+            transition: right 0.4s ease-in-out;
+            z-index: 9999; display: block !important;
+        }
+        /* عند الفتح */
+        #menu.menu-open { right: 0; }
+
+        #menu li { width: 100%; text-align: right; border-bottom: 1px solid var(--border); }
+        #menu a { display: block; padding: 15px 25px; font-size: 16px; }
+
+        .menu-close-btn {
+            display: block !important; position: absolute;
+            top: 20px; left: 20px; color: #ff5555;
+            font-weight: bold; cursor: pointer;
+        }
+    }
+</style>
+
+<script>
+    function toggleMobileMenu() {
+        document.getElementById('menu').classList.toggle('menu-open');
+    }
+</script>
