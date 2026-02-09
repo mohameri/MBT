@@ -1,38 +1,21 @@
-{{- /* theme-toggle is enabled */}}
+{{- /* =========================================================== */ -}}
+{{- /* بداية ملف Header (نسخة الإصلاح والاستقرار) */ -}}
+{{- /* =========================================================== */ -}}
+
 {{- if (not site.Params.disableThemeToggle) }}
-{{- /* theme is light */}}
-{{- if (eq site.Params.defaultTheme "light") }}
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    }
-</script>
-{{- /* theme is dark */}}
-{{- else if (eq site.Params.defaultTheme "dark") }}
-<script>
-    if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    }
-</script>
-{{- else }}
-{{- /* theme is auto */}}
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-</script>
-{{- end }}
-{{- /* theme-toggle is disabled and theme is auto */}}
+    {{- if (eq site.Params.defaultTheme "light") }}
+        <script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}</script>
+    {{- else if (eq site.Params.defaultTheme "dark") }}
+        <script>if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}</script>
+    {{- else }}
+        <script>
+            if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}
+            else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}
+            else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}
+        </script>
+    {{- end }}
 {{- else if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark"))}}
-<script>
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-</script>
+    <script>if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}</script>
 {{- end }}
 
 <header class="header">
@@ -42,237 +25,158 @@
             {{- if site.Title }}
             <a href="{{ "home/" | relLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)">
                 {{- if site.Params.label.icon }}
-                {{- $img := resources.Get site.Params.label.icon }}
-                {{- if $img }}
-                    {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
-                    {{- if hugo.IsExtended -}}
-                        {{- $processableFormats = $processableFormats | append "webp" -}}
-                    {{- end -}}
-                    {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
-                    {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
-                        {{- if site.Params.label.iconHeight }}
-                            {{- $img = $img.Resize (printf "x%d" site.Params.label.iconHeight) }}
-                        {{ else }}
-                            {{- $img = $img.Resize "x30" }}
-                        {{- end }}
-                    {{- end }}
-                    <img src="{{ $img.Permalink }}" alt="" aria-label="logo"
-                        height="{{- site.Params.label.iconHeight | default "30" -}}">
-                {{- else }}
-                <img src="{{- site.Params.label.icon | absURL -}}" alt="" aria-label="logo"
-                    height="{{- site.Params.label.iconHeight | default "30" -}}">
-                {{- end -}}
-                {{- else if hasPrefix site.Params.label.iconSVG "<svg" }}
-                    {{ site.Params.label.iconSVG | safeHTML }}
+                    <img src="{{ site.Params.label.icon | absURL }}" alt="logo" height="{{- site.Params.label.iconHeight | default "30" -}}">
                 {{- end -}}
                 {{- $label_text -}}
             </a>
             {{- end }}
-            
-            <div class="logo-switches">
-                {{- if (not site.Params.disableThemeToggle) }}
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-                {{- end }}
-                
-                <style>
-                    #currency-selector {
-                        appearance: none; -webkit-appearance: none; -moz-appearance: none;
-                        background-color: rgba(20, 20, 20, 0.9);
-                        color: #e1c443;
-                        border: 1px solid #e1c443;
-                        padding-top: 7px; padding-bottom: 10px;
-                        padding-right: 15px; padding-left: 15px;
-                        min-width: 70px;
-                        border-radius: 50px;
-                        font-family: inherit; font-weight: bold; font-size: 0.95rem;
-                        cursor: pointer; outline: none; transition: all 0.3s ease;
-                        text-align: center;
-                        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-                    }
-                    #currency-selector:hover {
-                        background-color: #000;
-                        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
-                        transform: translateY(-1px);
-                    }
-                    #currency-selector option {
-                        background-color: #222; color: #fff; padding: 10px;
-                    }
-                </style>
 
+            {{- /* زر العملة (موجود هنا وسيتحول لشريط سفلي في الموبايل عبر CSS فقط) */ -}}
+            <div class="currency-wrapper">
                 <select id="currency-selector" onchange="changeCurrency()">
                     <option value="IQD">🇮🇶 دينار</option>
                     <option value="USD">🇺🇸 دولار</option>
                     <option value="AED">🇦🇪 درهم</option>
                     <option value="SAR">🇸🇦 ريال</option>
                 </select>
+            </div>
 
-                {{- $lang := .Lang}}
-                {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
-                {{- with site.Home.Translations }}
-                <ul class="lang-switch">
-                    {{- if $separator }}<li>|</li>{{ end }}
-                    {{- range . -}}
-                    {{- if ne $lang .Lang }}
-                    <li>
-                        <a href="{{- .Permalink -}}" title="{{ .Language.Params.languageAltTitle | default (.Language.LanguageName | emojify) | default (.Lang | title) }}"
-                            aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
-                            {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) }}
-                            {{- .Language.LanguageName | emojify -}}
-                            {{- else }}
-                            {{- .Lang | title -}}
-                            {{- end -}}
-                        </a>
-                    </li>
-                    {{- end -}}
-                    {{- end}}
-                </ul>
+            <div class="logo-switches">
+                {{- if (not site.Params.disableThemeToggle) }}
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
                 {{- end }}
             </div>
-            
-            <button id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
 
         {{- $currentPage := . }}
         <ul id="menu">
+            {{- /* زر الإغلاق: مخفي افتراضياً ويظهر فقط في الموبايل */ -}}
             <li class="menu-close-btn" onclick="toggleMobileMenu()">✕ إغلاق</li>
-
+            
             {{- range site.Menus.main }}
-            {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
-            {{- $page_url:= $currentPage.Permalink | absLangURL }}
-            {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
             <li>
-                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
-                    <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
-                        {{- .Pre }}
-                        {{- .Name -}}
-                        {{ .Post -}}
-                    </span>
-                    {{- if (findRE "://" .URL) }}&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
-                    </svg>
-                    {{- end }}
+                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+                    <span>{{ .Name }}</span>
                 </a>
             </li>
             {{- end }}
         </ul>
+        
+        <button id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
     </nav>
 </header>
 
 <style>
-    /* استدعاء خط المراعي */
     @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap');
 
-    /* =========================================
-       1. تصميم الكمبيوتر (Desktop)
-       يظهر بجانب اللوغو بشكل طبيعي
-    ========================================= */
+    /* --- 1. إصلاح زر الإغلاق (أهم خطوة) --- */
+    .menu-close-btn {
+        display: none; /* مخفي دائماً على الكمبيوتر */
+        padding: 15px;
+        text-align: center;
+        background: #222;
+        color: #fff;
+        cursor: pointer;
+        border-bottom: 1px solid #333;
+        font-family: 'Almarai', sans-serif;
+    }
+
+    /* --- 2. تصميم زر العملة للكمبيوتر (Clean Style) --- */
     #currency-selector {
         font-family: 'Almarai', sans-serif !important;
         font-weight: 700;
         font-size: 0.9rem;
-
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-
-        /* تصميم ذهبي فخم */
+        appearance: none; -webkit-appearance: none; -moz-appearance: none;
+        
         background: linear-gradient(135deg, rgba(40, 40, 40, 0.95), rgba(10, 10, 10, 1));
         color: #FFD700;
         border: 1px solid #FFD700;
-        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
         
-        /* القياسات */
-        padding: 6px 30px 6px 15px;
+        /* ضبط الحشو بدقة لإصلاح مشكلة الكتابة في ويندوز */
+        padding: 6px 30px 6px 15px; /* اليمين 30 للسهم، اليسار 15 للنص */
         min-width: 140px;
         border-radius: 50px;
         cursor: pointer;
         outline: none;
-        transition: all 0.3s ease;
         margin-inline-start: 15px;
+        
+        /* إجبار النص على اليسار قليلاً لتفادي تداخل السهم */
+        text-align: left; 
+        text-indent: 5px;
 
-        /* أيقونة السهم */
         background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
         background-repeat: no-repeat;
-        background-position: left 12px center;
+        background-position: right 12px center; /* السهم يمين */
         background-size: 10px;
     }
+    
+    #currency-selector option { background-color: #222; color: #fff; padding: 10px; }
 
-    #currency-selector:hover {
-        background: #000;
-        box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
-    }
-
-    #currency-selector option {
-        background-color: #222;
-        color: #fff;
-        padding: 10px;
-    }
-
-    /* =========================================
-       2. تصميم الموبايل (الشريط السفلي العائم)
-       هنا يحدث السحر: نفصل الزر ونضعه في الأسفل
-    ========================================= */
-    @media screen and (max-width: 600px) {
-        #currency-selector {
-            /* 1. التموضع الثابت في الأسفل */
-            position: fixed !important;
-            bottom: 20px !important;    /* يطفو فوق الحافة السفلية قليلاً */
-            left: 50% !important;       /* في المنتصف */
-            transform: translateX(-50%) !important; /* لضمان التوسط بدقة */
-            z-index: 9999 !important;   /* ليظهر فوق كل المحتوى */
-
-            /* 2. الحجم والشكل */
-            width: 90% !important;      /* عريض ليسهل ضغطه بالإبهام */
-            height: 45px !important;    /* ارتفاع مريح للمس */
-            font-size: 16px !important; /* خط كبير وواضح */
-            text-align: center !important; /* النص في الوسط */
-            text-align-last: center !important;
-            
-            /* 3. الجمالية (شريط عائم فخم) */
-            background-color: #1a1a1a !important; /* لون داكن قوي */
-            border: 1px solid #FFD700 !important;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7) !important; /* ظل قوي لفصله عن الخلفية */
-            
-            /* 4. تعديل مكان السهم */
-            background-position: left 20px center !important;
-            padding-left: 0 !important; /* إلغاء الحواشي ليكون النص في المنتصف */
-        }
-
-        /* تحسين: إخفاء القائمة عند النزول للاسفل (اختياري، حالياً ستبقى ثابتة) */
+    /* --- 3. تصميم الموبايل (الشريط السفلي) --- */
+    @media screen and (max-width: 850px) {
         
-        /* إصلاح الهيدر: بما أن الزر نزل للأسفل، اللوغو سيعود لمكانه الطبيعي */
-        .logo {
-            justify-content: space-between;
+        /* إظهار زر الإغلاق داخل القائمة فقط */
+        .menu-close-btn { display: block; }
+
+        /* تحويل زر العملة لشريط سفلي */
+        .currency-wrapper {
+            position: fixed;
+            bottom: 20px;
+            left: 0; 
             width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 9999;
+            pointer-events: none; /* يسمح بالضغط حول الزر */
         }
+
+        #currency-selector {
+            pointer-events: auto; /* تفعيل الضغط على الزر */
+            width: 90%;
+            height: 50px;
+            font-size: 16px;
+            margin: 0;
+            
+            background-color: #1a1a1a !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            
+            /* توسيط النص في الموبايل */
+            text-align: center;
+            text-indent: 0;
+            padding: 0;
+            
+            /* السهم في الموبايل */
+            background-position: left 20px center;
+        }
+
+        /* إصلاح الهيدر ليظهر بشكل طبيعي */
+        .logo { justify-content: space-between; width: 100%; }
+        #hamburger-btn { display: block; }
+        #menu { 
+            /* إعدادات القائمة الجانبية (PaperMod Default) */
+            display: none; 
+            position: fixed; top: 0; right: 0; bottom: 0; 
+            background: var(--entry); width: 250px; 
+            box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+            padding: 0; list-style: none; z-index: 1000;
+            flex-direction: column;
+        }
+        #menu.menu-open { display: flex; }
+    }
+    
+    /* إخفاء زر الهمبرغر في الكمبيوتر */
+    @media screen and (min-width: 851px) {
+        #hamburger-btn { display: none; }
+        #menu { display: flex !important; background: transparent; box-shadow: none; width: auto; position: static; height: auto;}
     }
 </style>
 
