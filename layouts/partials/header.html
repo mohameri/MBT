@@ -188,11 +188,11 @@
 
 <style>
     /* استدعاء خط المراعي */
-    @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap');
 
     /* =========================================
-       1. التصميم الأساسي (للكمبيوتر والموبايل)
-       إضافة الروح والجمالية هنا
+       1. تصميم الكمبيوتر (Desktop)
+       يظهر بجانب اللوغو بشكل طبيعي
     ========================================= */
     #currency-selector {
         font-family: 'Almarai', sans-serif !important;
@@ -203,75 +203,76 @@
         -webkit-appearance: none;
         -moz-appearance: none;
 
-        /* --- تعديل الألوان لإعطاء روح --- */
-        /* خلفية متدرجة خفيفة بدلاً من لون مصمت */
-        background: linear-gradient(135deg, rgba(50, 50, 50, 0.9), rgba(20, 20, 20, 0.9));
-        color: #FFD700; /* ذهبي ساطع */
+        /* تصميم ذهبي فخم */
+        background: linear-gradient(135deg, rgba(40, 40, 40, 0.95), rgba(10, 10, 10, 1));
+        color: #FFD700;
         border: 1px solid #FFD700;
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
         
-        /* إضافة توهج ذهبي خفيف ليعطي إحساساً بالحياة */
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 5px rgba(255, 215, 0, 0.1);
-        backdrop-filter: blur(5px); /* تأثير زجاجي خفيف (للأجهزة الحديثة) */
-
-        /* --- القياسات --- */
-        padding-top: 6px;
-        padding-bottom: 6px;
-        padding-right: 12px;
-        padding-left: 30px; /* مساحة للسهم */
-        
+        /* القياسات */
+        padding: 6px 30px 6px 15px;
         min-width: 140px;
         border-radius: 50px;
         cursor: pointer;
         outline: none;
         transition: all 0.3s ease;
-        
-        /* أيقونة السهم الذهبي */
+        margin-inline-start: 15px;
+
+        /* أيقونة السهم */
         background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
         background-repeat: no-repeat;
         background-position: left 12px center;
         background-size: 10px;
     }
 
-    /* تأثير عند التحويم (للكمبيوتر) */
     #currency-selector:hover {
-        background: linear-gradient(135deg, rgba(70, 70, 70, 1), rgba(30, 30, 30, 1));
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); /* زيادة التوهج */
-        transform: translateY(-1px);
-    }
-
-    /* =========================================
-       2. إعدادات الموبايل فقط (الحل الجذري للمكان)
-    ========================================= */
-    @media screen and (max-width: 600px) {
-        #currency-selector {
-            /* --- فك الارتباط ووضعه في الزاوية --- */
-            position: absolute !important; /* يحرره من مكانه الحالي */
-            top: 12px !important;          /* المسافة من أعلى الشاشة */
-            right: 15px !important;        /* المسافة من يمين الشاشة (أقصى الزاوية) */
-            z-index: 100;                  /* لضمان ظهوره فوق كل شيء */
-
-            /* --- تعديل الحجم للموبايل --- */
-            font-size: 0.8rem !important;
-            padding: 4px 8px 4px 25px !important; /* تصغير الحواشي */
-            min-width: auto !important;    /* عرض تلقائي حسب النص */
-            background-size: 9px !important; /* تصغير السهم */
-            background-position: left 10px center !important;
-            
-            /* تقليل التوهج قليلاً في الموبايل */
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.2) !important;
-        }
-    
-        /* إضافة مساحة في الهيدر حتى لا يغطي الزر على اللوغو */
-        .header .nav {
-            padding-right: 80px; /* دفع اللوغو لليسار قليلاً لإفساح المجال للزر */
-        }
+        background: #000;
+        box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
     }
 
     #currency-selector option {
         background-color: #222;
         color: #fff;
-        font-family: 'Almarai', sans-serif;
         padding: 10px;
+    }
+
+    /* =========================================
+       2. تصميم الموبايل (الشريط السفلي العائم)
+       هنا يحدث السحر: نفصل الزر ونضعه في الأسفل
+    ========================================= */
+    @media screen and (max-width: 600px) {
+        #currency-selector {
+            /* 1. التموضع الثابت في الأسفل */
+            position: fixed !important;
+            bottom: 20px !important;    /* يطفو فوق الحافة السفلية قليلاً */
+            left: 50% !important;       /* في المنتصف */
+            transform: translateX(-50%) !important; /* لضمان التوسط بدقة */
+            z-index: 9999 !important;   /* ليظهر فوق كل المحتوى */
+
+            /* 2. الحجم والشكل */
+            width: 90% !important;      /* عريض ليسهل ضغطه بالإبهام */
+            height: 45px !important;    /* ارتفاع مريح للمس */
+            font-size: 16px !important; /* خط كبير وواضح */
+            text-align: center !important; /* النص في الوسط */
+            text-align-last: center !important;
+            
+            /* 3. الجمالية (شريط عائم فخم) */
+            background-color: #1a1a1a !important; /* لون داكن قوي */
+            border: 1px solid #FFD700 !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7) !important; /* ظل قوي لفصله عن الخلفية */
+            
+            /* 4. تعديل مكان السهم */
+            background-position: left 20px center !important;
+            padding-left: 0 !important; /* إلغاء الحواشي ليكون النص في المنتصف */
+        }
+
+        /* تحسين: إخفاء القائمة عند النزول للاسفل (اختياري، حالياً ستبقى ثابتة) */
+        
+        /* إصلاح الهيدر: بما أن الزر نزل للأسفل، اللوغو سيعود لمكانه الطبيعي */
+        .logo {
+            justify-content: space-between;
+            width: 100%;
+        }
     }
 </style>
 

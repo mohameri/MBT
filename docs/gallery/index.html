@@ -219,7 +219,7 @@
 
 <style>
      
-    @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap');
 
      
     #currency-selector {
@@ -232,27 +232,20 @@
         -moz-appearance: none;
 
          
-         
-        background: linear-gradient(135deg, rgba(50, 50, 50, 0.9), rgba(20, 20, 20, 0.9));
-        color: #FFD700;  
+        background: linear-gradient(135deg, rgba(40, 40, 40, 0.95), rgba(10, 10, 10, 1));
+        color: #FFD700;
         border: 1px solid #FFD700;
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
         
          
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 5px rgba(255, 215, 0, 0.1);
-        backdrop-filter: blur(5px);  
-
-         
-        padding-top: 6px;
-        padding-bottom: 6px;
-        padding-right: 12px;
-        padding-left: 30px;  
-        
+        padding: 6px 30px 6px 15px;
         min-width: 140px;
         border-radius: 50px;
         cursor: pointer;
         outline: none;
         transition: all 0.3s ease;
-        
+        margin-inline-start: 15px;
+
          
         background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
         background-repeat: no-repeat;
@@ -260,44 +253,51 @@
         background-size: 10px;
     }
 
-     
     #currency-selector:hover {
-        background: linear-gradient(135deg, rgba(70, 70, 70, 1), rgba(30, 30, 30, 1));
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);  
-        transform: translateY(-1px);
+        background: #000;
+        box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+    }
+
+    #currency-selector option {
+        background-color: #222;
+        color: #fff;
+        padding: 10px;
     }
 
      
     @media screen and (max-width: 600px) {
         #currency-selector {
              
-            position: absolute !important;  
-            top: 12px !important;           
-            right: 15px !important;         
-            z-index: 100;                   
+            position: fixed !important;
+            bottom: 20px !important;     
+            left: 50% !important;        
+            transform: translateX(-50%) !important;  
+            z-index: 9999 !important;    
 
              
-            font-size: 0.8rem !important;
-            padding: 4px 8px 4px 25px !important;  
-            min-width: auto !important;     
-            background-size: 9px !important;  
-            background-position: left 10px center !important;
+            width: 90% !important;       
+            height: 45px !important;     
+            font-size: 16px !important;  
+            text-align: center !important;  
+            text-align-last: center !important;
             
              
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.2) !important;
+            background-color: #1a1a1a !important;  
+            border: 1px solid #FFD700 !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7) !important;  
+            
+             
+            background-position: left 20px center !important;
+            padding-left: 0 !important;  
         }
-    
-         
-        .header .nav {
-            padding-right: 80px;  
-        }
-    }
 
-    #currency-selector option {
-        background-color: #222;
-        color: #fff;
-        font-family: 'Almarai', sans-serif;
-        padding: 10px;
+         
+        
+         
+        .logo {
+            justify-content: space-between;
+            width: 100%;
+        }
     }
 </style>
 
