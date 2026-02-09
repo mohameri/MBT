@@ -213,10 +213,9 @@
     .logo {
         display: flex;
         align-items: center;
-        gap: 15px;  
+        gap: 30px; 
     }
 
-     
     .logo a {
         text-decoration: none;
         color: inherit;
@@ -227,7 +226,6 @@
         align-items: center;
     }
 
-     
     .logo a:hover {
         color: #e1c443;
         transform: scale(1.05);
@@ -258,16 +256,9 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
-    #currency-selector:hover {
-        background-color: #000;
-        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
-        transform: translateY(-1px);
-    }
-
     #currency-selector option {
         background-color: #222;
         color: #fff;
-        padding: 10px;
     }
 
      
@@ -296,18 +287,14 @@
         padding: 0 18px;           
         border-radius: 50px;       
         white-space: nowrap;       
-        
-         
         color: #e0e0e0;
         background-color: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        
         font-weight: bold;
         font-size: 0.9rem;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: all 0.3s ease;
     }
 
-     
     #menu a:hover {
         border-color: #e1c443;
         color: #e1c443;
@@ -321,29 +308,20 @@
         border: 1px solid #25D366; 
         color: #ffffff !important; 
         padding: 0 15px;           
-        gap: 8px;                  
         box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); 
     }
 
     #menu a[href*="wa.me"]:hover {
         background-color: #128C7E; 
         border-color: #128C7E;
-        color: #fff !important;
         transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
     }
 
-     
     .desktop-whatsapp-img {
         width: 22px;   
         height: 22px;
         object-fit: contain;
-        filter: brightness(0) invert(1);  
-        transition: transform 0.3s;
-    }
-
-    #menu a[href*="wa.me"]:hover .desktop-whatsapp-img {
-        transform: rotate(10deg) scale(1.1);
+        filter: brightness(0) invert(1);
     }
 
      
@@ -356,13 +334,14 @@
         background-color: #1a1a1a;
         height: 65px;
         box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-        z-index: 9999;
+        z-index: 99999;
         justify-content: space-between;
         align-items: center;
         padding: 0;
         border-top: 1px solid #333;
     }
 
+     
     .nav-item {
         flex: 1;
         display: flex;
@@ -374,12 +353,9 @@
         color: #bbb;
         font-size: 0.9rem;
         font-weight: bold;
-        transition: color 0.3s;
     }
-
-    .nav-item:hover {
-        color: #e1c443;
-    }
+    
+    .nav-item:hover { color: #e1c443; }
 
      
     .whatsapp-container {
@@ -392,7 +368,7 @@
     }
 
      
-    .whatsapp-btn {
+    a.whatsapp-btn {
         width: 60px;
         height: 60px;
         background-color: #25D366 !important;  
@@ -402,40 +378,28 @@
         justify-content: center;
         position: absolute;
         top: -25px;
-        border: 5px solid #1a1a1a;  
+        border: 5px solid #1a1a1a; 
         box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        transition: transform 0.2s;
+        z-index: 1000;
     }
 
      
-    .whatsapp-btn img {
-        filter: brightness(0) invert(1); 
+    a.whatsapp-btn img {
+        filter: brightness(0) invert(1) !important; 
         width: 32px !important;
         height: 32px !important;
         object-fit: contain;
     }
 
-    .whatsapp-btn:active {
-        transform: scale(0.95);
-    }
-
      
     @media screen and (max-width: 768px) {
-        .header .menu, #menu {
-            display: none !important;
-        }
-        .mobile-bottom-nav {
-            display: flex !important;
-        }
-        .header .nav {
-            justify-content: space-between;
-        }
+        .header .menu, #menu { display: none !important; }
+        .mobile-bottom-nav { display: flex !important; }
+        .header .nav { justify-content: space-between; }
     }
 
     @media screen and (min-width: 769px) {
-        .mobile-bottom-nav {
-            display: none !important;
-        }
+        .mobile-bottom-nav { display: none !important; }
     }
 </style>
 
@@ -482,11 +446,11 @@
         <span>أعمالنا</span>
     </a>
 
-    <a href="https://wa.me/9647872840590" target="_blank" class="nav-item whatsapp-float" aria-label="Chat on WhatsApp">
-        <img src="/images/whatsapp-64.png" 
-                 alt="WhatsApp" 
-                 style="width: 30px; height: 30px; object-fit: contain;">
-    </a>
+    <div class="whatsapp-container">
+        <a href="https://wa.me/9647872840590" target="_blank" class="whatsapp-btn" aria-label="WhatsApp">
+            <img src="/images/whatsapp-64.png" alt="WhatsApp">
+        </a>
+    </div>
 
     <a href="/services/" class="nav-item">
         <span>خدماتنا</span>
