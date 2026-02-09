@@ -5,60 +5,59 @@ defaultContentLanguage = "ar"
 
 publishDir = "docs"
 
-# --- إعدادات اللغة العربية (لضمان اتجاه النص الصحيح) ---
+# --- إعدادات اللغة العربية (هنا التعديل المهم) ---
 [languages]
   [languages.ar]
+    languageName = "Arabic"
     languageCode = "ar"
-    direction = "rtl"
     weight = 1
+    title = "MBT"
+    languageDirection = "rtl" # هذا السطر هو الذي يقلب القالب رسمياً
 
 # --- إعدادات رئيسية للموقع ---
 [params]
   defaultTheme = "dark"
   disableThemeToggle = true
-  
   hideMeta = true
   
   [params.assets]
     disableFingerprinting = true
 
   images = ["/images/preview.png"]
-  # هذا السطر يقوم بإخفاء التاريخ ووقت القراءة من جميع المنشورات
-  hideMeta = true
-
+  
   # --- تفعيل وضع الصيانة (Profile Mode) ---
-  # هذا القسم هو المسؤول عن إخفاء المنشورات وعرض رسالة الصيانة
   [params.profileMode]
     enabled = true
     title = "الموقع تحت الصيانة"
-    subtitle = " " # يمكنك إضافة نص فرعي هنا إذا أردت
-    imageUrl = "images/logo.png" # تأكد من وجود هذا الملف في مجلد assets/images
+    subtitle = " " 
+    imageUrl = "images/logo.png" 
     imageWidth = 200
     imageHeight = 200
-	
-	[[menu.main]]
+
+# --- القوائم (Menus) ---
+[[menu.main]]
   identifier = "whatsapp"
   name = "الواتساب"
-  url = "https://wa.me/9647872840590" # قم بتغيير هذا الرقم إلى رقمك الخاص
+  url = "https://wa.me/9647872840590"
   weight = 10
+
+[[menu.main]]
+  identifier = "gallery"
+  name = "أعمالنا"
+  url = "/gallery/"
+  weight = 20
 
 [[menu.main]]
   identifier = "Services"
   name = "خدماتنا"
-  url = "/Services/" # تأكد من أن لديك صفحة بهذا المسار
+  url = "/Services/"
   weight = 30
   
-  [[menu.main]]
-  identifier = "gallery"
-  name = "اعمالنا"
-  url = "/gallery/" # تأكد من أن لديك صفحة بهذا المسار
-  weight = 20
-  
-  [[cascade]]
+[[cascade]]
   [cascade.params]
     hidemeta = true
 	
-	[markup]
+[markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
