@@ -57,3 +57,8 @@ publishDir = "docs"
   [[cascade]]
   [cascade.params]
     hidemeta = true
+	
+	[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

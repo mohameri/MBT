@@ -1,0 +1,34 @@
+<style>
+    .price-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+        font-family: sans-serif;
+    }
+    .price-label {
+        font-size: 1.1rem;
+        color: #777;
+        font-weight: normal;
+    }
+    .price-display {
+        display: inline-block;
+        background: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
+        color: #000 !important; /* لون أسود إجباري */
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 900;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 15px rgba(253, 185, 49, 0.4);
+        border: 1px solid #eec84b;
+        min-width: 120px;
+        text-align: center;
+    }
+</style>
+
+<div class="price-container">
+    <span class="price-label">السعر:</span>
+    <span class="price-display" data-base-price="{{ .Get 0 }}">
+        {{ .Get 0 | lang.FormatNumber 0 }} د.ع
+    </span>
+</div>

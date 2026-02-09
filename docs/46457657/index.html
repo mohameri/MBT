@@ -119,6 +119,64 @@
             
             <a href="/home/" accesskey="h" title="MBT (Alt + H)">MBT</a>
             <div class="logo-switches">
+				
+				<style>
+    #currency-selector {
+         
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+         
+        background-color: rgba(20, 20, 20, 0.9);
+        color: #e1c443;
+        border: 1px solid #e1c443;
+        
+         
+        padding-top: 7px;        
+        padding-bottom: 10px;     
+        padding-right: 15px;     
+        padding-left: 25px;      
+        
+        min-width: 90px;        
+        border-radius: 50px;
+        
+        font-family: inherit;
+        font-weight: bold;
+        font-size: 0.95rem;      
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+
+         
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+         
+        background-position: left 15px center; 
+        background-size: 12px;  
+        
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);  
+    }
+
+    #currency-selector:hover {
+        background-color: #000;
+        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
+        transform: translateY(-1px);  
+    }
+
+    #currency-selector option {
+        background-color: #222;
+        color: #fff;
+        padding: 10px;
+    }
+</style>
+
+<select id="currency-selector" onchange="changeCurrency()">
+    <option value="IQD">🇮🇶 دينار</option>
+    <option value="USD">🇺🇸 دولار</option>
+    <option value="AED">🇦🇪 درهم</option>
+    <option value="SAR">🇸🇦 ريال</option>
+</select>
             </div>
         </div>
         <ul id="menu">
@@ -243,6 +301,74 @@
         }
     };
 
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        
+        const currencySelector = document.getElementById("currency-selector");
+        const priceElements = document.querySelectorAll(".price-display");
+
+        
+        if (!currencySelector) {
+            console.error("خطأ: لم يتم العثور على قائمة العملات (ID: currency-selector)");
+            return;
+        }
+
+        
+        const rates = {
+            "IQD": 1,         
+            "USD": 1300,      
+            "AED": 355,        
+			"SAR": 384
+        };
+
+        
+        function updatePrices() {
+            const selected = currencySelector.value;
+            console.log("تم اختيار العملة:", selected); 
+
+            priceElements.forEach(el => {
+                
+                let rawPrice = el.getAttribute("data-base-price").replace(/,/g, ''); 
+                let basePrice = parseFloat(rawPrice);
+
+                let finalPrice = 0;
+                let symbol = "";
+
+                if (selected === "IQD") {
+                    finalPrice = basePrice;
+                    symbol = " د.ع";
+                } else if (selected === "USD") {
+                    finalPrice = basePrice / rates.USD;
+                    symbol = " $";
+                } else if (selected === "AED") {
+                    finalPrice = basePrice / rates.AED;
+                    symbol = " د.إ";
+				} else if (selected === "SAR") {  
+                    finalPrice = basePrice / rates.SAR;
+                    symbol = " ر.س";	
+                }
+
+                
+                el.innerText = Math.round(finalPrice).toLocaleString() + symbol;
+            });
+
+            
+            localStorage.setItem("userCurrency", selected);
+        }
+
+        
+        currencySelector.addEventListener("change", updatePrices);
+
+        
+        const savedCurrency = localStorage.getItem("userCurrency");
+        if (savedCurrency) {
+            currencySelector.value = savedCurrency;
+        }
+        
+        
+        updatePrices();
+    });
 </script></body>
 
 </html>

@@ -134,3 +134,71 @@
     });
 </script>
 {{- end }}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. تعريف عناصر التحكم
+        const currencySelector = document.getElementById("currency-selector");
+        const priceElements = document.querySelectorAll(".price-display");
+
+        // تأكد من وجود القائمة قبل تشغيل الكود لتجنب الأخطاء
+        if (!currencySelector) {
+            console.error("خطأ: لم يتم العثور على قائمة العملات (ID: currency-selector)");
+            return;
+        }
+
+        // 2. أسعار الصرف (تأكد من تحديثها)
+        const rates = {
+            "IQD": 1,         // الأساس
+            "USD": 1300,      // سعر الدولار (قسمة)
+            "AED": 355,        // سعر الدرهم (قسمة)
+			"SAR": 384
+        };
+
+        // 3. الدالة الرئيسية
+        function updatePrices() {
+            const selected = currencySelector.value;
+            console.log("تم اختيار العملة:", selected); // للتجربة
+
+            priceElements.forEach(el => {
+                // تنظيف الرقم من أي فواصل قد تكون كتبت بالخطأ
+                let rawPrice = el.getAttribute("data-base-price").replace(/,/g, ''); 
+                let basePrice = parseFloat(rawPrice);
+
+                let finalPrice = 0;
+                let symbol = "";
+
+                if (selected === "IQD") {
+                    finalPrice = basePrice;
+                    symbol = " د.ع";
+                } else if (selected === "USD") {
+                    finalPrice = basePrice / rates.USD;
+                    symbol = " $";
+                } else if (selected === "AED") {
+                    finalPrice = basePrice / rates.AED;
+                    symbol = " د.إ";
+				} else if (selected === "SAR") {  // <--- هذا الشرط كان ناقصاً وهو سبب الصفر!
+                    finalPrice = basePrice / rates.SAR;
+                    symbol = " ر.س";	
+                }
+
+                // التحديث في الصفحة (بدون كسور)
+                el.innerText = Math.round(finalPrice).toLocaleString() + symbol;
+            });
+
+            // حفظ الاختيار
+            localStorage.setItem("userCurrency", selected);
+        }
+
+        // 4. ربط الأحداث (تشغيل الكود عند التغيير)
+        currencySelector.addEventListener("change", updatePrices);
+
+        // 5. استرجاع الاختيار القديم عند التحميل
+        const savedCurrency = localStorage.getItem("userCurrency");
+        if (savedCurrency) {
+            currencySelector.value = savedCurrency;
+        }
+        
+        // تحديث أولي
+        updatePrices();
+    });
+</script>
