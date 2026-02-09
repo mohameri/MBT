@@ -104,47 +104,81 @@
         -webkit-appearance: none;
         -moz-appearance: none;
 
-        /* 2. الألوان (ذهبي على خلفية داكنة) */
+        /* 2. الألوان (نفس ألوانك المعدلة) */
         background-color: rgba(20, 20, 20, 0.9);
         color: #e1c443;
         border: 1px solid #e1c443;
         
-        /* 3. القياسات والمساحات (هنا التعديل المهم) */
-        padding-top: 7px;       /* مساحة من الأعلى */
-        padding-bottom: 10px;    /* مساحة من الأسفل */
-        padding-right: 15px;    /* مساحة قبل بداية الكلام */
-        padding-left: 25px;     /* مساحة كبيرة للسهم عشان ما ينحشر */
+        /* 3. القياسات والمساحات */
+        padding-top: 7px;
+        padding-bottom: 10px;
+        padding-right: 15px;    
+        padding-left: 15px;     /* عدلتها لتساوي اليمين (كانت 25) لأن السهم اختفى */
         
-        min-width: 90px;       /* عرض أدنى للقائمة لتكون فخمة */
+        min-width: 70px;
         border-radius: 50px;
         
         font-family: inherit;
         font-weight: bold;
-        font-size: 0.95rem;     /* تكبير الخط قليلاً */
+        font-size: 0.95rem;
         cursor: pointer;
         outline: none;
         transition: all 0.3s ease;
+        text-align: center; /* لضمان توسيط النص */
 
-        /* 4. السهم الذهبي */
-        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-        background-repeat: no-repeat;
-        /* حركنا السهم ليكون بعيداً عن الحافة اليسرى بمقدار 15 بكسل */
-        background-position: left 15px center; 
-        background-size: 12px; /* كبرنا السهم قليلاً */
+        /* تم حذف كود السهم (background-image) من هنا */
         
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3); /* ظل ليعطي عمق */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
     #currency-selector:hover {
         background-color: #000;
         box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
-        transform: translateY(-1px); /* حركة بسيطة للأعلى عند اللمس */
+        transform: translateY(-1px);
     }
 
     #currency-selector option {
         background-color: #222;
         color: #fff;
         padding: 10px;
+    }
+</style>
+
+<style>
+    /* ... (اترك الكود القديم كما هو) ... */
+
+    /* === بداية الحل: كود خاص للموبايل فقط === */
+    @media screen and (max-width: 600px) {
+        
+        /* 1. تصغير القائمة لتتناسب مع الموبايل */
+        #currency-selector {
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 8px;  /* تقليل الحواف */
+            padding-right: 8px;
+            
+            min-width: auto;   /* إلغاء العرض الثابت */
+            font-size: 11px;   /* تصغير الخط قليلاً */
+            height: 28px;      /* ارتفاع مناسب للوغو */
+            margin-inline: 5px; /* تقريب المسافة من اللوغو */
+            border-width: 1px; /* تنعيم الإطار */
+        }
+
+        /* 2. تحسين ترتيب الهيدر بالكامل */
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px; /* مسافة صغيرة بين اللوغو والقائمة */
+        }
+
+        .logo-switches {
+            margin-top: 2px; /* محاذاة دقيقة */
+        }
+        
+        /* 3. جعل خيارات القائمة الداخلية أصغر أيضاً */
+        #currency-selector option {
+            font-size: 12px;
+        }
     }
 </style>
 
