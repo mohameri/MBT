@@ -148,7 +148,6 @@
     
     <style>
      
-     
     .logo {
         display: flex;
         align-items: center;
@@ -158,19 +157,18 @@
      
     .logo a {
         text-decoration: none;
-        color: inherit;  
+        color: inherit;
         font-weight: bold;
-        font-size: 1.5rem;  
-        transition: all 0.3s ease;  
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
     }
 
      
     .logo a:hover {
-        color: #e1c443;  
-        transform: scale(1.05);  
-         
+        color: #e1c443;
+        transform: scale(1.05);
         filter: drop-shadow(0 0 8px rgba(225, 196, 67, 0.6)); 
     }
 
@@ -265,7 +263,6 @@
         box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); 
     }
 
-     
     #menu a[href*="wa.me"]:hover {
         background-color: #128C7E; 
         border-color: #128C7E;
@@ -279,7 +276,7 @@
         width: 22px;   
         height: 22px;
         object-fit: contain;
-        filter: brightness(0) invert(1); 
+        filter: brightness(0) invert(1);  
         transition: transform 0.3s;
     }
 
@@ -322,6 +319,7 @@
         color: #e1c443;
     }
 
+     
     .whatsapp-container {
         position: relative;
         width: 80px;
@@ -331,19 +329,28 @@
         align-items: flex-start;
     }
 
+     
     .whatsapp-btn {
         width: 60px;
         height: 60px;
-        background-color: #25D366;
+        background-color: #25D366 !important;  
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         position: absolute;
         top: -25px;
-        border: 5px solid #1a1a1a;
+        border: 5px solid #1a1a1a;  
         box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         transition: transform 0.2s;
+    }
+
+     
+    .whatsapp-btn img {
+        filter: brightness(0) invert(1); 
+        width: 32px !important;
+        height: 32px !important;
+        object-fit: contain;
     }
 
     .whatsapp-btn:active {
