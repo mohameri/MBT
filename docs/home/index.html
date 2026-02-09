@@ -221,46 +221,85 @@
 
 <style>
      
-    #hamburger-btn {
-        display: none;  
-        background: none; border: none; cursor: pointer;
-        flex-direction: column; gap: 5px; padding: 5px;
-        margin-right: 15px;  
-    }
-    #hamburger-btn span {
-        display: block; width: 25px; height: 3px;
-        background-color: var(--primary);  
-        border-radius: 2px;
+    @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');
+
+     
+    #currency-selector {
+        font-family: 'Almarai', sans-serif !important;
+        font-weight: 700;
+        font-size: 0.9rem;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+         
+         
+        background: linear-gradient(135deg, rgba(50, 50, 50, 0.9), rgba(20, 20, 20, 0.9));
+        color: #FFD700;  
+        border: 1px solid #FFD700;
+        
+         
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 5px rgba(255, 215, 0, 0.1);
+        backdrop-filter: blur(5px);  
+
+         
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-right: 12px;
+        padding-left: 30px;  
+        
+        min-width: 140px;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+        
+         
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: left 12px center;
+        background-size: 10px;
     }
 
      
-    .menu-close-btn { display: none; }
+    #currency-selector:hover {
+        background: linear-gradient(135deg, rgba(70, 70, 70, 1), rgba(30, 30, 30, 1));
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);  
+        transform: translateY(-1px);
+    }
 
      
-    @media screen and (max-width: 768px) {
-        #hamburger-btn { display: flex; }  
+    @media screen and (max-width: 600px) {
+        #currency-selector {
+             
+            position: absolute !important;  
+            top: 12px !important;           
+            right: 15px !important;         
+            z-index: 100;                   
 
-         
-        #menu {
-            position: fixed; top: 0; right: -280px;  
-            width: 260px; height: 100vh;
-            background-color: var(--entry);  
-            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-            flex-direction: column; padding-top: 60px;
-            transition: right 0.4s ease-in-out;
-            z-index: 9999; display: block !important;
+             
+            font-size: 0.8rem !important;
+            padding: 4px 8px 4px 25px !important;  
+            min-width: auto !important;     
+            background-size: 9px !important;  
+            background-position: left 10px center !important;
+            
+             
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.2) !important;
         }
+    
          
-        #menu.menu-open { right: 0; }
-
-        #menu li { width: 100%; text-align: right; border-bottom: 1px solid var(--border); }
-        #menu a { display: block; padding: 15px 25px; font-size: 16px; }
-
-        .menu-close-btn {
-            display: block !important; position: absolute;
-            top: 20px; left: 20px; color: #ff5555;
-            font-weight: bold; cursor: pointer;
+        .header .nav {
+            padding-right: 80px;  
         }
+    }
+
+    #currency-selector option {
+        background-color: #222;
+        color: #fff;
+        font-family: 'Almarai', sans-serif;
+        padding: 10px;
     }
 </style>
 
