@@ -145,39 +145,42 @@
 </style>
 
 <style>
-    /* ... (اترك الكود القديم كما هو) ... */
+    /* ... (اترك الأكواد العلوية كما هي) ... */
 
-    /* === بداية الحل: كود خاص للموبايل فقط === */
+    /* === حل مشكلة الموبايل (التوسيط والوضوح) === */
     @media screen and (max-width: 600px) {
         
-        /* 1. تصغير القائمة لتتناسب مع الموبايل */
-        #currency-selector {
-            padding-top: 4px;
-            padding-bottom: 4px;
-            padding-left: 8px;  /* تقليل الحواف */
-            padding-right: 8px;
-            
-            min-width: auto;   /* إلغاء العرض الثابت */
-            font-size: 11px;   /* تصغير الخط قليلاً */
-            height: 28px;      /* ارتفاع مناسب للوغو */
-            margin-inline: 5px; /* تقريب المسافة من اللوغو */
-            border-width: 1px; /* تنعيم الإطار */
+        /* 1. إصلاح محاذاة الهيدر بالكامل (الحل السحري للاعوجاج) */
+        .logo {
+            display: flex !important;
+            align-items: center !important; /* يجبر النص والزر أن يكونا على خط واحد */
+            gap: 8px; /* مسافة نظيفة بين اللوغو والزر */
         }
 
-        /* 2. تحسين ترتيب الهيدر بالكامل */
-        .header .logo {
+        .logo a {
             display: flex;
             align-items: center;
-            gap: 5px; /* مسافة صغيرة بين اللوغو والقائمة */
         }
 
-        .logo-switches {
-            margin-top: 2px; /* محاذاة دقيقة */
+        /* 2. تصميم الزر للموبايل (واضح وليس ناعم) */
+        #currency-selector {
+            font-size: 13px !important; /* تكبير الخط */
+            font-weight: 800 !important; /* خط سميك جداً للوضوح */
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+            padding-right: 10px !important;
+            padding-left: 10px !important; /* مسافات متساوية */
+            
+            min-width: auto !important;
+            height: auto !important;
+            margin: 0 !important; /* إزالة أي هوامش تسبب الاعوجاج */
+            border-width: 1px !important;
+            line-height: 1 !important; /* ضبط ارتفاع السطر */
         }
         
-        /* 3. جعل خيارات القائمة الداخلية أصغر أيضاً */
-        #currency-selector option {
-            font-size: 12px;
+        /* 3. منع زر القائمة (الموبايل) من الالتصاق */
+        .logo-switches {
+             margin-top: 0 !important;
         }
     }
 </style>
