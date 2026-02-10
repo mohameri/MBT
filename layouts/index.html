@@ -72,6 +72,7 @@
         z-index: 2;
         transition: transform 0.1s ease-out;
         cursor: default;
+        /* الحركة مفعلة في الحاسوب فقط عبر السكربت */
     }
 
     .big-typography span {
@@ -185,7 +186,7 @@
         transition: 0.5s;
     }
 
-    .glass-card::hover::before {
+    .glass-card:hover::before {
         left: 100%;
     }
 
@@ -366,22 +367,23 @@
     }
 
     /* =========================================
-       Mobile Customization
+       Mobile Customization (تخصيص الموبايل بدقة)
        ========================================= */
     @media (max-width: 768px) {
         
-        /* 1. تقليل المساحة المهدرة بالبداية */
+        /* 1. Hero Adjustments */
         .hero-section {
-            padding: 20px 20px 0 20px; /* تقليل البادينج العلوي من 40 إلى 20 */
-            justify-content: start; /* بدء المحتوى من الأعلى قليلاً */
-            min-height: 70vh; /* تقليل الارتفاع الأدنى للموبايل */
-            padding-top: 80px; /* تعويض عن الهيدر الثابت إن وجد */
+            padding: 20px 20px 0 20px;
+            justify-content: start;
+            min-height: 70vh;
+            padding-top: 90px;
         }
 
         .big-typography { 
             font-size: 2.8rem; 
             line-height: 1.1; 
             margin-bottom: 15px;
+            transform: none !important; /* إيقاف حركة النص */
         }
         
         .hero-subtitle { 
@@ -390,38 +392,91 @@
             margin-top: 10px;
         }
 
-        .glass-grid, .nav-grid { 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
+        /* 2. Marquee Adjustments */
+        .marquee-wrapper {
+            /* تقليل المسافة العلوية للنصف */
+            padding-top: 20px; 
+            padding-bottom: 40px;
         }
 
-        .glass-card, .nav-card {
-            padding: 20px 15px; 
+        /* 3. Services Layout (توسيع الكروت لتصبح أفقية) */
+        .glass-grid { 
+            display: flex;
+            flex-direction: column; /* الكروت تحت بعض */
+            gap: 15px;
+        }
+
+        .glass-card {
+            padding: 20px;
             border-radius: 15px;
-            min-height: auto; 
+            /* تغيير اتجاه المحتوى ليصبح أفقي (أيقونة بجانب النص) */
+            flex-direction: row; 
+            align-items: center;
+            gap: 20px;
+            min-height: auto;
+            text-align: right;
         }
 
         .card-icon {
-            font-size: 2rem; 
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 0; /* إلغاء الهامش السفلي لأنها بجانب النص */
+            /* جعل الأيقونة ثابتة العرض لعدم الانضغاط */
+            min-width: 50px; 
+            display: flex;
+            justify-content: center;
+        }
+
+        /* حاوية للنصوص داخل الكارت */
+        .card-content-wrapper {
+            flex: 1;
         }
         
         .card-title {
-            font-size: 1rem; 
-            margin-bottom: 8px;
+            font-size: 1.1rem; 
+            margin-bottom: 5px;
         }
         
         .card-desc {
-            font-size: 0.8rem; 
+            font-size: 0.85rem; 
             line-height: 1.4;
+            margin: 0;
         }
         
+        /* 4. Navigation Cards (توسيعها لتصبح مربعة وجذابة) */
+        .nav-grid { 
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* بوكسين متقابلين */
+            gap: 10px;
+        }
+
         .nav-card {
-            min-height: 180px; 
+            min-height: auto; /* ارتفاع حر حسب المحتوى */
+            aspect-ratio: 1 / 1; /* جعلها مربعة تماماً */
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
         }
-        
-        .nav-arrow {
-            font-size: 1.5rem;
+
+        .nav-card .card-icon {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .nav-card .card-title {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .nav-card .card-desc {
+            display: none; /* إخفاء الوصف في البوكسات المربعة الصغيرة للحفاظ على الجمالية */
+        }
+
+        .nav-card .nav-arrow {
+            display: none; /* إخفاء السهم لتوفير المساحة */
         }
 
         .slide-item { 
@@ -476,34 +531,34 @@
             
             <div class="glass-card">
                 <div class="card-icon">🎥</div>
-                <h3 class="card-title">صناعة المحتوى</h3>
-                <p class="card-desc">
-                    إدارة شاملة لحسابات السوشيال ميديا. تصوير ومونتاج احترافي.
-                </p>
+                <div class="card-content-wrapper">
+                    <h3 class="card-title">صناعة المحتوى</h3>
+                    <p class="card-desc">إدارة شاملة لحسابات السوشيال ميديا. تصوير ومونتاج احترافي.</p>
+                </div>
             </div>
 
             <div class="glass-card">
                 <div class="card-icon">🎨</div>
-                <h3 class="card-title">التصميم والجرافيك</h3>
-                <p class="card-desc">
-                    تصميم الشعارات والهويات البصرية المتكاملة لعلامة تجارية قوية.
-                </p>
+                <div class="card-content-wrapper">
+                    <h3 class="card-title">التصميم والجرافيك</h3>
+                    <p class="card-desc">تصميم الشعارات والهويات البصرية المتكاملة لعلامة تجارية قوية.</p>
+                </div>
             </div>
 
             <div class="glass-card">
                 <div class="card-icon">💻</div>
-                <h3 class="card-title">تصميم وبرمجة المواقع</h3>
-                <p class="card-desc">
-                    مواقع عصرية وسريعة تعكس هوية شركتك وتسهل الوصول لخدماتك.
-                </p>
+                <div class="card-content-wrapper">
+                    <h3 class="card-title">تصميم وبرمجة المواقع</h3>
+                    <p class="card-desc">مواقع عصرية وسريعة تعكس هوية شركتك وتسهل الوصول لخدماتك.</p>
+                </div>
             </div>
 
             <div class="glass-card">
                 <div class="card-icon">📈</div>
-                <h3 class="card-title">إدارة حسابات</h3>
-                <p class="card-desc">
-                    ندير تواجدك الرقمي بالكامل لتتفرغ أنت لإدارة أعمالك.
-                </p>
+                <div class="card-content-wrapper">
+                    <h3 class="card-title">إدارة حسابات</h3>
+                    <p class="card-desc">ندير تواجدك الرقمي بالكامل لتتفرغ أنت لإدارة أعمالك.</p>
+                </div>
             </div>
 
         </div>
@@ -553,21 +608,15 @@
     <section class="nav-links-section">
         <div class="nav-grid">
             <a href="/services/" class="glass-card nav-card">
-                <div>
-                    <div class="card-icon">💎</div>
-                    <h3 class="card-title">الخدمات والأسعار</h3>
-                    <p class="card-desc">تصفح باقاتنا المتكاملة.</p>
-                </div>
-                <div class="nav-arrow">←</div>
+                <div class="card-icon">💎</div>
+                <h3 class="card-title">الخدمات والأسعار</h3>
+                <p class="card-desc">تصفح باقاتنا المتكاملة.</p> 
             </a>
 
             <a href="/gallery/" class="glass-card nav-card">
-                <div>
-                    <div class="card-icon">🎬</div>
-                    <h3 class="card-title">معرض الأعمال</h3>
-                    <p class="card-desc">شاهد نماذج حقيقية وقصص نجاح.</p>
-                </div>
-                <div class="nav-arrow">←</div>
+                <div class="card-icon">🎬</div>
+                <h3 class="card-title">معرض الأعمال</h3>
+                <p class="card-desc">شاهد نماذج حقيقية.</p>
             </a>
         </div>
     </section>
@@ -583,13 +632,16 @@
 </div>
 
 <script>
-    // 1. Parallax
+    // 1. Parallax (يعمل فقط على الشاشات الكبيرة تلقائياً بسبب الماوس)
     document.addEventListener('mousemove', (e) => {
-        const heroText = document.getElementById('hero-text');
-        const x = (window.innerWidth - e.pageX * 2) / 80;
-        const y = (window.innerHeight - e.pageY * 2) / 80;
-        if(heroText) {
-            heroText.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        // التحقق من عرض الشاشة لتعطيل الحركة في الموبايل تماماً (احتياطاً)
+        if(window.innerWidth > 768) {
+            const heroText = document.getElementById('hero-text');
+            const x = (window.innerWidth - e.pageX * 2) / 80;
+            const y = (window.innerHeight - e.pageY * 2) / 80;
+            if(heroText) {
+                heroText.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            }
         }
     });
 
