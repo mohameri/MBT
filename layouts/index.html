@@ -366,16 +366,16 @@
     }
 
     /* =========================================
-       Mobile Customization (تعديل المسافات النهائي)
+       Mobile Customization
        ========================================= */
     @media (max-width: 768px) {
         
-        /* 1. تقليل مساحة الهيرو العلوية بشكل كبير */
+        /* 1. Hero */
         .hero-section {
-            padding-top: 50px; /* تقليل الفراغ العلوي */
+            padding-top: 50px;
             padding-bottom: 20px;
-            justify-content: flex-start; /* بدء المحتوى من الأعلى */
-            min-height: auto; /* ارتفاع تلقائي لعدم ترك فراغ */
+            justify-content: flex-start;
+            min-height: auto;
         }
 
         .big-typography { 
@@ -391,19 +391,20 @@
             margin-top: 10px;
         }
 
+        /* 2. Marquee Adjustments - زيادة المساحة العلوية قليلاً كما طلبت */
         .marquee-wrapper {
-            padding-top: 15px; 
+            padding-top: 35px; /* مساحة بسيطة لفصلها عن الهيرو */
             padding-bottom: 15px;
         }
 
-        /* 2. زيادة المساحات قبل الأقسام (خدماتنا، أعمالنا) */
+        /* 3. Spacings (المسافات بين الأقسام) */
         .services-section {
-            padding-top: 70px; /* زيادة مسافة قبل خدماتنا */
+            padding-top: 70px; 
             padding-bottom: 30px;
         }
 
         .portfolio-section {
-            padding-top: 70px; /* زيادة مسافة قبل أعمالنا */
+            padding-top: 70px; 
             padding-bottom: 30px;
         }
 
@@ -412,9 +413,8 @@
             padding-bottom: 40px;
         }
 
-        /* 3. مسافة بسيطة قبل زر تواصل معنا */
         .cta-section {
-            padding-top: 50px; /* مسافة بسيطة */
+            padding-top: 50px; 
             padding-bottom: 60px;
         }
 
@@ -423,7 +423,7 @@
             font-size: 2rem;
         }
 
-        /* تخطيط الخدمات */
+        /* 4. Layouts */
         .glass-grid { 
             display: flex;
             flex-direction: column;
@@ -452,7 +452,7 @@
         .card-title { font-size: 1.1rem; margin-bottom: 5px; }
         .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
         
-        /* تخطيط كروت التوجيه */
+        /* 5. Navigation Cards (المربعات مع الأسهم) */
         .nav-grid { 
             display: grid;
             grid-template-columns: 1fr 1fr; 
@@ -481,7 +481,6 @@
             margin: 0;
         }
 
-        /* إظهار السهم في الموبايل بالزاوية */
         .nav-card .nav-arrow {
             display: block; 
             font-size: 1.2rem;
