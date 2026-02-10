@@ -61,9 +61,10 @@
     }
 
     .big-typography {
-        font-size: clamp(3rem, 9vw, 6.5rem); 
+        /* استخدام clamp لضبط الخط تلقائياً */
+        font-size: clamp(2.5rem, 8vw, 6.5rem); 
         font-weight: 900;
-        line-height: 1.3;
+        line-height: 1.2;
         margin-bottom: 20px;
         color: #ffffff;
         text-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -127,7 +128,7 @@
     }
 
     /* =========================================
-       3. Services (2 Cards per row)
+       3. Services
        ========================================= */
     .services-section {
         padding: 100px 20px;
@@ -155,6 +156,7 @@
 
     .glass-grid {
         display: grid;
+        /* الافتراضي للحاسوب: كروت بعرض مناسب */
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
     }
@@ -215,7 +217,7 @@
     }
 
     /* =========================================
-       4. Portfolio Slider (تم التعديل لدعم الماوس)
+       4. Portfolio Slider
        ========================================= */
     .portfolio-section {
         padding: 100px 0;
@@ -230,16 +232,13 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none; 
-        
-        /* هذا السطر يجعل المؤشر يتغير ليد عند التمرير عليه */
         cursor: grab; 
     }
 
-    /* تغيير شكل المؤشر عند الضغط والسحب */
     .slider-container.active {
         cursor: grabbing;
         cursor: -webkit-grabbing;
-        scroll-snap-type: none; /* إيقاف الـ snap أثناء السحب لسلاسة الحركة */
+        scroll-snap-type: none; 
     }
 
     .slider-container::-webkit-scrollbar {
@@ -256,7 +255,6 @@
         overflow: hidden;
         border: 1px solid var(--glass-border);
         transition: transform 0.3s;
-        /* منع تحديد النص أو الصورة أثناء السحب */
         user-select: none; 
         -webkit-user-select: none;
     }
@@ -271,7 +269,7 @@
         object-fit: cover;
         opacity: 0.8;
         transition: opacity 0.3s;
-        pointer-events: none; /* مهم جداً لمنع سحب الصورة نفسها بدلاً من السلايدر */
+        pointer-events: none; 
     }
 
     .slide-item:hover .slide-img {
@@ -369,14 +367,71 @@
         box-shadow: 0 0 40px rgba(225, 196, 67, 0.4);
     }
 
-    /* Mobile Tweaks */
+    /* =========================================
+       Mobile Customization (تخصيص الموبايل بدقة)
+       ========================================= */
     @media (max-width: 768px) {
-        .big-typography { font-size: 3rem; }
-        .slide-item { min-width: 80vw; height: 400px; }
-        .glass-grid { grid-template-columns: 1fr; } 
-        .nav-grid { grid-template-columns: 1fr; }
-    }
+        /* تصغير الخطوط في الهيرو */
+        .big-typography { 
+            font-size: 2.8rem; /* تصغير العنوان لعدم التكسر */
+            line-height: 1.1; 
+        }
+        .hero-subtitle { 
+            font-size: 0.95rem; 
+            padding: 10px 20px; 
+            margin-top: 15px;
+        }
 
+        /* تعديل الشبكة لتصبح عمودين (متقابلين) في الموبايل */
+        .glass-grid, .nav-grid { 
+            grid-template-columns: 1fr 1fr; /* إجبار عمودين */
+            gap: 12px; /* تقليل المسافة بين الكروت */
+        }
+
+        /* تصغير الكروت لتناسب العمودين */
+        .glass-card, .nav-card {
+            padding: 20px 15px; /* تقليل الحواف الداخلية */
+            border-radius: 15px;
+            min-height: auto; /* إزالة الحد الأدنى للارتفاع */
+        }
+
+        /* تصغير العناصر داخل الكروت */
+        .card-icon {
+            font-size: 2rem; /* تصغير الأيقونة */
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-size: 1rem; /* تصغير العنوان */
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            font-size: 0.8rem; /* تصغير الوصف */
+            line-height: 1.4;
+        }
+        
+        /* تعديل كروت التوجيه في الأسفل */
+        .nav-card {
+            min-height: 180px; /* ارتفاع أصغر */
+        }
+        .nav-arrow {
+            font-size: 1.5rem;
+        }
+
+        /* تعديل السلايدر في الموبايل */
+        .slide-item { 
+            min-width: 260px; /* عرض أقل للكارت في السلايدر */
+            height: 380px; 
+        }
+        
+        /* CTA */
+        .cta-box {
+            padding: 30px 20px;
+        }
+        .cta-btn {
+            width: 100%; /* الزر يأخذ كامل العرض */
+            padding: 12px 0;
+        }
+    }
 </style>
 
 <div class="home-container">
@@ -417,7 +472,7 @@
                 <div class="card-icon">🎥</div>
                 <h3 class="card-title">صناعة المحتوى</h3>
                 <p class="card-desc">
-                    إدارة شاملة لحسابات السوشيال ميديا. تصوير ومونتاج احترافي (Reels, TikTok) يركز على جلب المشاهدات وزيادة المبيعات.
+                    إدارة شاملة لحسابات السوشيال ميديا. تصوير ومونتاج احترافي.
                 </p>
             </div>
 
@@ -425,7 +480,7 @@
                 <div class="card-icon">🎨</div>
                 <h3 class="card-title">التصميم والجرافيك</h3>
                 <p class="card-desc">
-                    تصميم الشعارات والهويات البصرية المتكاملة. نمنح علامتك التجارية شخصية بصرية فريدة وقوية تميزك عن المنافسين.
+                    تصميم الشعارات والهويات البصرية المتكاملة لعلامة تجارية قوية.
                 </p>
             </div>
 
@@ -433,7 +488,7 @@
                 <div class="card-icon">💻</div>
                 <h3 class="card-title">تصميم المواقع</h3>
                 <p class="card-desc">
-                    تصميم مواقع عصرية متجاوبة وسريعة، تعكس هوية شركتك وتسهل وصول عملائك لخدماتك.
+                    مواقع عصرية وسريعة تعكس هوية شركتك وتسهل الوصول لخدماتك.
                 </p>
             </div>
 
@@ -441,7 +496,7 @@
                 <div class="card-icon">📈</div>
                 <h3 class="card-title">إدارة حسابات</h3>
                 <p class="card-desc">
-                    نحن ندير تواجدك الرقمي بالكامل، من النشر إلى التفاعل، لتتفرغ أنت لإدارة أعمالك وتنميتها.
+                    ندير تواجدك الرقمي بالكامل لتتفرغ أنت لإدارة أعمالك.
                 </p>
             </div>
 
@@ -495,7 +550,7 @@
                 <div>
                     <div class="card-icon">💎</div>
                     <h3 class="card-title">الخدمات والأسعار</h3>
-                    <p class="card-desc">تصفح باقاتنا المتكاملة وأسعار الخدمات التي تناسب ميزانية مشروعك.</p>
+                    <p class="card-desc">تصفح باقاتنا المتكاملة.</p>
                 </div>
                 <div class="nav-arrow">←</div>
             </a>
@@ -504,7 +559,7 @@
                 <div>
                     <div class="card-icon">🎬</div>
                     <h3 class="card-title">معرض الأعمال</h3>
-                    <p class="card-desc">شاهد نماذج حقيقية وقصص نجاح صنعناها لعملائنا في مختلف المجالات.</p>
+                    <p class="card-desc">شاهد نماذج حقيقية وقصص نجاح.</p>
                 </div>
                 <div class="nav-arrow">←</div>
             </a>
@@ -522,7 +577,7 @@
 </div>
 
 <script>
-    // 1. حركة النص مع الماوس (Parallax)
+    // 1. Parallax
     document.addEventListener('mousemove', (e) => {
         const heroText = document.getElementById('hero-text');
         const x = (window.innerWidth - e.pageX * 2) / 80;
@@ -532,7 +587,7 @@
         }
     });
 
-    // 2. تفعيل السحب بالماوس للسلايدر (Drag to Scroll)
+    // 2. Drag to Scroll
     const slider = document.querySelector('.slider-container');
     let isDown = false;
     let startX;
@@ -559,7 +614,7 @@
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // سرعة السحب
+        const walk = (x - startX) * 2;
         slider.scrollLeft = scrollLeft - walk;
     });
 </script>
