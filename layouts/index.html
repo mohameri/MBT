@@ -366,37 +366,23 @@
     }
 
     /* =========================================
-       Mobile Customization
+       Mobile Customization (تعديل المسافات النهائي)
        ========================================= */
     @media (max-width: 768px) {
         
-        /* تقليل المسافات العامة */
-        .services-section, 
-        .portfolio-section, 
-        .nav-links-section, 
-        .cta-section {
-            padding-top: 30px;
-            padding-bottom: 30px;
-        }
-
-        .section-title {
-            margin-bottom: 25px;
-            font-size: 2rem;
-        }
-
-        /* 1. Hero Adjustments */
+        /* 1. تقليل مساحة الهيرو العلوية بشكل كبير */
         .hero-section {
-            padding: 20px 20px 0 20px;
-            justify-content: center;
-            min-height: 60vh; /* تقليل الارتفاع */
-            padding-top: 80px;
+            padding-top: 50px; /* تقليل الفراغ العلوي */
+            padding-bottom: 20px;
+            justify-content: flex-start; /* بدء المحتوى من الأعلى */
+            min-height: auto; /* ارتفاع تلقائي لعدم ترك فراغ */
         }
 
         .big-typography { 
             font-size: 2.8rem; 
             line-height: 1.1; 
             margin-bottom: 15px;
-            transform: none !important; /* إيقاف الحركة */
+            transform: none !important; 
         }
         
         .hero-subtitle { 
@@ -405,17 +391,43 @@
             margin-top: 10px;
         }
 
-        /* 2. Marquee Adjustments */
         .marquee-wrapper {
-            padding-top: 15px; /* تقليل المسافة */
+            padding-top: 15px; 
             padding-bottom: 15px;
         }
 
-        /* 3. Services Layout */
+        /* 2. زيادة المساحات قبل الأقسام (خدماتنا، أعمالنا) */
+        .services-section {
+            padding-top: 70px; /* زيادة مسافة قبل خدماتنا */
+            padding-bottom: 30px;
+        }
+
+        .portfolio-section {
+            padding-top: 70px; /* زيادة مسافة قبل أعمالنا */
+            padding-bottom: 30px;
+        }
+
+        .nav-links-section {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        /* 3. مسافة بسيطة قبل زر تواصل معنا */
+        .cta-section {
+            padding-top: 50px; /* مسافة بسيطة */
+            padding-bottom: 60px;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        /* تخطيط الخدمات */
         .glass-grid { 
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
 
         .glass-card {
@@ -440,7 +452,7 @@
         .card-title { font-size: 1.1rem; margin-bottom: 5px; }
         .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
         
-        /* 4. Navigation Cards (المربعات المتقابلة مع الأسهم) */
+        /* تخطيط كروت التوجيه */
         .nav-grid { 
             display: grid;
             grid-template-columns: 1fr 1fr; 
@@ -453,7 +465,7 @@
             padding: 15px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* توزيع المحتوى */
+            justify-content: space-between; 
             align-items: center;
             text-align: center;
             gap: 5px;
@@ -469,11 +481,11 @@
             margin: 0;
         }
 
-        /* إعادة إظهار السهم في الموبايل */
+        /* إظهار السهم في الموبايل بالزاوية */
         .nav-card .nav-arrow {
             display: block; 
             font-size: 1.2rem;
-            align-self: flex-end; /* وضعه في الزاوية */
+            align-self: flex-end; 
             margin-top: auto;
         }
 
@@ -636,7 +648,7 @@
 </div>
 
 <script>
-    // 1. Parallax (يعمل فقط على الشاشات الكبيرة تلقائياً بسبب الماوس)
+    // 1. Parallax (يعمل فقط على الشاشات الكبيرة تلقائياً)
     document.addEventListener('mousemove', (e) => {
         if(window.innerWidth > 768) {
             const heroText = document.getElementById('hero-text');
