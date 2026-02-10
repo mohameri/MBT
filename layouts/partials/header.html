@@ -39,7 +39,7 @@
     
     <style>
     /* =========================================
-       1. تنسيقات الشعار (LOGO)
+       1. تنسيقات الشعار (LOGO) - عاد نصاً كما طلبت
        ========================================= */
     .logo {
         display: flex;
@@ -51,7 +51,7 @@
         text-decoration: none;
         color: inherit;
         font-weight: bold;
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* حجم مناسب وواضح */
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
@@ -64,7 +64,7 @@
     }
 
     /* =========================================
-       2. تنسيقات محدد العملة (Currency Selector)
+       2. تنسيقات محدد العملة
        ========================================= */
     #currency-selector {
         appearance: none;
@@ -102,7 +102,7 @@
     }
 
     /* =========================================
-       3. تنسيقات القائمة العلوية (Desktop Menu)
+       3. تنسيقات القائمة العلوية (Desktop)
        ========================================= */
     #menu {
         display: flex;             
@@ -165,7 +165,7 @@
     }
 
     /* =========================================
-       4. تنسيقات الموبايل (Mobile Bottom Nav)
+       4. تنسيقات الموبايل (التصميم القديم البسيط)
        ========================================= */
     .mobile-bottom-nav {
         display: none; 
@@ -194,9 +194,12 @@
         color: #bbb;
         font-size: 0.9rem;
         font-weight: bold;
+        transition: color 0.3s;
     }
     
     .nav-item:hover { color: #e1c443; }
+
+    /* إزالة تأثير التوهج والخلفية الذهبية */
 
     .whatsapp-container {
         position: relative;
@@ -230,10 +233,10 @@
     }
 
     /* =========================================
-       5. تنسيقات نافذة التأكيد (WhatsApp Modal)
+       5. نافذة تأكيد الواتساب (Popup)
        ========================================= */
     .wa-modal-overlay {
-        display: none; /* مخفي افتراضياً */
+        display: none; 
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         background-color: rgba(0, 0, 0, 0.6); 
@@ -270,12 +273,10 @@
         font-size: 1.1rem;
     }
 
-    /* تنسيق خاص لصورة اللوغو داخل النافذة */
     .wa-modal-header img {
         width: 28px;
         height: 28px;
         object-fit: contain;
-        /* تحويل الصورة للون الأبيض لتناسب الخلفية الخضراء */
         filter: brightness(0) invert(1);
     }
 
@@ -449,7 +450,7 @@
 <div id="whatsapp-modal" class="wa-modal-overlay">
     <div class="wa-modal-content">
         <div class="wa-modal-header">
-            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 20px; height: 20px;">
+            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 28px; height: 28px;">
             <span>الانتقال إلى واتساب؟</span>
         </div>
         <div class="wa-modal-body">
@@ -469,7 +470,6 @@
         const cancelBtn = document.getElementById('wa-cancel');
         let targetUrl = '';
 
-        // استهداف جميع روابط الواتساب
         const waLinks = document.querySelectorAll('a.wa-trigger-link, a[href*="wa.me"]');
 
         waLinks.forEach(link => {

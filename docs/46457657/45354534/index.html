@@ -220,7 +220,7 @@
         text-decoration: none;
         color: inherit;
         font-weight: bold;
-        font-size: 1.5rem;
+        font-size: 1.5rem;  
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
@@ -357,9 +357,12 @@
         color: #bbb;
         font-size: 0.9rem;
         font-weight: bold;
+        transition: color 0.3s;
     }
     
     .nav-item:hover { color: #e1c443; }
+
+     
 
     .whatsapp-container {
         position: relative;
@@ -394,7 +397,7 @@
 
      
     .wa-modal-overlay {
-        display: none;  
+        display: none; 
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         background-color: rgba(0, 0, 0, 0.6); 
@@ -431,12 +434,10 @@
         font-size: 1.1rem;
     }
 
-     
     .wa-modal-header img {
         width: 28px;
         height: 28px;
         object-fit: contain;
-         
         filter: brightness(0) invert(1);
     }
 
@@ -551,7 +552,7 @@
 <div id="whatsapp-modal" class="wa-modal-overlay">
     <div class="wa-modal-content">
         <div class="wa-modal-header">
-            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 20px; height: 20px;">
+            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 28px; height: 28px;">
             <span>الانتقال إلى واتساب؟</span>
         </div>
         <div class="wa-modal-body">
@@ -571,7 +572,6 @@
         const cancelBtn = document.getElementById('wa-cancel');
         let targetUrl = '';
 
-        
         const waLinks = document.querySelectorAll('a.wa-trigger-link, a[href*="wa.me"]');
 
         waLinks.forEach(link => {
