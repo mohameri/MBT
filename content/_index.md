@@ -1,6 +1,6 @@
 +++
-title = "Home"
-url = "/"
-aliases = ["/index.html"]
-layout = "redirect"
+title = 'MBT - شريكك في صناعة المحتوى والتصميم'
+date = '2025-08-14T14:12:37+03:00'
+draft = false
+# ملاحظة: لا تضع أي كود تصميم هنا، التصميم سيأتي من الخطوة 3
 +++

@@ -1,0 +1,567 @@
+{{ define "main" }}
+
+<style>
+    /* =========================================
+       Global Variables & Reset
+       ========================================= */
+    :root {
+        --gold: #e1c443;
+        --blue: #1a2855;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --blur-amt: 12px;
+        --text-main: #ffffff;
+        --text-muted: #aaaaaa;
+    }
+
+    .home-container {
+        font-family: inherit;
+        overflow-x: hidden;
+        direction: rtl;
+        color: var(--text-main);
+        position: relative;
+        min-height: 100vh;
+    }
+
+    /* Ambient Glow */
+    .ambient-glow {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(26, 40, 85, 0.15) 0%, transparent 70%);
+        top: -100px;
+        left: -100px;
+        z-index: -1;
+        pointer-events: none;
+    }
+    .ambient-glow-2 {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(225, 196, 67, 0.08) 0%, transparent 70%);
+        bottom: -100px;
+        right: -100px;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* =========================================
+       1. Hero Section
+       ========================================= */
+    .hero-section {
+        min-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .big-typography {
+        font-size: clamp(3rem, 9vw, 6.5rem); 
+        font-weight: 900;
+        line-height: 1.3;
+        margin-bottom: 20px;
+        color: #ffffff;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        -webkit-text-stroke: 0; 
+        position: relative;
+        z-index: 2;
+        transition: transform 0.1s ease-out;
+        cursor: default;
+    }
+
+    .big-typography span {
+        display: block;
+        color: var(--gold);
+        text-shadow: 0 0 40px rgba(225, 196, 67, 0.4);
+    }
+
+    .hero-subtitle {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        line-height: 1.6;
+        background: var(--glass-bg);
+        padding: 15px 30px;
+        border-radius: 50px;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(var(--blur-amt));
+        -webkit-backdrop-filter: blur(var(--blur-amt));
+    }
+
+    /* =========================================
+       2. Marquee
+       ========================================= */
+    .marquee-wrapper {
+        width: 100%;
+        overflow: hidden;
+        padding: 40px 0;
+        background: linear-gradient(to right, transparent, rgba(0,0,0,0.2), transparent);
+        border-top: 1px solid var(--glass-border);
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .marquee-content {
+        display: flex;
+        gap: 60px;
+        animation: scroll 20s linear infinite;
+        width: max-content;
+    }
+
+    .marquee-item {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgba(255,255,255,0.3);
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(50%); } 
+    }
+
+    /* =========================================
+       3. Services (2 Cards per row)
+       ========================================= */
+    .services-section {
+        padding: 100px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        position: relative;
+        display: inline-block;
+        color: #fff;
+    }
+    
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--gold);
+    }
+
+    .glass-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .glass-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(var(--blur-amt));
+        -webkit-backdrop-filter: blur(var(--blur-amt));
+        padding: 40px 30px;
+        border-radius: 20px;
+        transition: transform 0.3s, border-color 0.3s, background 0.3s;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .glass-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .glass-card:hover::before {
+        left: 100%;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--gold);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: var(--gold);
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .card-desc {
+        color: var(--text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    /* =========================================
+       4. Portfolio Slider (تم التعديل لدعم الماوس)
+       ========================================= */
+    .portfolio-section {
+        padding: 100px 0;
+        overflow: hidden;
+    }
+
+    .slider-container {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 20px 5%; 
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; 
+        
+        /* هذا السطر يجعل المؤشر يتغير ليد عند التمرير عليه */
+        cursor: grab; 
+    }
+
+    /* تغيير شكل المؤشر عند الضغط والسحب */
+    .slider-container.active {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        scroll-snap-type: none; /* إيقاف الـ snap أثناء السحب لسلاسة الحركة */
+    }
+
+    .slider-container::-webkit-scrollbar {
+        display: none; 
+    }
+
+    .slide-item {
+        min-width: 300px;
+        height: 450px;
+        background: #000;
+        border-radius: 20px;
+        scroll-snap-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--glass-border);
+        transition: transform 0.3s;
+        /* منع تحديد النص أو الصورة أثناء السحب */
+        user-select: none; 
+        -webkit-user-select: none;
+    }
+
+    .slide-item:hover {
+        transform: scale(1.02);
+    }
+
+    .slide-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: opacity 0.3s;
+        pointer-events: none; /* مهم جداً لمنع سحب الصورة نفسها بدلاً من السلايدر */
+    }
+
+    .slide-item:hover .slide-img {
+        opacity: 1;
+    }
+
+    .slide-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        color: #fff;
+    }
+
+    .slide-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .slide-cat {
+        font-size: 0.8rem;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* =========================================
+       5. Navigation Cards
+       ========================================= */
+    .nav-links-section {
+        padding: 60px 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .nav-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .nav-card {
+        text-decoration: none;
+        cursor: pointer;
+        min-height: 250px;
+        justify-content: space-between;
+    }
+
+    .nav-arrow {
+        align-self: flex-end;
+        font-size: 2rem;
+        color: var(--gold);
+        transition: transform 0.3s;
+    }
+
+    .nav-card:hover .nav-arrow {
+        transform: translateX(-10px);
+    }
+
+    /* =========================================
+       6. CTA
+       ========================================= */
+    .cta-section {
+        text-align: center;
+        padding: 80px 20px 100px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-box {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        padding: 50px;
+        border-radius: 30px;
+        backdrop-filter: blur(var(--blur-amt));
+    }
+
+    .cta-btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 15px 50px;
+        background: var(--gold);
+        color: #000;
+        font-weight: bold;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s;
+        box-shadow: 0 0 20px rgba(225, 196, 67, 0.2);
+    }
+
+    .cta-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(225, 196, 67, 0.4);
+    }
+
+    /* Mobile Tweaks */
+    @media (max-width: 768px) {
+        .big-typography { font-size: 3rem; }
+        .slide-item { min-width: 80vw; height: 400px; }
+        .glass-grid { grid-template-columns: 1fr; } 
+        .nav-grid { grid-template-columns: 1fr; }
+    }
+
+</style>
+
+<div class="home-container">
+    
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <section class="hero-section" id="hero">
+        <h1 class="big-typography" id="hero-text">
+            اجعل علامتك <br>
+            <span>تتحدث وتبيع</span>
+        </h1>
+        <div class="hero-subtitle">
+            نحول صناعة المحتوى إلى استثمار حقيقي. استراتيجية، تصميم، وإنتاج يضمن لك النمو الرقمي.
+        </div>
+    </section>
+
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
+            <span class="marquee-item">Content Creation</span>
+            <span class="marquee-item">Account Management</span>
+            <span class="marquee-item">Graphic Design</span>
+            <span class="marquee-item">Branding</span>
+            <span class="marquee-item">Web Development</span>
+            <span class="marquee-item">Motion Graphics</span>
+            <span class="marquee-item">Content Creation</span>
+            <span class="marquee-item">Account Management</span>
+            <span class="marquee-item">Graphic Design</span>
+            <span class="marquee-item">Branding</span>
+        </div>
+    </div>
+
+    <section class="services-section">
+        <h2 class="section-title">خدماتنا</h2>
+        <div class="glass-grid">
+            
+            <div class="glass-card">
+                <div class="card-icon">🎥</div>
+                <h3 class="card-title">صناعة المحتوى</h3>
+                <p class="card-desc">
+                    إدارة شاملة لحسابات السوشيال ميديا. تصوير ومونتاج احترافي (Reels, TikTok) يركز على جلب المشاهدات وزيادة المبيعات.
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon">🎨</div>
+                <h3 class="card-title">التصميم والجرافيك</h3>
+                <p class="card-desc">
+                    تصميم الشعارات والهويات البصرية المتكاملة. نمنح علامتك التجارية شخصية بصرية فريدة وقوية تميزك عن المنافسين.
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon">💻</div>
+                <h3 class="card-title">تصميم المواقع</h3>
+                <p class="card-desc">
+                    تصميم مواقع عصرية متجاوبة وسريعة، تعكس هوية شركتك وتسهل وصول عملائك لخدماتك.
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon">📈</div>
+                <h3 class="card-title">إدارة حسابات</h3>
+                <p class="card-desc">
+                    نحن ندير تواجدك الرقمي بالكامل، من النشر إلى التفاعل، لتتفرغ أنت لإدارة أعمالك وتنميتها.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="portfolio-section">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: end;">
+            <h2 class="section-title" style="margin: 0;">أعمالنا</h2>
+            <span style="color: var(--text-muted); font-size: 0.9rem;">اسحب للمزيد ←</span>
+        </div>
+
+        <div class="slider-container">
+            <div class="slide-item">
+                <img src="/images/work1.jpg" class="slide-img" alt="Content Project">
+                <div class="slide-caption">
+                    <div class="slide-cat">Content Creation</div>
+                    <div class="slide-title">تصوير منتجات احترافي</div>
+                </div>
+            </div>
+
+            <div class="slide-item">
+                <img src="/images/work2.jpg" class="slide-img" alt="Web Project">
+                <div class="slide-caption">
+                    <div class="slide-cat">Web Design</div>
+                    <div class="slide-title">موقع شركة عقارية</div>
+                </div>
+            </div>
+
+            <div class="slide-item">
+                <img src="/images/work3.jpg" class="slide-img" alt="Branding Project">
+                <div class="slide-caption">
+                    <div class="slide-cat">Branding</div>
+                    <div class="slide-title">هوية بصرية كاملة</div>
+                </div>
+            </div>
+
+            <div class="slide-item">
+                <img src="/images/work4.jpg" class="slide-img" alt="Social Media">
+                <div class="slide-caption">
+                    <div class="slide-cat">Social Media</div>
+                    <div class="slide-title">حملة إعلانية</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nav-links-section">
+        <div class="nav-grid">
+            <a href="/services/" class="glass-card nav-card">
+                <div>
+                    <div class="card-icon">💎</div>
+                    <h3 class="card-title">الخدمات والأسعار</h3>
+                    <p class="card-desc">تصفح باقاتنا المتكاملة وأسعار الخدمات التي تناسب ميزانية مشروعك.</p>
+                </div>
+                <div class="nav-arrow">←</div>
+            </a>
+
+            <a href="/gallery/" class="glass-card nav-card">
+                <div>
+                    <div class="card-icon">🎬</div>
+                    <h3 class="card-title">معرض الأعمال</h3>
+                    <p class="card-desc">شاهد نماذج حقيقية وقصص نجاح صنعناها لعملائنا في مختلف المجالات.</p>
+                </div>
+                <div class="nav-arrow">←</div>
+            </a>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-box">
+            <h2 style="font-size: 2rem; margin-bottom: 10px; color:#fff;">جاهز للبدء؟</h2>
+            <p style="color: var(--text-muted);">دعنا نناقش كيف يمكننا تطوير علامتك التجارية.</p>
+            <a href="https://wa.me/9647872840590" class="cta-btn wa-trigger-link">تواصل معنا الآن</a>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // 1. حركة النص مع الماوس (Parallax)
+    document.addEventListener('mousemove', (e) => {
+        const heroText = document.getElementById('hero-text');
+        const x = (window.innerWidth - e.pageX * 2) / 80;
+        const y = (window.innerHeight - e.pageY * 2) / 80;
+        if(heroText) {
+            heroText.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        }
+    });
+
+    // 2. تفعيل السحب بالماوس للسلايدر (Drag to Scroll)
+    const slider = document.querySelector('.slider-container');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // سرعة السحب
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
+
+{{ end }}
