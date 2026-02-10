@@ -403,7 +403,7 @@
 
     <nav class="nav">
         <div class="logo">
-            <a href="/en/home/" accesskey="h" title="MBT (Alt + H)">MBT</a>
+            <a href="/en/" accesskey="h" title="MBT (Alt + H)">MBT</a>
             
             <div class="logo-switches">
                 
@@ -574,7 +574,6 @@
         z-index: 2;
         transition: transform 0.1s ease-out;
         cursor: default;
-         
     }
 
     .big-typography span {
@@ -862,11 +861,25 @@
     @media (max-width: 768px) {
         
          
+        .services-section, 
+        .portfolio-section, 
+        .nav-links-section, 
+        .cta-section {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+         
         .hero-section {
             padding: 20px 20px 0 20px;
-            justify-content: start;
-            min-height: 70vh;
-            padding-top: 90px;
+            justify-content: center;
+            min-height: 60vh;  
+            padding-top: 80px;
         }
 
         .big-typography { 
@@ -884,75 +897,60 @@
 
          
         .marquee-wrapper {
-             
-            padding-top: 20px; 
-            padding-bottom: 40px;
+            padding-top: 15px;  
+            padding-bottom: 15px;
         }
 
          
         .glass-grid { 
             display: flex;
-            flex-direction: column;  
-            gap: 15px;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .glass-card {
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
-             
             flex-direction: row; 
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             min-height: auto;
             text-align: right;
         }
 
         .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 0;  
-             
+            font-size: 2rem;
+            margin-bottom: 0;
             min-width: 50px; 
             display: flex;
             justify-content: center;
         }
 
-         
-        .card-content-wrapper {
-            flex: 1;
-        }
-        
-        .card-title {
-            font-size: 1.1rem; 
-            margin-bottom: 5px;
-        }
-        
-        .card-desc {
-            font-size: 0.85rem; 
-            line-height: 1.4;
-            margin: 0;
-        }
+        .card-content-wrapper { flex: 1; }
+        .card-title { font-size: 1.1rem; margin-bottom: 5px; }
+        .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
         
          
         .nav-grid { 
             display: grid;
-            grid-template-columns: 1fr 1fr;  
+            grid-template-columns: 1fr 1fr; 
             gap: 10px;
         }
 
         .nav-card {
-            min-height: auto;  
-            aspect-ratio: 1 / 1;  
+            min-height: auto; 
+            aspect-ratio: 1 / 1; 
             padding: 15px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;  
             align-items: center;
             text-align: center;
-            gap: 10px;
+            gap: 5px;
         }
 
         .nav-card .card-icon {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin: 0;
         }
 
@@ -961,12 +959,16 @@
             margin: 0;
         }
 
-        .nav-card .card-desc {
-            display: none;  
+         
+        .nav-card .nav-arrow {
+            display: block; 
+            font-size: 1.2rem;
+            align-self: flex-end;  
+            margin-top: auto;
         }
 
-        .nav-card .nav-arrow {
-            display: none;  
+        .nav-card .card-desc {
+            display: none; 
         }
 
         .slide-item { 
@@ -996,7 +998,7 @@
             <span>تتحدث وتبيع</span>
         </h1>
         <div class="hero-subtitle">
-            نحول صناعة المحتوى إلى استثمار حقيقي. استراتيجية، تصميم، وإنتاج يضمن لك النمو الرقمي.
+            نحول صناعة المحتوى إلى استثمار حقيقي. استراتيجية، تصميم و إنتاج يضمن لك النمو الرقمي.
         </div>
     </section>
 
@@ -1101,12 +1103,14 @@
                 <div class="card-icon">💎</div>
                 <h3 class="card-title">الخدمات والأسعار</h3>
                 <p class="card-desc">تصفح باقاتنا المتكاملة.</p> 
+                <div class="nav-arrow">←</div>
             </a>
 
             <a href="/gallery/" class="glass-card nav-card">
                 <div class="card-icon">🎬</div>
                 <h3 class="card-title">معرض الأعمال</h3>
                 <p class="card-desc">شاهد نماذج حقيقية.</p>
+                <div class="nav-arrow">←</div>
             </a>
         </div>
     </section>
@@ -1124,7 +1128,6 @@
 <script>
     
     document.addEventListener('mousemove', (e) => {
-        
         if(window.innerWidth > 768) {
             const heroText = document.getElementById('hero-text');
             const x = (window.innerWidth - e.pageX * 2) / 80;
