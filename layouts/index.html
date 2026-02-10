@@ -366,16 +366,16 @@
     }
 
     /* =========================================
-       Mobile Customization
+       Mobile Customization (فرض التغييرات بالقوة)
        ========================================= */
     @media (max-width: 768px) {
         
-        /* 1. Hero */
+        /* 1. Hero: تقليل المساحة العلوية بشكل قسري */
         .hero-section {
-            padding-top: 50px;
-            padding-bottom: 20px;
-            justify-content: flex-start;
-            min-height: auto;
+            padding-top: 50px !important; 
+            padding-bottom: 10px !important; /* مسافة أقل من الأسفل */
+            justify-content: flex-start !important;
+            min-height: auto !important;
         }
 
         .big-typography { 
@@ -391,39 +391,43 @@
             margin-top: 10px;
         }
 
-        /* 2. Marquee Adjustments - زيادة المساحة العلوية قليلاً كما طلبت */
+        /* 2. Marquee: مسافة قليلة جداً فوق الشريط */
         .marquee-wrapper {
-            padding-top: 35px; /* مساحة بسيطة لفصلها عن الهيرو */
-            padding-bottom: 15px;
+            padding-top: 10px !important;  /* مسافة صغيرة جداً */
+            padding-bottom: 15px !important;
+            margin-top: 20px !important;
         }
 
-        /* 3. Spacings (المسافات بين الأقسام) */
+        /* 3. Services */
         .services-section {
-            padding-top: 70px; 
-            padding-bottom: 30px;
+            padding-top: 60px !important; 
+            padding-bottom: 20px !important;
         }
 
+        /* 4. Portfolio */
         .portfolio-section {
-            padding-top: 70px; 
-            padding-bottom: 30px;
+            padding-top: 60px !important; 
+            padding-bottom: 20px !important;
         }
 
+        /* 5. Navigation */
         .nav-links-section {
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
         }
 
+        /* 6. CTA */
         .cta-section {
-            padding-top: 50px; 
-            padding-bottom: 60px;
+            padding-top: 40px !important; 
+            padding-bottom: 60px !important;
         }
 
         .section-title {
-            margin-bottom: 30px;
+            margin-bottom: 25px !important;
             font-size: 2rem;
         }
 
-        /* 4. Layouts */
+        /* Layouts */
         .glass-grid { 
             display: flex;
             flex-direction: column;
@@ -452,7 +456,7 @@
         .card-title { font-size: 1.1rem; margin-bottom: 5px; }
         .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
         
-        /* 5. Navigation Cards (المربعات مع الأسهم) */
+        /* Navigation Cards */
         .nav-grid { 
             display: grid;
             grid-template-columns: 1fr 1fr; 
@@ -647,7 +651,7 @@
 </div>
 
 <script>
-    // 1. Parallax (يعمل فقط على الشاشات الكبيرة تلقائياً)
+    // 1. Parallax (يعمل فقط على الشاشات الكبيرة)
     document.addEventListener('mousemove', (e) => {
         if(window.innerWidth > 768) {
             const heroText = document.getElementById('hero-text');
