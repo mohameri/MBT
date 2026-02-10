@@ -191,25 +191,12 @@
         justify-content: center;
         text-decoration: none;
         height: 100%;
-        color: #bbb; /* اللون الرمادي العادي */
+        color: #bbb;
         font-size: 0.9rem;
         font-weight: bold;
-        transition: all 0.3s ease;
-        position: relative; /* ضروري للتأثير */
     }
     
     .nav-item:hover { color: #e1c443; }
-
-    /* --- تنسيق العنصر النشط (Active) المعدل --- */
-    .nav-item.active {
-        color: #e1c443; /* لون النص ذهبي */
-        
-        /* توهج النص بشكل ناعم */
-        text-shadow: 0 0 15px rgba(225, 196, 67, 0.6); 
-        
-        /* تأثير ضوئي ناعم جداً (Spotlight) يتلاشى عند الأطراف */
-        background: radial-gradient(circle at bottom, rgba(225, 196, 67, 0.15) 0%, transparent 60%);
-    }
 
     .whatsapp-container {
         position: relative;
@@ -246,7 +233,7 @@
        5. تنسيقات نافذة التأكيد (WhatsApp Modal)
        ========================================= */
     .wa-modal-overlay {
-        display: none; 
+        display: none; /* مخفي افتراضياً */
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         background-color: rgba(0, 0, 0, 0.6); 
@@ -283,10 +270,12 @@
         font-size: 1.1rem;
     }
 
+    /* تنسيق خاص لصورة اللوغو داخل النافذة */
     .wa-modal-header img {
         width: 28px;
         height: 28px;
         object-fit: contain;
+        /* تحويل الصورة للون الأبيض لتناسب الخلفية الخضراء */
         filter: brightness(0) invert(1);
     }
 
@@ -441,9 +430,8 @@
     </nav>
 </header>
 
-{{- $currentPage := . }}
 <div class="mobile-bottom-nav">
-    <a href="/gallery/" class="nav-item {{ if or (eq $currentPage.RelPermalink "/gallery/") (in $currentPage.RelPermalink "gallery") }}active{{ end }}">
+    <a href="/gallery/" class="nav-item">
         <span>أعمالنا</span>
     </a>
 
@@ -453,7 +441,7 @@
         </a>
     </div>
 
-    <a href="/services/" class="nav-item {{ if or (eq $currentPage.RelPermalink "/services/") (in $currentPage.RelPermalink "services") }}active{{ end }}">
+    <a href="/services/" class="nav-item">
         <span>خدماتنا</span>
     </a>
 </div>
@@ -461,7 +449,7 @@
 <div id="whatsapp-modal" class="wa-modal-overlay">
     <div class="wa-modal-content">
         <div class="wa-modal-header">
-            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 28px; height: 28px;">
+            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 20px; height: 20px;">
             <span>الانتقال إلى واتساب؟</span>
         </div>
         <div class="wa-modal-body">
@@ -481,6 +469,7 @@
         const cancelBtn = document.getElementById('wa-cancel');
         let targetUrl = '';
 
+        // استهداف جميع روابط الواتساب
         const waLinks = document.querySelectorAll('a.wa-trigger-link, a[href*="wa.me"]');
 
         waLinks.forEach(link => {
