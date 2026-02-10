@@ -61,7 +61,6 @@
     }
 
     .big-typography {
-        /* استخدام clamp لضبط الخط تلقائياً */
         font-size: clamp(2.5rem, 8vw, 6.5rem); 
         font-weight: 900;
         line-height: 1.2;
@@ -156,7 +155,6 @@
 
     .glass-grid {
         display: grid;
-        /* الافتراضي للحاسوب: كروت بعرض مناسب */
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
     }
@@ -187,7 +185,7 @@
         transition: 0.5s;
     }
 
-    .glass-card:hover::before {
+    .glass-card::hover::before {
         left: 100%;
     }
 
@@ -368,67 +366,75 @@
     }
 
     /* =========================================
-       Mobile Customization (تخصيص الموبايل بدقة)
+       Mobile Customization
        ========================================= */
     @media (max-width: 768px) {
-        /* تصغير الخطوط في الهيرو */
-        .big-typography { 
-            font-size: 2.8rem; /* تصغير العنوان لعدم التكسر */
-            line-height: 1.1; 
+        
+        /* 1. تقليل المساحة المهدرة بالبداية */
+        .hero-section {
+            padding: 20px 20px 0 20px; /* تقليل البادينج العلوي من 40 إلى 20 */
+            justify-content: start; /* بدء المحتوى من الأعلى قليلاً */
+            min-height: 70vh; /* تقليل الارتفاع الأدنى للموبايل */
+            padding-top: 80px; /* تعويض عن الهيدر الثابت إن وجد */
         }
+
+        .big-typography { 
+            font-size: 2.8rem; 
+            line-height: 1.1; 
+            margin-bottom: 15px;
+        }
+        
         .hero-subtitle { 
             font-size: 0.95rem; 
             padding: 10px 20px; 
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
-        /* تعديل الشبكة لتصبح عمودين (متقابلين) في الموبايل */
         .glass-grid, .nav-grid { 
-            grid-template-columns: 1fr 1fr; /* إجبار عمودين */
-            gap: 12px; /* تقليل المسافة بين الكروت */
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
         }
 
-        /* تصغير الكروت لتناسب العمودين */
         .glass-card, .nav-card {
-            padding: 20px 15px; /* تقليل الحواف الداخلية */
+            padding: 20px 15px; 
             border-radius: 15px;
-            min-height: auto; /* إزالة الحد الأدنى للارتفاع */
+            min-height: auto; 
         }
 
-        /* تصغير العناصر داخل الكروت */
         .card-icon {
-            font-size: 2rem; /* تصغير الأيقونة */
+            font-size: 2rem; 
             margin-bottom: 10px;
         }
+        
         .card-title {
-            font-size: 1rem; /* تصغير العنوان */
+            font-size: 1rem; 
             margin-bottom: 8px;
         }
+        
         .card-desc {
-            font-size: 0.8rem; /* تصغير الوصف */
+            font-size: 0.8rem; 
             line-height: 1.4;
         }
         
-        /* تعديل كروت التوجيه في الأسفل */
         .nav-card {
-            min-height: 180px; /* ارتفاع أصغر */
+            min-height: 180px; 
         }
+        
         .nav-arrow {
             font-size: 1.5rem;
         }
 
-        /* تعديل السلايدر في الموبايل */
         .slide-item { 
-            min-width: 260px; /* عرض أقل للكارت في السلايدر */
+            min-width: 260px; 
             height: 380px; 
         }
         
-        /* CTA */
         .cta-box {
             padding: 30px 20px;
         }
+        
         .cta-btn {
-            width: 100%; /* الزر يأخذ كامل العرض */
+            width: 100%; 
             padding: 12px 0;
         }
     }
@@ -486,7 +492,7 @@
 
             <div class="glass-card">
                 <div class="card-icon">💻</div>
-                <h3 class="card-title">تصميم المواقع</h3>
+                <h3 class="card-title">تصميم وبرمجة المواقع</h3>
                 <p class="card-desc">
                     مواقع عصرية وسريعة تعكس هوية شركتك وتسهل الوصول لخدماتك.
                 </p>

@@ -563,7 +563,6 @@
     }
 
     .big-typography {
-         
         font-size: clamp(2.5rem, 8vw, 6.5rem); 
         font-weight: 900;
         line-height: 1.2;
@@ -654,7 +653,6 @@
 
     .glass-grid {
         display: grid;
-         
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
     }
@@ -685,7 +683,7 @@
         transition: 0.5s;
     }
 
-    .glass-card:hover::before {
+    .glass-card::hover::before {
         left: 100%;
     }
 
@@ -861,64 +859,72 @@
 
      
     @media (max-width: 768px) {
+        
          
-        .big-typography { 
-            font-size: 2.8rem;  
-            line-height: 1.1; 
+        .hero-section {
+            padding: 20px 20px 0 20px;  
+            justify-content: start;  
+            min-height: 70vh;  
+            padding-top: 80px;  
         }
+
+        .big-typography { 
+            font-size: 2.8rem; 
+            line-height: 1.1; 
+            margin-bottom: 15px;
+        }
+        
         .hero-subtitle { 
             font-size: 0.95rem; 
             padding: 10px 20px; 
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
-         
         .glass-grid, .nav-grid { 
-            grid-template-columns: 1fr 1fr;  
-            gap: 12px;  
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
         }
 
-         
         .glass-card, .nav-card {
-            padding: 20px 15px;  
+            padding: 20px 15px; 
             border-radius: 15px;
-            min-height: auto;  
+            min-height: auto; 
         }
 
-         
         .card-icon {
-            font-size: 2rem;  
+            font-size: 2rem; 
             margin-bottom: 10px;
         }
+        
         .card-title {
-            font-size: 1rem;  
+            font-size: 1rem; 
             margin-bottom: 8px;
         }
+        
         .card-desc {
-            font-size: 0.8rem;  
+            font-size: 0.8rem; 
             line-height: 1.4;
         }
         
-         
         .nav-card {
-            min-height: 180px;  
+            min-height: 180px; 
         }
+        
         .nav-arrow {
             font-size: 1.5rem;
         }
 
-         
         .slide-item { 
-            min-width: 260px;  
+            min-width: 260px; 
             height: 380px; 
         }
         
-         
         .cta-box {
             padding: 30px 20px;
         }
+        
         .cta-btn {
-            width: 100%;  
+            width: 100%; 
             padding: 12px 0;
         }
     }
@@ -976,7 +982,7 @@
 
             <div class="glass-card">
                 <div class="card-icon">💻</div>
-                <h3 class="card-title">تصميم المواقع</h3>
+                <h3 class="card-title">تصميم وبرمجة المواقع</h3>
                 <p class="card-desc">
                     مواقع عصرية وسريعة تعكس هوية شركتك وتسهل الوصول لخدماتك.
                 </p>
