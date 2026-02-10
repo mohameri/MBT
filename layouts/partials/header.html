@@ -64,7 +64,7 @@
     }
 
     /* =========================================
-       2. تنسيقات محدد العملة
+       2. تنسيقات محدد العملة (Currency Selector)
        ========================================= */
     #currency-selector {
         appearance: none;
@@ -78,15 +78,22 @@
         padding-right: 15px;    
         padding-left: 15px;     
         min-width: 70px;
+        height: 40px;
         border-radius: 50px;
         font-family: inherit;
         font-weight: bold;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         cursor: pointer;
         outline: none;
         transition: all 0.3s ease;
         text-align: center; 
         box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    #currency-selector:hover {
+        background-color: #000;
+        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
+        transform: translateY(-1px);
     }
 
     #currency-selector option {
@@ -95,7 +102,7 @@
     }
 
     /* =========================================
-       3. تنسيقات القائمة العلوية (Desktop)
+       3. تنسيقات القائمة العلوية (Desktop Menu)
        ========================================= */
     #menu {
         display: flex;             
@@ -112,7 +119,6 @@
         align-items: center;
     }
 
-    /* أزرار القائمة (أعمالنا، خدماتنا) */
     #menu a {
         display: flex;
         align-items: center;
@@ -137,7 +143,6 @@
         transform: translateY(-2px);
     }
 
-    /* زر الواتساب في الحاسوب (أخضر) */
     #menu a[href*="wa.me"] {
         background-color: #25D366; 
         border: 1px solid #25D366; 
@@ -160,7 +165,7 @@
     }
 
     /* =========================================
-       4. تنسيقات الموبايل (Mobile)
+       4. تنسيقات الموبايل (Mobile Bottom Nav)
        ========================================= */
     .mobile-bottom-nav {
         display: none; 
@@ -178,7 +183,6 @@
         border-top: 1px solid #333;
     }
 
-    /* الروابط الجانبية */
     .nav-item {
         flex: 1;
         display: flex;
@@ -187,14 +191,26 @@
         justify-content: center;
         text-decoration: none;
         height: 100%;
-        color: #bbb;
+        color: #bbb; /* اللون الرمادي العادي */
         font-size: 0.9rem;
         font-weight: bold;
+        transition: all 0.3s ease;
+        position: relative; /* ضروري للتأثير */
     }
     
     .nav-item:hover { color: #e1c443; }
 
-    /* حاوية الزر العائم */
+    /* --- تنسيق العنصر النشط (Active) المعدل --- */
+    .nav-item.active {
+        color: #e1c443; /* لون النص ذهبي */
+        
+        /* توهج النص بشكل ناعم */
+        text-shadow: 0 0 15px rgba(225, 196, 67, 0.6); 
+        
+        /* تأثير ضوئي ناعم جداً (Spotlight) يتلاشى عند الأطراف */
+        background: radial-gradient(circle at bottom, rgba(225, 196, 67, 0.15) 0%, transparent 60%);
+    }
+
     .whatsapp-container {
         position: relative;
         width: 80px;
@@ -204,11 +220,10 @@
         align-items: flex-start;
     }
 
-    /* الدائرة الخضراء (تصحيح اللون الإجباري) */
     a.whatsapp-btn {
         width: 60px;
         height: 60px;
-        background-color: #25D366 !important; /* لون أخضر إجباري */
+        background-color: #25D366 !important; 
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -220,7 +235,6 @@
         z-index: 1000;
     }
 
-    /* الأيقونة البيضاء */
     a.whatsapp-btn img {
         filter: brightness(0) invert(1) !important; 
         width: 32px !important;
@@ -229,7 +243,96 @@
     }
 
     /* =========================================
-       5. Media Queries
+       5. تنسيقات نافذة التأكيد (WhatsApp Modal)
+       ========================================= */
+    .wa-modal-overlay {
+        display: none; 
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6); 
+        z-index: 999999; 
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(3px); 
+    }
+
+    .wa-modal-content {
+        background-color: #fff;
+        width: 90%;
+        max-width: 350px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        animation: waFadeIn 0.3s ease;
+        font-family: inherit;
+    }
+
+    @keyframes waFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .wa-modal-header {
+        background-color: #128C7E; 
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .wa-modal-header img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+    }
+
+    .wa-modal-body {
+        padding: 25px 20px;
+        text-align: center;
+        color: #333;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .wa-modal-footer {
+        padding: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        background-color: #f9f9f9;
+        border-top: 1px solid #eee;
+    }
+
+    .wa-btn {
+        padding: 10px 25px;
+        border-radius: 50px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: transform 0.2s;
+        flex: 1;
+    }
+
+    .wa-btn:active { transform: scale(0.95); }
+
+    .wa-btn-confirm {
+        background-color: #25D366;
+        color: white;
+        box-shadow: 0 3px 8px rgba(37, 211, 102, 0.3);
+    }
+    
+    .wa-btn-cancel {
+        background-color: #e0e0e0;
+        color: #555;
+    }
+
+    /* =========================================
+       6. Media Queries
        ========================================= */
     @media screen and (max-width: 768px) {
         .header .menu, #menu { display: none !important; }
@@ -240,7 +343,7 @@
     @media screen and (min-width: 769px) {
         .mobile-bottom-nav { display: none !important; }
     }
-</style>
+    </style>
 
     <nav class="nav">
         <div class="logo">
@@ -274,6 +377,7 @@
                 {{- $label_text -}}
             </a>
             {{- end }}
+            
             <div class="logo-switches">
                 {{- if (not site.Params.disableThemeToggle) }}
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -304,28 +408,6 @@
                     <option value="AED">🇦🇪 درهم</option>
                     <option value="SAR">🇸🇦 ريال</option>
                 </select>
-
-                {{- $lang := .Lang}}
-                {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
-                {{- with site.Home.Translations }}
-                <ul class="lang-switch">
-                    {{- if $separator }}<li>|</li>{{ end }}
-                    {{- range . -}}
-                    {{- if ne $lang .Lang }}
-                    <li>
-                        <a href="{{- .Permalink -}}" title="{{ .Language.Params.languageAltTitle | default (.Language.LanguageName | emojify) | default (.Lang | title) }}"
-                            aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
-                            {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) }}
-                            {{- .Language.LanguageName | emojify -}}
-                            {{- else }}
-                            {{- .Lang | title -}}
-                            {{- end -}}
-                        </a>
-                    </li>
-                    {{- end -}}
-                    {{- end}}
-                </ul>
-                {{- end }}
             </div>
         </div>
         
@@ -338,7 +420,7 @@
             
             <li class="menu-item">
                 {{- if or (eq .Name "الواتساب") (in .URL "wa.me") }}
-                    <a href="{{ .URL }}" target="_blank" title="{{ .Name }}" aria-label="WhatsApp">
+                    <a href="{{ .URL }}" target="_blank" title="{{ .Name }}" aria-label="WhatsApp" class="wa-trigger-link">
                         <img src="/images/whatsapp-64.png" 
                              alt="{{ .Name }}" 
                              class="desktop-whatsapp-img">
@@ -359,18 +441,69 @@
     </nav>
 </header>
 
+{{- $currentPage := . }}
 <div class="mobile-bottom-nav">
-    <a href="/gallery/" class="nav-item">
+    <a href="/gallery/" class="nav-item {{ if or (eq $currentPage.RelPermalink "/gallery/") (in $currentPage.RelPermalink "gallery") }}active{{ end }}">
         <span>أعمالنا</span>
     </a>
 
     <div class="whatsapp-container">
-        <a href="https://wa.me/9647872840590" target="_blank" class="whatsapp-btn" aria-label="WhatsApp">
+        <a href="https://wa.me/9647872840590" target="_blank" class="whatsapp-btn wa-trigger-link" aria-label="WhatsApp">
             <img src="/images/whatsapp-64.png" alt="WhatsApp">
         </a>
     </div>
 
-    <a href="/services/" class="nav-item">
+    <a href="/services/" class="nav-item {{ if or (eq $currentPage.RelPermalink "/services/") (in $currentPage.RelPermalink "services") }}active{{ end }}">
         <span>خدماتنا</span>
     </a>
 </div>
+
+<div id="whatsapp-modal" class="wa-modal-overlay">
+    <div class="wa-modal-content">
+        <div class="wa-modal-header">
+            <img src="/images/whatsapp-64.png" alt="WhatsApp" style="width: 28px; height: 28px;">
+            <span>الانتقال إلى واتساب؟</span>
+        </div>
+        <div class="wa-modal-body">
+            <p>هل تريد مغادرة الموقع وبدء المحادثة عبر واتساب الآن؟</p>
+        </div>
+        <div class="wa-modal-footer">
+            <button id="wa-cancel" class="wa-btn wa-btn-cancel">إلغاء</button>
+            <button id="wa-confirm" class="wa-btn wa-btn-confirm">نعم</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.getElementById('whatsapp-modal');
+        const confirmBtn = document.getElementById('wa-confirm');
+        const cancelBtn = document.getElementById('wa-cancel');
+        let targetUrl = '';
+
+        const waLinks = document.querySelectorAll('a.wa-trigger-link, a[href*="wa.me"]');
+
+        waLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                targetUrl = this.href; 
+                modal.style.display = 'flex'; 
+            });
+        });
+
+        confirmBtn.addEventListener('click', function() {
+            window.open(targetUrl, '_blank'); 
+            modal.style.display = 'none';
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            modal.style.display = 'none'; 
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>

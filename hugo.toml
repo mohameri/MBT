@@ -7,12 +7,21 @@ publishDir = "docs"
 
 # --- إعدادات اللغة العربية (هنا التعديل المهم) ---
 [languages]
+  # اللغة العربية (الافتراضية)
   [languages.ar]
-    languageName = "Arabic"
+    languageName = "العربية"
     languageCode = "ar"
     weight = 1
     title = "MBT"
-    languageDirection = "rtl" # هذا السطر هو الذي يقلب القالب رسمياً
+    languageDirection = "rtl"
+
+  # اللغة الإنجليزية (الجديدة)
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    weight = 2
+    title = "MBT"
+    languageDirection = "ltr" # اتجاه يسار ليمين
 
 # --- إعدادات رئيسية للموقع ---
 [params]
