@@ -261,39 +261,28 @@
         transform: scale(1.02);
     }
 
-    .slide-img {
+/* استبدل كلاس .slide-img القديم بهذا */
+    .slide-video {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover; /* يملأ الإطار بالكامل */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0; /* ليكون خلف النص */
         opacity: 0.8;
         transition: opacity 0.3s;
-        pointer-events: none; 
     }
 
-    .slide-item:hover .slide-img {
+    .slide-item:hover .slide-video {
         opacity: 1;
     }
-
+    
+    /* تأكد أن النص فوق الفيديو */
     .slide-caption {
+        z-index: 2; 
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px;
-        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-        color: #fff;
-    }
-
-    .slide-title {
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
-
-    .slide-cat {
-        font-size: 0.8rem;
-        color: var(--gold);
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        /* بقية الخصائص كما هي */
     }
 
     /* =========================================
@@ -365,17 +354,80 @@
         box-shadow: 0 0 40px rgba(225, 196, 67, 0.4);
     }
 
+/* تصميم بطاقة شاهد المزيد */
+    .see-more-card {
+        text-decoration: none; /* إزالة الخط تحت الرابط */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.02); /* خلفية شفافة غامقة قليلاً */
+        border: 1px dashed var(--glass-border); /* حدود متقطعة توحي بوجود المزيد */
+        transition: all 0.3s ease;
+    }
+
+    .see-more-card:hover {
+        background: rgba(26, 40, 85, 0.3); /* لون أزرق خفيف عند التحويم */
+        border-color: var(--gold); /* الحدود تصبح ذهبية */
+        transform: scale(0.98); /* تصغير بسيط يعطي شعور الضغطة */
+    }
+
+    .see-more-content {
+        text-align: center;
+        padding: 20px;
+        z-index: 2;
+    }
+
+    .more-icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        transition: all 0.3s ease;
+    }
+
+    .see-more-card:hover .more-icon-circle {
+        background: var(--gold);
+        box-shadow: 0 0 20px rgba(225, 196, 67, 0.4);
+    }
+
+    .more-arrow {
+        font-size: 1.5rem;
+        color: var(--gold);
+        transition: all 0.3s ease;
+    }
+
+    .see-more-card:hover .more-arrow {
+        color: #000; /* السهم يصبح أسود عند التحويم لأن الخلفية ذهبية */
+        transform: translateX(-5px); /* حركة بسيطة لليسار */
+    }
+
+    .more-title {
+        font-size: 1.4rem;
+        color: #fff;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .more-subtitle {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
     /* =========================================
-       Mobile Customization (تعديل المسافات النهائي)
+       Mobile Customization (فرض التغييرات بالقوة)
        ========================================= */
     @media (max-width: 768px) {
         
-        /* 1. تقليل مساحة الهيرو العلوية بشكل كبير */
+        /* 1. Hero: تقليل المساحة العلوية بشكل قسري */
         .hero-section {
-            padding-top: 50px; /* تقليل الفراغ العلوي */
-            padding-bottom: 20px;
-            justify-content: flex-start; /* بدء المحتوى من الأعلى */
-            min-height: auto; /* ارتفاع تلقائي لعدم ترك فراغ */
+            padding-top: 50px !important; 
+            padding-bottom: 10px !important; /* مسافة أقل من الأسفل */
+            justify-content: flex-start !important;
+            min-height: auto !important;
         }
 
         .big-typography { 
@@ -391,39 +443,43 @@
             margin-top: 10px;
         }
 
+        /* 2. Marquee: مسافة قليلة جداً فوق الشريط */
         .marquee-wrapper {
-            padding-top: 15px; 
-            padding-bottom: 15px;
+            padding-top: 10px !important;  /* مسافة صغيرة جداً */
+            padding-bottom: 15px !important;
+            margin-top: 20px !important;
         }
 
-        /* 2. زيادة المساحات قبل الأقسام (خدماتنا، أعمالنا) */
+        /* 3. Services */
         .services-section {
-            padding-top: 70px; /* زيادة مسافة قبل خدماتنا */
-            padding-bottom: 30px;
+            padding-top: 60px !important; 
+            padding-bottom: 20px !important;
         }
 
+        /* 4. Portfolio */
         .portfolio-section {
-            padding-top: 70px; /* زيادة مسافة قبل أعمالنا */
-            padding-bottom: 30px;
+            padding-top: 60px !important; 
+            padding-bottom: 20px !important;
         }
 
+        /* 5. Navigation */
         .nav-links-section {
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
         }
 
-        /* 3. مسافة بسيطة قبل زر تواصل معنا */
+        /* 6. CTA */
         .cta-section {
-            padding-top: 50px; /* مسافة بسيطة */
-            padding-bottom: 60px;
+            padding-top: 40px !important; 
+            padding-bottom: 60px !important;
         }
 
         .section-title {
-            margin-bottom: 30px;
+            margin-bottom: 25px !important;
             font-size: 2rem;
         }
 
-        /* تخطيط الخدمات */
+        /* Layouts */
         .glass-grid { 
             display: flex;
             flex-direction: column;
@@ -452,7 +508,7 @@
         .card-title { font-size: 1.1rem; margin-bottom: 5px; }
         .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
         
-        /* تخطيط كروت التوجيه */
+        /* Navigation Cards */
         .nav-grid { 
             display: grid;
             grid-template-columns: 1fr 1fr; 
@@ -481,7 +537,6 @@
             margin: 0;
         }
 
-        /* إظهار السهم في الموبايل بالزاوية */
         .nav-card .nav-arrow {
             display: block; 
             font-size: 1.2rem;
@@ -578,44 +633,67 @@
         </div>
     </section>
 
-    <section class="portfolio-section">
+<section class="portfolio-section">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: end;">
             <h2 class="section-title" style="margin: 0;">أعمالنا</h2>
             <span style="color: var(--text-muted); font-size: 0.9rem;">اسحب للمزيد ←</span>
         </div>
 
         <div class="slider-container">
+            
             <div class="slide-item">
-                <img src="/images/work1.jpg" class="slide-img" alt="Content Project">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/11145.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="slide-caption">
                     <div class="slide-cat">Content Creation</div>
-                    <div class="slide-title">تصوير منتجات احترافي</div>
+                    <div class="slide-title">حملة إعلانية للارغد</div>
                 </div>
             </div>
 
             <div class="slide-item">
-                <img src="/images/work2.jpg" class="slide-img" alt="Web Project">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/22243.mp4" type="video/mp4">
+                </video>
                 <div class="slide-caption">
-                    <div class="slide-cat">Web Design</div>
-                    <div class="slide-title">موقع شركة عقارية</div>
+                    <div class="slide-cat">Content Creation</div>
+                    <div class="slide-title">حملة اعلانية للارغد</div>
                 </div>
             </div>
 
             <div class="slide-item">
-                <img src="/images/work3.jpg" class="slide-img" alt="Branding Project">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/33345.mp4" type="video/mp4">
+                </video>
                 <div class="slide-caption">
-                    <div class="slide-cat">Branding</div>
-                    <div class="slide-title">هوية بصرية كاملة</div>
+                    <div class="slide-cat">Editing</div>
+                    <div class="slide-title">مونتاج لشركة الوند</div>
                 </div>
             </div>
 
-            <div class="slide-item">
-                <img src="/images/work4.jpg" class="slide-img" alt="Social Media">
+             <div class="slide-item">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/44423.mp4" type="video/mp4">
+                </video>
                 <div class="slide-caption">
-                    <div class="slide-cat">Social Media</div>
-                    <div class="slide-title">حملة إعلانية</div>
+                    <div class="slide-cat">Outro</div>
+                    <div class="slide-title">خاتمة احترافية</div>
                 </div>
             </div>
+
+<a href="/gallery/" class="slide-item see-more-card">
+                <div class="see-more-content">
+                    <div class="more-icon-circle">
+                        <span class="more-arrow">←</span>
+                    </div>
+                    <h3 class="more-title">شاهد المزيد</h3>
+                    <p class="more-subtitle">تصفح معرض اعمالنا</p>
+                </div>
+            </a>
+
+        </div> </section>
+
         </div>
     </section>
 
@@ -648,7 +726,7 @@
 </div>
 
 <script>
-    // 1. Parallax (يعمل فقط على الشاشات الكبيرة تلقائياً)
+    // 1. Parallax (يعمل فقط على الشاشات الكبيرة)
     document.addEventListener('mousemove', (e) => {
         if(window.innerWidth > 768) {
             const heroText = document.getElementById('hero-text');

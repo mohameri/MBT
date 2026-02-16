@@ -45,49 +45,7 @@
       localStorage.setItem('pref-theme','dark'); 
     } catch(e) {}
   })();
-</script>
-
-
-<script>
-  !function(w,d,t){
-    w.TiktokAnalyticsObject=t;
-    var ttq=w[t]=w[t]||[];
-    ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
-    ttq.setAndDefer=function(t,e){
-      t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))};
-    };
-    for(var i=0;i<ttq.methods.length;i++){
-      ttq.setAndDefer(ttq,ttq.methods[i]);
-    }
-    ttq.instance=function(t){
-      for(var e=ttq._i[t]||[], n=0; n<ttq.methods.length; n++){
-        ttq.setAndDefer(e,ttq.methods[n]);
-      }
-      return e;
-    };
-    ttq.load=function(e,n){
-      var r="https://analytics.tiktok.com/i18n/pixel/events.js";
-      ttq._i=ttq._i||{};
-      ttq._i[e]=[];
-      ttq._i[e]._u=r;
-      ttq._t=ttq._t||{};
-      ttq._t[e]=+new Date;
-      ttq._o=ttq._o||{};
-      ttq._o[e]=n||{};
-      n=d.createElement("script");
-      n.type="text/javascript";
-      n.async=!0;
-      n.src=r+"?sdkid="+e+"&lib="+t;
-      e=d.getElementsByTagName("script")[0];
-      e.parentNode.insertBefore(n,e);
-    };
-
-    ttq.load('D4B2Q1BC77U004J46BD0'); 
-    ttq.page();
-  }(window, document, 'ttq');
-</script>
-
-<meta property="og:url" content="https://mbt.ad/">
+</script><meta name="facebook-domain-verification" content="463idkj2kmw4xlyxcyzprzeu9wcguk" /><meta property="og:url" content="https://mbt.ad/">
   <meta property="og:site_name" content="MBT">
   <meta property="og:title" content="MBT - شريكك في صناعة المحتوى والتصميم">
   <meta property="og:locale" content="ar">
@@ -757,39 +715,28 @@
         transform: scale(1.02);
     }
 
-    .slide-img {
+ 
+    .slide-video {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover;  
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;  
         opacity: 0.8;
         transition: opacity 0.3s;
-        pointer-events: none; 
     }
 
-    .slide-item:hover .slide-img {
+    .slide-item:hover .slide-video {
         opacity: 1;
     }
-
+    
+     
     .slide-caption {
+        z-index: 2; 
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px;
-        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-        color: #fff;
-    }
-
-    .slide-title {
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
-
-    .slide-cat {
-        font-size: 0.8rem;
-        color: var(--gold);
-        text-transform: uppercase;
-        letter-spacing: 1px;
+         
     }
 
      
@@ -857,15 +804,78 @@
         box-shadow: 0 0 40px rgba(225, 196, 67, 0.4);
     }
 
+ 
+    .see-more-card {
+        text-decoration: none;  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.02);  
+        border: 1px dashed var(--glass-border);  
+        transition: all 0.3s ease;
+    }
+
+    .see-more-card:hover {
+        background: rgba(26, 40, 85, 0.3);  
+        border-color: var(--gold);  
+        transform: scale(0.98);  
+    }
+
+    .see-more-content {
+        text-align: center;
+        padding: 20px;
+        z-index: 2;
+    }
+
+    .more-icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        transition: all 0.3s ease;
+    }
+
+    .see-more-card:hover .more-icon-circle {
+        background: var(--gold);
+        box-shadow: 0 0 20px rgba(225, 196, 67, 0.4);
+    }
+
+    .more-arrow {
+        font-size: 1.5rem;
+        color: var(--gold);
+        transition: all 0.3s ease;
+    }
+
+    .see-more-card:hover .more-arrow {
+        color: #000;  
+        transform: translateX(-5px);  
+    }
+
+    .more-title {
+        font-size: 1.4rem;
+        color: #fff;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .more-subtitle {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
      
     @media (max-width: 768px) {
         
          
         .hero-section {
-            padding-top: 50px;  
-            padding-bottom: 20px;
-            justify-content: flex-start;  
-            min-height: auto;  
+            padding-top: 50px !important; 
+            padding-bottom: 10px !important;  
+            justify-content: flex-start !important;
+            min-height: auto !important;
         }
 
         .big-typography { 
@@ -881,35 +891,39 @@
             margin-top: 10px;
         }
 
+         
         .marquee-wrapper {
-            padding-top: 15px; 
-            padding-bottom: 15px;
+            padding-top: 10px !important;   
+            padding-bottom: 15px !important;
+            margin-top: 20px !important;
         }
 
          
         .services-section {
-            padding-top: 70px;  
-            padding-bottom: 30px;
+            padding-top: 60px !important; 
+            padding-bottom: 20px !important;
         }
 
+         
         .portfolio-section {
-            padding-top: 70px;  
-            padding-bottom: 30px;
+            padding-top: 60px !important; 
+            padding-bottom: 20px !important;
         }
 
+         
         .nav-links-section {
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
         }
 
          
         .cta-section {
-            padding-top: 50px;  
-            padding-bottom: 60px;
+            padding-top: 40px !important; 
+            padding-bottom: 60px !important;
         }
 
         .section-title {
-            margin-bottom: 30px;
+            margin-bottom: 25px !important;
             font-size: 2rem;
         }
 
@@ -971,7 +985,6 @@
             margin: 0;
         }
 
-         
         .nav-card .nav-arrow {
             display: block; 
             font-size: 1.2rem;
@@ -1068,44 +1081,67 @@
         </div>
     </section>
 
-    <section class="portfolio-section">
+<section class="portfolio-section">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: end;">
             <h2 class="section-title" style="margin: 0;">أعمالنا</h2>
             <span style="color: var(--text-muted); font-size: 0.9rem;">اسحب للمزيد ←</span>
         </div>
 
         <div class="slider-container">
+            
             <div class="slide-item">
-                <img src="/images/work1.jpg" class="slide-img" alt="Content Project">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/11145.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="slide-caption">
                     <div class="slide-cat">Content Creation</div>
-                    <div class="slide-title">تصوير منتجات احترافي</div>
+                    <div class="slide-title">حملة إعلانية للارغد</div>
                 </div>
             </div>
 
             <div class="slide-item">
-                <img src="/images/work2.jpg" class="slide-img" alt="Web Project">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/22243.mp4" type="video/mp4">
+                </video>
                 <div class="slide-caption">
-                    <div class="slide-cat">Web Design</div>
-                    <div class="slide-title">موقع شركة عقارية</div>
+                    <div class="slide-cat">Content Creation</div>
+                    <div class="slide-title">حملة اعلانية للارغد</div>
                 </div>
             </div>
 
             <div class="slide-item">
-                <img src="/images/work3.jpg" class="slide-img" alt="Branding Project">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/33345.mp4" type="video/mp4">
+                </video>
                 <div class="slide-caption">
-                    <div class="slide-cat">Branding</div>
-                    <div class="slide-title">هوية بصرية كاملة</div>
+                    <div class="slide-cat">Editing</div>
+                    <div class="slide-title">مونتاج لشركة الوند</div>
                 </div>
             </div>
 
-            <div class="slide-item">
-                <img src="/images/work4.jpg" class="slide-img" alt="Social Media">
+             <div class="slide-item">
+                <video class="slide-video" autoplay loop muted playsinline>
+                    <source src="videos/44423.mp4" type="video/mp4">
+                </video>
                 <div class="slide-caption">
-                    <div class="slide-cat">Social Media</div>
-                    <div class="slide-title">حملة إعلانية</div>
+                    <div class="slide-cat">Outro</div>
+                    <div class="slide-title">خاتمة احترافية</div>
                 </div>
             </div>
+
+<a href="/gallery/" class="slide-item see-more-card">
+                <div class="see-more-content">
+                    <div class="more-icon-circle">
+                        <span class="more-arrow">←</span>
+                    </div>
+                    <h3 class="more-title">شاهد المزيد</h3>
+                    <p class="more-subtitle">تصفح معرض اعمالنا</p>
+                </div>
+            </a>
+
+        </div> </section>
+
         </div>
     </section>
 
