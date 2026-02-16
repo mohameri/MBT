@@ -5,9 +5,8 @@ defaultContentLanguage = "ar"
 
 publishDir = "docs"
 
-# --- إعدادات اللغة العربية (هنا التعديل المهم) ---
+# --- إعدادات اللغة ---
 [languages]
-  # اللغة العربية (الافتراضية)
   [languages.ar]
     languageName = "العربية"
     languageCode = "ar"
@@ -15,35 +14,26 @@ publishDir = "docs"
     title = "MBT"
     languageDirection = "rtl"
 
-  # اللغة الإنجليزية (الجديدة)
   [languages.en]
     languageName = "English"
     languageCode = "en"
     weight = 2
     title = "MBT"
-    languageDirection = "ltr" # اتجاه يسار ليمين
+    languageDirection = "ltr"
 
-# --- إعدادات رئيسية للموقع ---
+# --- الإعدادات العامة ---
 [params]
   defaultTheme = "dark"
   disableThemeToggle = true
   hideMeta = true
   
+  # رابط الحقوق يوجه للصفحة الرئيسية
+  copyright = "&copy; 2026 <a href=\"/\">MBT</a>"
+
   [params.assets]
     disableFingerprinting = true
 
-  images = ["/images/preview.png"]
-  
-  # --- تفعيل وضع الصيانة (Profile Mode) ---
-  [params.profileMode]
-    enabled = true
-    title = "الموقع تحت الصيانة"
-    subtitle = " " 
-    imageUrl = "images/logo.png" 
-    imageWidth = 200
-    imageHeight = 200
-
-# --- القوائم (Menus) ---
+# --- القوائم ---
 [[menu.main]]
   identifier = "whatsapp"
   name = "الواتساب"
@@ -62,10 +52,12 @@ publishDir = "docs"
   url = "/Services/"
   weight = 30
   
+# --- إخفاء بيانات الميتا الزائدة ---
 [[cascade]]
   [cascade.params]
     hidemeta = true
-	
+
+# --- السماح بكود HTML في الصفحات ---
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
