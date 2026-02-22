@@ -480,16 +480,16 @@
             transform: none !important;
         }
 
-       /* توسيع الصندوق ليحتوي النص في سطرين */
+       /* سحب الكلمة الأخيرة للسطر الثاني بقوة */
         .hero-subtitle {
-            font-size: 0.85rem !important; 
-            padding: 8px 5px !important; /* تقليل الحواف الجانبية جداً لإعطاء مساحة للكلمات */
+            font-size: 0.78rem !important; /* تصغير درجة طفيفة جداً */
+            padding: 8px 2px !important; /* إلغاء الحواف الجانبية تقريباً */
             margin-top: 10px !important;
             line-height: 1.6 !important;
             
-            /* توسيع العرض لأقصى حد مريح في الموبايل */
-            width: 98% !important; 
-            max-width: 480px !important; /* رفع الحد الأقصى للصندوق */
+            width: 100% !important; /* أخذ عرض الشاشة بالكامل */
+            max-width: 100% !important;
+            letter-spacing: -0.2px !important; /* تقارب خفيف جداً بين الحروف لكسب مساحة */
             margin-left: auto !important;
             margin-right: auto !important;
         }
