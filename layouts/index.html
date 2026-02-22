@@ -480,16 +480,17 @@
             transform: none !important;
         }
 
-       /* سحب الكلمة الأخيرة للسطر الثاني بقوة */
+       /* سحب الكلمة للسطر الثاني مع إبعاد الشريط من الأسفل */
         .hero-subtitle {
-            font-size: 0.78rem !important; /* تصغير درجة طفيفة جداً */
-            padding: 8px 2px !important; /* إلغاء الحواف الجانبية تقريباً */
+            font-size: 0.78rem !important; 
+            padding: 8px 2px !important; 
             margin-top: 10px !important;
+            margin-bottom: 35px !important; /* <--- السر هنا: إبعاد الشريط للأسفل */
             line-height: 1.6 !important;
             
-            width: 100% !important; /* أخذ عرض الشاشة بالكامل */
+            width: 100% !important; 
             max-width: 100% !important;
-            letter-spacing: -0.2px !important; /* تقارب خفيف جداً بين الحروف لكسب مساحة */
+            letter-spacing: -0.2px !important; 
             margin-left: auto !important;
             margin-right: auto !important;
         }
