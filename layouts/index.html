@@ -480,18 +480,18 @@
             transform: none !important;
         }
 
-       /* ضبط وصف الهيرو في الموبايل ليصبح سطرين */
+       /* توسيع الصندوق ليحتوي النص في سطرين */
         .hero-subtitle {
-            font-size: 0.85rem !important; /* حجم مقروء وممتاز */
-            padding: 8px 15px !important;
+            font-size: 0.85rem !important; 
+            padding: 8px 5px !important; /* تقليل الحواف الجانبية جداً لإعطاء مساحة للكلمات */
             margin-top: 10px !important;
             line-height: 1.6 !important;
             
-            /* السر هنا: إجبار النص على النزول لسطرين */
-            width: 90% !important; 
-            max-width: 340px !important; /* هذا الرقم يضمن التفاف النص لسطرين */
-            margin-left: auto !important; /* لتوسيط الصندوق */
-            margin-right: auto !important; /* لتوسيط الصندوق */
+            /* توسيع العرض لأقصى حد مريح في الموبايل */
+            width: 98% !important; 
+            max-width: 480px !important; /* رفع الحد الأقصى للصندوق */
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
 
         /* ... (بقية الأكواد...) ... */
@@ -677,7 +677,7 @@
 <section class="portfolio-section">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
             <h2 class="section-title" style="margin: 0 !important;">أعمالنا</h2>
-            <span style="color: var(--text-muted); font-size: 0.85rem; transform: translateY(-2px);">اسحب للمزيد ←</span>
+            <span style="color: var(--text-muted); font-size: 0.85rem; transform: translateY( 0px);">اسحب للمزيد ←</span>
         </div>
 
         <div class="slider-container">
