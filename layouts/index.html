@@ -81,25 +81,18 @@
     }
 
     .hero-subtitle {
-            font-size: 0.85rem !important; /* حجم خط مقروء وواضح */
-            padding: 12px 15px !important;
-            margin-top: 15px !important;
-            margin-bottom: 35px !important;
-            line-height: 1.6 !important;
-            
-            /* أبعاد البوكس الجديد */
-            width: 95% !important; 
-            max-width: none !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            
-            /* التصميم الزجاجي العصري الجديد */
-            border-radius: 15px !important; /* حواف دائرية بدل الكبسولة لتوفير المساحة */
-            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%) !important;
-            border: 1px solid rgba(225, 196, 67, 0.2) !important; /* إطار ذهبي خفيف */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important;
-            letter-spacing: normal !important;
-        }
+        margin-top: 10px;
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        line-height: 1.6;
+        background: var(--glass-bg);
+        padding: 15px 30px;
+        border-radius: 50px;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(var(--blur-amt));
+        -webkit-backdrop-filter: blur(var(--blur-amt));
+    }
 
     /* =========================================
        2. Marquee
@@ -479,10 +472,10 @@
             justify-content: flex-start !important;
             min-height: auto !important;
         }
-                            /* مسافة أوسع للعنوان الرئيسي */
+
         .big-typography {
             font-size: 2.8rem;
-            line-height: 1.55 !important; /* زيادة المسافة بين السطرين */
+            line-height: 1.1;
             margin-bottom: 15px;
             transform: none !important;
         }
@@ -533,7 +526,7 @@
         .nav-card .card-title {
             font-size: 0.95rem; /* تكبير الخط شعراية ليتناسب مع المسافة */
             margin: 0;
-            line-height: 1.8 !important; /* تمت زيادة المسافة بشكل كبير لراحة العين */
+            line-height: 1.6 !important; /* تمت زيادة المسافة بشكل كبير لراحة العين */
         }
 
         /* >>> التعديل الثاني: إصلاح مكان السهم <<< */
