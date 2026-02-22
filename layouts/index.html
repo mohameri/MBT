@@ -464,110 +464,49 @@
        Mobile Customization (فرض التغييرات بالقوة)
        ========================================= */
     @media (max-width: 768px) {
-        
+
         /* 1. Hero: تقليل المساحة العلوية بشكل قسري */
         .hero-section {
-            padding-top: 50px !important; 
-            padding-bottom: 10px !important; /* مسافة أقل من الأسفل */
+            padding-top: 50px !important;
+            padding-bottom: 10px !important;
             justify-content: flex-start !important;
             min-height: auto !important;
         }
 
-        .big-typography { 
-            font-size: 2.8rem; 
-            line-height: 1.1; 
+        .big-typography {
+            font-size: 2.8rem;
+            line-height: 1.1;
             margin-bottom: 15px;
-            transform: none !important; 
+            transform: none !important;
         }
-        
-        .hero-subtitle { 
-            font-size: 0.95rem; 
-            padding: 10px 20px; 
+
+        /* >>> التعديل الأول: تصغير خط الوصف <<< */
+        .hero-subtitle {
+            font-size: 0.8rem !important; /* تم التصغير من 0.95rem */
+            padding: 8px 15px !important;  /* تقليل الحواف قليلاً */
             margin-top: 10px;
         }
 
-        /* 2. Marquee: مسافة قليلة جداً فوق الشريط */
-        .marquee-wrapper {
-            padding-top: 10px !important;  /* مسافة صغيرة جداً */
-            padding-bottom: 15px !important;
-            margin-top: 20px !important;
-        }
+        /* ... (بقية الأكواد...) ... */
 
-        /* 3. Services */
-        .services-section {
-            padding-top: 60px !important; 
-            padding-bottom: 20px !important;
-        }
-
-        /* 4. Portfolio */
-        .portfolio-section {
-            padding-top: 60px !important; 
-            padding-bottom: 20px !important;
-        }
-
-        /* 5. Navigation */
-        .nav-links-section {
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
-        }
-
-        /* 6. CTA */
-        .cta-section {
-            padding-top: 40px !important; 
-            padding-bottom: 60px !important;
-        }
-
-        .section-title {
-            margin-bottom: 25px !important;
-            font-size: 2rem;
-        }
-
-        /* Layouts */
-        .glass-grid { 
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .glass-card {
-            padding: 15px;
-            border-radius: 15px;
-            flex-direction: row; 
-            align-items: center;
-            gap: 15px;
-            min-height: auto;
-            text-align: right;
-        }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 0;
-            min-width: 50px; 
-            display: flex;
-            justify-content: center;
-        }
-
-        .card-content-wrapper { flex: 1; }
-        .card-title { font-size: 1.1rem; margin-bottom: 5px; }
-        .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
-        
         /* Navigation Cards */
-        .nav-grid { 
+        .nav-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
         .nav-card {
-            min-height: auto; 
-            aspect-ratio: 1 / 1; 
+            min-height: auto;
+            aspect-ratio: 1 / 1;
             padding: 15px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; 
+            justify-content: space-between;
             align-items: center;
             text-align: center;
             gap: 5px;
+            position: relative !important; /* ضروري لعمل السهم */
         }
 
         .nav-card .card-icon {
@@ -580,29 +519,21 @@
             margin: 0;
         }
 
+        /* >>> التعديل الثاني: إصلاح مكان السهم <<< */
         .nav-card .nav-arrow {
-            display: block; 
+            display: block;
             font-size: 1.2rem;
-            align-self: flex-end; 
-            margin-top: auto;
+            /* إلغاء الخصائص القديمة التي تسبب المشكلة */
+            align-self: auto !important;
+            margin-top: 0 !important;
+            /* تثبيت السهم في الزاوية السفلية اليسرى بدقة */
+            position: absolute;
+            bottom: 12px;
+            left: 15px;
         }
 
         .nav-card .card-desc {
-            display: none; 
-        }
-
-        .slide-item { 
-            min-width: 260px; 
-            height: 380px; 
-        }
-        
-        .cta-box {
-            padding: 30px 20px;
-        }
-        
-        .cta-btn {
-            width: 100%; 
-            padding: 12px 0;
+            display: none;
         }
     }
 	/* =========================================

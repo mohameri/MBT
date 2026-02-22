@@ -961,110 +961,49 @@
 
      
     @media (max-width: 768px) {
-        
+
          
         .hero-section {
-            padding-top: 50px !important; 
-            padding-bottom: 10px !important;  
+            padding-top: 50px !important;
+            padding-bottom: 10px !important;
             justify-content: flex-start !important;
             min-height: auto !important;
         }
 
-        .big-typography { 
-            font-size: 2.8rem; 
-            line-height: 1.1; 
+        .big-typography {
+            font-size: 2.8rem;
+            line-height: 1.1;
             margin-bottom: 15px;
-            transform: none !important; 
+            transform: none !important;
         }
-        
-        .hero-subtitle { 
-            font-size: 0.95rem; 
-            padding: 10px 20px; 
+
+         
+        .hero-subtitle {
+            font-size: 0.8rem !important;  
+            padding: 8px 15px !important;   
             margin-top: 10px;
         }
 
          
-        .marquee-wrapper {
-            padding-top: 10px !important;   
-            padding-bottom: 15px !important;
-            margin-top: 20px !important;
-        }
 
          
-        .services-section {
-            padding-top: 60px !important; 
-            padding-bottom: 20px !important;
-        }
-
-         
-        .portfolio-section {
-            padding-top: 60px !important; 
-            padding-bottom: 20px !important;
-        }
-
-         
-        .nav-links-section {
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
-        }
-
-         
-        .cta-section {
-            padding-top: 40px !important; 
-            padding-bottom: 60px !important;
-        }
-
-        .section-title {
-            margin-bottom: 25px !important;
-            font-size: 2rem;
-        }
-
-         
-        .glass-grid { 
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .glass-card {
-            padding: 15px;
-            border-radius: 15px;
-            flex-direction: row; 
-            align-items: center;
-            gap: 15px;
-            min-height: auto;
-            text-align: right;
-        }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 0;
-            min-width: 50px; 
-            display: flex;
-            justify-content: center;
-        }
-
-        .card-content-wrapper { flex: 1; }
-        .card-title { font-size: 1.1rem; margin-bottom: 5px; }
-        .card-desc { font-size: 0.85rem; line-height: 1.4; margin: 0; }
-        
-         
-        .nav-grid { 
+        .nav-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
         .nav-card {
-            min-height: auto; 
-            aspect-ratio: 1 / 1; 
+            min-height: auto;
+            aspect-ratio: 1 / 1;
             padding: 15px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; 
+            justify-content: space-between;
             align-items: center;
             text-align: center;
             gap: 5px;
+            position: relative !important;  
         }
 
         .nav-card .card-icon {
@@ -1077,29 +1016,21 @@
             margin: 0;
         }
 
+         
         .nav-card .nav-arrow {
-            display: block; 
+            display: block;
             font-size: 1.2rem;
-            align-self: flex-end; 
-            margin-top: auto;
+             
+            align-self: auto !important;
+            margin-top: 0 !important;
+             
+            position: absolute;
+            bottom: 12px;
+            left: 15px;
         }
 
         .nav-card .card-desc {
-            display: none; 
-        }
-
-        .slide-item { 
-            min-width: 260px; 
-            height: 380px; 
-        }
-        
-        .cta-box {
-            padding: 30px 20px;
-        }
-        
-        .cta-btn {
-            width: 100%; 
-            padding: 12px 0;
+            display: none;
         }
     }
 	 
