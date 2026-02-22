@@ -685,10 +685,10 @@
 
         <div class="slider-container">
             
-            <div class="slide-item">
-                <video class="slide-video" autoplay loop muted playsinline>
-                    <source src="videos/22243.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+            <<div class="slide-item">
+                <video class="slide-video" loop muted playsinline preload="none" poster="/images/poster-1.jpg">
+                    <source data-src="videos/22243.mp4" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو.
                 </video>
                 <div class="slide-caption">
                     <div class="slide-cat">Content Creation</div>
@@ -697,8 +697,8 @@
             </div>
 
             <div class="slide-item">
-                <video class="slide-video" autoplay loop muted playsinline>
-                    <source src="videos/33345.mp4" type="video/mp4">
+                <video class="slide-video" loop muted playsinline preload="none" poster="/images/poster-2.png">
+                    <source data-src="videos/33345.mp4" type="video/mp4">
                 </video>
                 <div class="slide-caption">
                     <div class="slide-cat">Editing</div>
@@ -707,8 +707,8 @@
             </div>
 
             <div class="slide-item">
-                <video class="slide-video" autoplay loop muted playsinline>
-                    <source src="videos/45345345.mp4" type="video/mp4">
+                <video class="slide-video" loop muted playsinline preload="none" poster="/images/poster-3.png">
+                    <source data-src="videos/45345345.mp4" type="video/mp4">
                 </video>
                 <div class="slide-caption">
                     <div class="slide-cat">Visual identity</div>
@@ -717,8 +717,8 @@
             </div>
 
              <div class="slide-item">
-                <video class="slide-video" autoplay loop muted playsinline>
-                    <source src="videos/44423.mp4" type="video/mp4">
+                <video class="slide-video" loop muted playsinline preload="none" poster="/images/poster-4.png">
+                    <source data-src="videos/44423.mp4" type="video/mp4">
                 </video>
                 <div class="slide-caption">
                     <div class="slide-cat">Outro</div>
@@ -811,5 +811,45 @@
         slider.scrollLeft = scrollLeft - walk;
     });
 </script>
+<script>
+    // 3. Smart Video Lazy Loading (تشغيل وإيقاف ذكي للفيديوهات)
+    document.addEventListener("DOMContentLoaded", function() {
+        const videos = document.querySelectorAll('.slide-video');
 
+        if ('IntersectionObserver' in window) {
+            const videoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    
+                    // إذا ظهر 50% من الفيديو على الشاشة
+                    if (entry.isIntersecting) {
+                        const source = video.querySelector('source');
+                        // التأكد من وضع الرابط الحقيقي إذا لم يكن موجوداً
+                        if (source && !source.src) {
+                            source.src = source.dataset.src; 
+                            video.load(); 
+                        }
+                        // تشغيل الفيديو بسلاسة
+                        video.play().catch(e => console.log("Play prevented by browser")); 
+                    } else {
+                        // إيقاف الفيديو فور خروجه من الشاشة لتوفير الإنترنت والبطارية
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 }); // 0.5 تعني أنه يعمل عند ظهور نصف الكارت
+
+            videos.forEach(video => {
+                videoObserver.observe(video);
+            });
+        } else {
+            // كود احتياطي للمتصفحات القديمة جداً
+            videos.forEach(video => {
+                const source = video.querySelector('source');
+                source.src = source.dataset.src;
+                video.load();
+                video.autoplay = true;
+            });
+        }
+    });
+</script>
 {{ end }}
