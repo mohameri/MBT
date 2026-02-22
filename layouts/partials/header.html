@@ -165,7 +165,7 @@
     }
 
     /* =========================================
-       4. تنسيقات الموبايل (التصميم القديم البسيط)
+       4. تنسيقات الموبايل (التصميم مع بلور وتوهج)
        ========================================= */
     .mobile-bottom-nav {
         display: none; 
@@ -173,17 +173,23 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: #1a1a1a;
+        /* جعل الخلفية شفافة قليلاً ليظهر البلور */
+        background-color: rgba(20, 20, 20, 0.85); 
+        /* تأثير الزجاج (البلور) */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         height: 65px;
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        /* ظل عادي للأسفل + توهج ذهبي خفيف للأعلى */
+        box-shadow: 0 -10px 25px rgba(0,0,0,0.6), 0 -2px 10px rgba(225, 196, 67, 0.15);
         z-index: 99999;
         justify-content: space-between;
         align-items: center;
         padding: 0;
-        border-top: 1px solid #333;
+        /* خط علوي ذهبي خفيف جداً */
+        border-top: 1px solid rgba(225, 196, 67, 0.2); 
     }
 
-    .nav-item {
+   .nav-item {
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -192,12 +198,27 @@
         text-decoration: none;
         height: 100%;
         color: #bbb;
-        font-size: 0.9rem;
-        font-weight: bold;
-        transition: color 0.3s;
+        transition: all 0.3s ease;
+        gap: 3px; /* مسافة بسيطة ومدروسة بين الأيقونة والنص */
     }
     
-    .nav-item:hover { color: #e1c443; }
+    .nav-item:hover { 
+        color: #e1c443; 
+    }
+
+    /* تنسيق الأيقونة */
+    .nav-item .nav-icon {
+        font-size: 1.3rem;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* ظل خفيف يعطي عمق */
+    }
+
+    /* تنعيم النص وترتيبه */
+    .nav-item .nav-text {
+        font-size: 0.75rem; /* تصغير الحجم */
+        font-weight: 500; /* وزن متوسط بدل العريض جداً */
+        letter-spacing: 0.5px; /* مسافة خفيفة بين الحروف تريح العين */
+        opacity: 0.8; /* تخفيف حدة اللون الأبيض */
+    }
 
     /* إزالة تأثير التوهج والخلفية الذهبية */
 
@@ -433,6 +454,7 @@
 
 <div class="mobile-bottom-nav">
     <a href="/gallery/" class="nav-item">
+        <span style="font-size: 1.3rem; margin-bottom: 2px;">🎬</span>
         <span>أعمالنا</span>
     </a>
 
@@ -443,6 +465,7 @@
     </div>
 
     <a href="/services/" class="nav-item">
+        <span style="font-size: 1.3rem; margin-bottom: 2px;">💲</span>
         <span>خدماتنا</span>
     </a>
 </div>
@@ -461,6 +484,24 @@
             <button id="wa-confirm" class="wa-btn wa-btn-confirm">نعم</button>
         </div>
     </div>
+</div>
+
+<div class="mobile-bottom-nav">
+    <a href="/gallery/" class="nav-item">
+        <span class="nav-icon">🎬</span>
+        <span class="nav-text">أعمالنا</span>
+    </a>
+
+    <div class="whatsapp-container">
+        <a href="https://wa.me/9647872840590" target="_blank" class="whatsapp-btn wa-trigger-link" aria-label="WhatsApp">
+            <img src="/images/whatsapp-64.png" alt="WhatsApp">
+        </a>
+    </div>
+
+    <a href="/services/" class="nav-item">
+        <span class="nav-icon">💲</span>
+        <span class="nav-text">خدماتنا</span>
+    </a>
 </div>
 
 <script>

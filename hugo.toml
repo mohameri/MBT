@@ -45,12 +45,14 @@ publishDir = "docs"
   name = "أعمالنا"
   url = "/gallery/"
   weight = 20
+  pre = "🎬 "
 
 [[menu.main]]
   identifier = "Services"
   name = "خدماتنا"
   url = "/Services/"
   weight = 30
+  pre = "💲 "
   
 # --- إخفاء بيانات الميتا الزائدة ---
 [[cascade]]
