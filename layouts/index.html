@@ -605,6 +605,66 @@
             padding: 12px 0;
         }
     }
+	/* =========================================
+       تعديل أحجام النصوص لتتناسب مع الخط الجديد (تصغير عام)
+       ========================================= */
+    .big-typography {
+        font-size: clamp(2rem, 6vw, 5rem); /* تصغير العنوان الرئيسي */
+    }
+    .hero-subtitle {
+        font-size: 1.05rem; /* تصغير الوصف */
+    }
+    .section-title {
+        font-size: 2.1rem; /* تصغير عناوين الأقسام */
+    }
+    .card-title {
+        font-size: 1.25rem; /* تصغير عناوين الكروت */
+    }
+    .card-desc {
+        font-size: 0.85rem; /* تصغير وصف الكروت */
+    }
+    .slide-title {
+        font-size: 1.1rem; /* تصغير عناوين الأعمال */
+    }
+    .more-title {
+        font-size: 1.2rem;
+    }
+    .marquee-item {
+        font-size: 1.2rem;
+    }
+
+    /* --- تصغير إضافي مخصص لشاشات الهاتف بقوة --- */
+    @media (max-width: 768px) {
+        .big-typography { 
+            font-size: 2.1rem !important; /* كان 2.8 */
+        }
+        .hero-subtitle { 
+            font-size: 0.85rem !important; /* كان 0.95 */
+            padding: 8px 15px !important;
+        }
+        .section-title {
+            font-size: 1.7rem !important; /* كان 2.0 */
+            margin-bottom: 20px !important;
+        }
+        .glass-card {
+            padding: 12px !important;
+        }
+        .card-title { 
+            font-size: 1rem !important; /* كان 1.1 */
+        }
+        .card-desc { 
+            font-size: 0.75rem !important; /* كان 0.85 */
+        }
+        .slide-title {
+            font-size: 1rem !important;
+        }
+        .cta-box h2 {
+            font-size: 1.6rem !important;
+        }
+        .cta-box p {
+            font-size: 0.85rem !important;
+        }
+    }
 </style>
 
 <div class="home-container">
