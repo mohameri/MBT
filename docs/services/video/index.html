@@ -57,7 +57,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="الفيديوهات | MBT" />
 <meta name="twitter:description" content="  كيفية تحديد أسعار خدمات التصميم مثل البرزنتيشن، البروفايل، والكتالوجات عند شركتنا بناءً على عوامل رئيسية مثل تعقيد التصميم، عدد الصفحات، والمحتوى البصري." />
-<meta name="twitter:image" content="https://mbt.ad/images/mbt-share-cover.jpg" />
+<meta name="twitter:image" content="https://mbt.ad/images/23435HH.jpg" />
 
 <meta name="theme-color" content="#1a2855">
 
@@ -611,57 +611,168 @@
 </article>
     </main>
     
-<footer class="footer">
-        <span>&copy; 2026 <a href="/">MBT</a></span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
+<style>
+     
+    .modern-footer {
+        background-color: #2a2a2a; 
+        border-top: 1px solid #3d3d3d;
+        padding: 120px 20px 50px; 
+        color: #ffffff;
+        font-family: inherit;
+        text-align: center;
+        direction: rtl;
     }
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
+    .footer-cta {
+        margin-bottom: 100px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-logo-img {
+        width: 260px; 
+        margin-bottom: 40px; 
+        pointer-events: none;
+        filter: drop-shadow(0 0 12px rgba(0,0,0,0.25)); 
+    }
 
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
+    .footer-main-title {
+        font-size: clamp(1.1rem, 2.5vw, 1.6rem); 
+        font-weight: 900;
+        margin: 0 0 30px 0;
+        line-height: 1.5;
+    }
+
+     
+    .text-hover-gold { 
+        color: #ffffff; 
+        transition: color 0.3s ease; 
+        cursor: default; 
+    }
+    .text-hover-gold:hover, .text-hover-gold:active { 
+        color: #e1c443; 
+    }
+    
+     
+    .text-always-gold { 
+        color: #e1c443; 
+    }
+
+    .footer-cta-btn {
+        display: inline-block;
+        padding: 15px 45px;
+        background-color: #1f3264; 
+        color: #ffffff; 
+        border: 1px solid #1f3264;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .footer-cta-btn:hover {
+        background-color: #e1c443;
+        color: #1f3264;
+        border-color: #e1c443;
+        transform: translateY(-3px);
+    }
+
+    .footer-subscribe-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px; 
+        max-width: 1100px;
+        margin: 0 auto 70px; 
+        text-align: right;
+        border-top: 1px solid #444444; 
+        border-bottom: 1px solid #444444;
+        padding: 70px 0; 
+    }
+
+    .subscribe-text h3 { font-size: 1.5rem; font-weight: 800; margin: 0 0 10px 0; color: #ffffff; }
+    .subscribe-text p { color: #bbbbbb; font-size: 0.95rem; margin: 0; line-height: 1.5; }
+
+    .subscribe-form { display: flex; gap: 15px; width: 100%; max-width: 500px; }
+    .subscribe-form input { flex: 1; padding: 15px 20px; border-radius: 8px; border: 1px solid #555; background: #404040; color: #ffffff; font-family: inherit; outline: none; }
+    .subscribe-form input:focus { border-color: #1f3264; }
+    .subscribe-form button { padding: 15px 30px; background: #1f3264; color: #ffffff; border: none; border-radius: 8px; font-family: inherit; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .subscribe-form button:hover { background: #e1c443; color: #1f3264; }
+
+    .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1100px;
+        margin: 0 auto;
+        color: #999999;
+        font-size: 0.9rem;
+    }
+
+    .footer-socials { display: flex; gap: 25px; font-weight: bold; }
+    .footer-socials a { color: #bbbbbb; text-decoration: none; transition: all 0.3s; }
+    .footer-socials a:hover { color: #e1c443; transform: translateY(-3px); }
+
+     
+    @media (max-width: 768px) {
+        .modern-footer {
+            padding: 50px 15px 120px; 
         }
-    };
+        .footer-cta { margin-bottom: 40px; }
+        .footer-logo-img { width: 180px; margin-bottom: 25px; }
+        .footer-main-title { font-size: 1.2rem; margin-bottom: 30px; }
+        .footer-subscribe-wrapper {
+            flex-direction: column;
+            gap: 35px;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        .subscribe-form { flex-direction: column; width: 100%; }
+        .footer-bottom {
+            flex-direction: column-reverse; 
+            gap: 25px;
+            padding-top: 10px;
+        }
+    }
+</style>
 
-</script>
+<footer class="modern-footer">
+    
+    <div class="footer-cta">
+        <img src="/images/logo.png" alt="شعار MBT" class="footer-logo-img">
+        <h2 class="footer-main-title">
+            <span class="text-hover-gold">دعنا نناقش كيف يمكننا </span><span class="text-always-gold">تطوير علامتك التجارية</span>
+        </h2>
+        <a href="https://wa.me/9647872840590" target="_blank" class="footer-cta-btn">تواصل معنا الآن</a>
+    </div>
+
+    <div class="footer-subscribe-wrapper">
+        <div class="subscribe-text">
+            <h3>نشرة MBT البريدية</h3>
+            <p>أحدث استراتيجيات بناء العلامات التجارية وصناعة المحتوى في صندوق واردك.</p>
+        </div>
+        <div class="subscribe-form">
+            <input type="email" placeholder="أدخل بريدك الإلكتروني..." required>
+            <button type="submit">اشترك معنا</button>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="copyright">
+            &copy; 2026 MBT. جميع الحقوق محفوظة.
+        </div>
+        <div class="footer-socials">
+            <a href="https://instagram.com/mbt_ad" target="_blank">Instagram</a>
+            <a href="https://facebook.com/mbt.advertising" target="_blank">Facebook</a>
+            <a href="https://wa.me/9647872840590" target="_blank">WhatsApp</a>
+        </div>
+    </div>
+
+</footer>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         
