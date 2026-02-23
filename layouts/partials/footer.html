@@ -1,16 +1,23 @@
 {{- if not (.Param "hideFooter") }}
 <style>
     /* =========================================
-       1. الإطار العام للفوتر والمساحات (كمبيوتر)
+       1. الإطار العام للفوتر (تصميم الجزيرة العائمة)
        ========================================= */
     .modern-footer {
-        background-color: #2a2a2a; 
-        border-top: 1px solid #3d3d3d;
-        padding: 120px 20px 50px; 
+        background-color: #222222; /* رمادي داكن فخم */
+        border: 1px solid #333333; /* إطار كامل يحيط بالبطاقة */
+        border-radius: 40px; /* حواف دائرية ناعمة جداً */
+        width: 95%; /* عرض شبه كامل مع ترك فراغ من الجوانب */
+        max-width: 1400px;
+        margin: 80px auto 40px; /* مسافة تفصل الفوتر عن البوست (80px) وعن نهاية الشاشة (40px) */
+        box-shadow: 0 25px 60px rgba(0,0,0,0.6); /* ظل عميق يجعل الفوتر يطفو فوق الصفحة */
+        padding: 100px 20px 50px; 
         color: #ffffff;
         font-family: inherit;
         text-align: center;
         direction: rtl;
+        position: relative;
+        overflow: hidden;
     }
 
     .footer-cta {
@@ -24,7 +31,6 @@
         width: 260px; 
         margin-bottom: 40px; 
         pointer-events: none;
-        filter: drop-shadow(0 0 12px rgba(0,0,0,0.25)); 
     }
 
     .footer-main-title {
@@ -34,7 +40,6 @@
         line-height: 1.5;
     }
 
-    /* التنسيق الجديد للعنوان */
     .text-hover-gold { 
         color: #ffffff; 
         transition: color 0.3s ease; 
@@ -44,7 +49,6 @@
         color: #e1c443; 
     }
     
-    /* اللون الأصفر (الذهبي) المخصص للكلمة المطلوبة */
     .text-always-gold { 
         color: #e1c443; 
     }
@@ -78,8 +82,8 @@
         max-width: 1100px;
         margin: 0 auto 70px; 
         text-align: right;
-        border-top: 1px solid #444444; 
-        border-bottom: 1px solid #444444;
+        border-top: 1px solid #333333; 
+        border-bottom: 1px solid #333333;
         padding: 70px 0; 
     }
 
@@ -87,7 +91,7 @@
     .subscribe-text p { color: #bbbbbb; font-size: 0.95rem; margin: 0; line-height: 1.5; }
 
     .subscribe-form { display: flex; gap: 15px; width: 100%; max-width: 500px; }
-    .subscribe-form input { flex: 1; padding: 15px 20px; border-radius: 8px; border: 1px solid #555; background: #404040; color: #ffffff; font-family: inherit; outline: none; }
+    .subscribe-form input { flex: 1; padding: 15px 20px; border-radius: 8px; border: 1px solid #444; background: #333; color: #ffffff; font-family: inherit; outline: none; }
     .subscribe-form input:focus { border-color: #1f3264; }
     .subscribe-form button { padding: 15px 30px; background: #1f3264; color: #ffffff; border: none; border-radius: 8px; font-family: inherit; font-weight: bold; cursor: pointer; transition: all 0.3s; }
     .subscribe-form button:hover { background: #e1c443; color: #1f3264; }
@@ -108,11 +112,15 @@
     .footer-socials a:hover { color: #e1c443; transform: translateY(-3px); }
 
     /* =========================================
-       2. تحسينات مخصصة للهاتف
+       2. تحسينات مخصصة للهاتف (الجزيرة العائمة)
        ========================================= */
     @media (max-width: 768px) {
         .modern-footer {
-            padding: 50px 15px 120px; 
+            width: 92%; /* عرض أقل في الموبايل لإبراز الفراغ الجانبي */
+            border-radius: 30px; /* حواف دائرية أصغر للموبايل */
+            margin: 60px auto 100px; /* دفع الفوتر ليكون فوق الشريط السفلي مباشرة */
+            padding: 50px 15px 40px; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
         }
         .footer-cta { margin-bottom: 40px; }
         .footer-logo-img { width: 180px; margin-bottom: 25px; }
@@ -155,7 +163,7 @@
 
     <div class="footer-bottom">
         <div class="copyright">
-            &copy; {{ now.Year }} MBT.
+            &copy; {{ now.Year }} MBT
         </div>
         <div class="footer-socials">
             <a href="https://instagram.com/mbt_ad" target="_blank">Instagram</a>
