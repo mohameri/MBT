@@ -20,9 +20,6 @@
     <loc>https://mbt.ad/46457657/</loc>
     <lastmod>2025-09-01T20:57:37+03:00</lastmod>
   </url><url>
-    <loc>https://mbt.ad/gallery/</loc>
-    <lastmod>2025-09-01T20:57:37+03:00</lastmod>
-  </url><url>
     <loc>https://mbt.ad/46457657/45354534/</loc>
     <lastmod>2025-09-01T20:57:37+03:00</lastmod>
   </url><url>
@@ -65,6 +62,8 @@
                 hreflang="ar"
                 href="https://mbt.ad/categories/"
                 />
+  </url><url>
+    <loc>https://mbt.ad/gallery/</loc>
   </url><url>
     <loc>https://mbt.ad/tags/</loc>
     <xhtml:link
