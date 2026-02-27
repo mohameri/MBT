@@ -109,10 +109,8 @@ draft = false
     }
 }
 </style>
-
 <div class="gallery-portal">
 <div class="cinematic-grid">
-
 <a href="/gallery/video/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-video-temp.jpg" controlslist="nodownload" disablepictureinpicture>
 <source data-src="/videos/4545435545435.mp4" type="video/mp4">
