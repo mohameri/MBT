@@ -103,7 +103,7 @@ font-size: 0.9rem;
 
 <a href="/gallery/video/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-video-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/video-preview.mp4" type="video/mp4">
+<source data-src="/videos/55.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
 <h2 class="card-title">فيديوهات وموشن</h2>
