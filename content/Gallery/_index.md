@@ -17,43 +17,22 @@ draft = false
         text-decoration: none; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.05); 
         box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); display: block; 
     }
-    /* تأثير الهوفر الأساسي للشاشات الكبيرة فقط */
-    @media (min-width: 769px) {
-        .cinematic-card:hover { 
-            transform: translateY(-8px); border-color: rgba(225, 196, 67, 0.4); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(225, 196, 67, 0.1); 
-        }
-        .cinematic-card:hover .card-title {
-            animation: pulseGoldBox 1.5s infinite ease-in-out;
-        }
-        .cinematic-card:active .card-title {
-            animation: none;
-            color: #1a2855; 
-            background: #e1c443; 
-            border-color: #e1c443;
-            transform: scale(0.95);
-        }
-        .cinematic-card:hover .reveal-arrow { opacity: 1; transform: translateX(0); }
-    }
 
     /* 3. Video */
     .cinematic-video { 
         position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; 
         filter: brightness(0.6) contrast(1.1); transition: transform 1s ease, filter 0.5s ease; pointer-events: none; 
     }
-    .cinematic-card:hover .cinematic-video { transform: scale(1.05); filter: brightness(0.8) contrast(1.1); }
 
-    /* 4. Overlay */
+    /* 4. Overlay - سر السنترة المثالية هنا */
     .cinematic-overlay { 
         position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
         background: rgba(0, 0, 0, 0.3); transition: background 0.5s ease; 
         display: flex; justify-content: center; align-items: center; /* توسيط دقيق 100% */
     }
-    .cinematic-card:hover .cinematic-overlay { background: rgba(0, 0, 0, 0.5); }
 
-    /* 5. Title in a Glass Box (مربع الكلمة الزجاجي) */
+    /* 5. Title in a Glass Box */
     .card-title {
-        /* البوكس الزجاجي الذهبي */
         background: rgba(225, 196, 67, 0.1);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -61,29 +40,16 @@ draft = false
         padding: 18px 50px;
         border-radius: 50px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        
-        /* النص */
         color: #ffffff; 
         font-size: 2.2rem; 
         font-weight: 900; 
         margin: 0; 
         text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
-        
-        /* ضبط المقاسات */
         text-align: center; 
-        width: max-content; 
-        max-width: 90%;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    /* 6. Pulsation Animation for Box & Text */
-    @keyframes pulseGoldBox {
-        0% { color: #ffffff; background: rgba(225, 196, 67, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(225, 196, 67, 0.3); }
-        50% { color: #e1c443; background: rgba(225, 196, 67, 0.2); box-shadow: 0 10px 40px rgba(225, 196, 67, 0.4); border-color: rgba(225, 196, 67, 0.8); }
-        100% { color: #ffffff; background: rgba(225, 196, 67, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(225, 196, 67, 0.3); }
-    }
-
-    /* 7. Arrow Position */
+    /* 6. Arrow Position */
     .reveal-arrow {
         color: #e1c443; font-size: 2.8rem; font-weight: bold; text-shadow: 0 0 15px rgba(225, 196, 67, 0.4);
         opacity: 0; transform: translateX(30px); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -91,26 +57,57 @@ draft = false
     }
 
     /* =========================================
-       8. Mobile Customization (تعديلات الهاتف الدقيقة)
+       تأثيرات الشاشات الكبيرة (الكمبيوتر) فقط
+       ========================================= */
+    @media (min-width: 769px) {
+        .cinematic-card:hover { 
+            transform: translateY(-8px); border-color: rgba(225, 196, 67, 0.4); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(225, 196, 67, 0.1); 
+        }
+        .cinematic-card:hover .cinematic-video { transform: scale(1.05); filter: brightness(0.8) contrast(1.1); }
+        .cinematic-card:hover .cinematic-overlay { background: rgba(0, 0, 0, 0.5); }
+        .cinematic-card:hover .reveal-arrow { opacity: 1; transform: translateX(0); }
+        
+        @keyframes pulseGoldBox {
+            0% { color: #ffffff; background: rgba(225, 196, 67, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(225, 196, 67, 0.3); }
+            50% { color: #e1c443; background: rgba(225, 196, 67, 0.2); box-shadow: 0 10px 40px rgba(225, 196, 67, 0.4); border-color: rgba(225, 196, 67, 0.8); }
+            100% { color: #ffffff; background: rgba(225, 196, 67, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(225, 196, 67, 0.3); }
+        }
+        .cinematic-card:hover .card-title { animation: pulseGoldBox 1.5s infinite ease-in-out; }
+        .cinematic-card:active .card-title {
+            animation: none; color: #1a2855; background: #e1c443; border-color: #e1c443; transform: scale(0.95);
+        }
+    }
+
+    /* =========================================
+       تخصيص الهاتف المحمول (تصغير دقيق وتأثير التمرير)
        ========================================= */
     @media (max-width: 768px) {
         .gallery-portal { padding: 20px 15px; }
-        .cinematic-card {
-            height: 220px; /* Wider rectangular format */
-            border-radius: 25px;
+        .cinematic-grid { gap: 25px; }
+        .cinematic-card { height: 200px; border-radius: 20px; }
+        
+        .card-title { 
+            font-size: 1.1rem; /* خط أصغر ومناسب */
+            padding: 10px 25px; /* بوكس أصغر وملموم */
+            white-space: nowrap; /* إجبار النص على البقاء بسطر واحد */
+            max-width: 90%; /* حماية إضافية لمنع الخروج من الشاشة */
         }
-        .card-title {
-            font-size: 1.2rem; /* Reduced font size to prevent overflow */
-            padding: 10px 20px; /* Reduced padding for mobile */
-            max-width: 95%; /* More generous max-width */
-            white-space: nowrap; /* Keep it on one line if possible, but reduced size helps */
-        }
-        .reveal-arrow { font-size: 2rem; opacity: 0.6; transform: translateX(0); bottom: 15px; left: 15px; }
+        .reveal-arrow { font-size: 1.6rem; opacity: 0.8; transform: translateX(0); bottom: 12px; left: 15px; }
 
-        /* Subtle style for when a card passes through the central target area */
+        /* التأثير السحري عند مرور الكارت بمنتصف الشاشة أثناء النزول */
         .cinematic-card.in-focus {
-            border-color: rgba(225, 196, 67, 0.6) !important; /* Brighter gold border */
-            box-shadow: 0 5px 15px rgba(225, 196, 67, 0.1) !important; /* Subtle gold shadow */
+            border-color: rgba(225, 196, 67, 0.4);
+        }
+        .cinematic-card.in-focus .cinematic-video {
+            filter: brightness(0.8) contrast(1.1); /* تفتيح الفيديو ناعم */
+        }
+        .cinematic-card.in-focus .card-title {
+            background: rgba(225, 196, 67, 0.2);
+            border-color: rgba(225, 196, 67, 0.8);
+            color: #e1c443; /* النص يصبح ذهبي */
+            box-shadow: 0 5px 20px rgba(225, 196, 67, 0.3);
+            transform: scale(1.03); /* الكلمة تبرز قليلاً */
         }
     }
 </style>
@@ -120,30 +117,30 @@ draft = false
 
 <a href="/gallery/video/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-video-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/45.mp4" type="video/mp4">
+<source data-src="/videos/55.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">فيديوهات و موشن</h2>
+<h2 class="card-title">فيديوهات وموشن</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
 
 <a href="/gallery/logo/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-logo-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/778.mp4" type="video/mp4">
+<source data-src="/videos/logo-preview.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">شعارات و هويات</h2>
+<h2 class="card-title">شعارات وهويات</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
 
 <a href="/gallery/print/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-print-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/911.mp4" type="video/mp4">
+<source data-src="/videos/print-preview.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">مطبوعات و مرئيات</h2>
+<h2 class="card-title">مطبوعات ومرئيات</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
@@ -153,7 +150,7 @@ draft = false
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Existing lazy-video script
+    // 1. تشغيل الفيديو الذكي (Lazy Load)
     const lazyVideos = document.querySelectorAll('.lazy-video');
     if ('IntersectionObserver' in window) {
         const videoObserver = new IntersectionObserver((entries) => {
@@ -176,54 +173,31 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // New script for mobile highlighting on pass
-    const galleryCards = document.querySelectorAll('.cinematic-card');
-    const highlightArea = document.querySelector('.cinematic-grid'); // Highlight central card relative to this container
-
-    // Function to calculate IntersectionObserver threshold based on screen height
-    function getMobileThreshold() {
-        return window.innerHeight * 0.4; // Target central 40% of screen
-    }
-
-    if ('IntersectionObserver' in window) {
-        // Highlighting observer
-        const highlightObserver = new IntersectionObserver((entries, observer) => {
+    // 2. سكريبت الهاتف: تفعيل التأثير الذهبي عند وصول الكارت لمنتصف الشاشة
+    if (window.innerWidth <= 768 && 'IntersectionObserver' in window) {
+        const galleryCards = document.querySelectorAll('.cinematic-card');
+        
+        // إنشاء منطقة تركيز وهمية في منتصف الشاشة
+        const focusObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Find the first and last card to handle edge cases smoothly
-                    const cards = Array.from(galleryCards);
-                    const isFirstCard = entry.target === cards[0];
-                    const isLastCard = entry.target === cards[cards.length - 1];
-
-                    // Check if card is roughly in the center of the viewport
-                    const rect = entry.target.getBoundingClientRect();
-                    const viewHeight = window.innerHeight;
-                    const centralTarget = getMobileThreshold();
-                    const cardCenterY = rect.top + rect.height / 2;
-
-                    // Clear previous highlights
-                    galleryCards.forEach(c => c.classList.remove('in-focus'));
-
-                    // Add highlight to central card
-                    if (isFirstCard || isLastCard || (cardCenterY > centralTarget && cardCenterY < (viewHeight - centralTarget))) {
-                        entry.target.classList.add('in-focus');
-                    }
-
+                    entry.target.classList.add('in-focus');
+                } else {
+                    entry.target.classList.remove('in-focus');
                 }
             });
         }, {
-            root: null, // Use viewport
-            rootMargin: `-${getMobileThreshold()}px 0px -${getMobileThreshold()}px 0px`, // Inward margin creates target area
-            threshold: 0 // Trigger on any entry/exit
+            // سالب 35% من فوق وجوه يعني المنطقة الفعالة هي 30% بمنتصف الشاشة فقط
+            rootMargin: "-35% 0px -35% 0px",
+            threshold: 0
         });
 
-        // Start observing cards for highlighting
         galleryCards.forEach(card => {
-            highlightObserver.observe(card);
+            focusObserver.observe(card);
         });
     }
 
-    // Existing contextmenu protection
+    // 3. حماية الفيديوهات من النقر كليك يمين
     const protectedCards = document.querySelectorAll('.protected-card');
     protectedCards.forEach(card => {
         card.addEventListener('contextmenu', function(e) {
