@@ -117,30 +117,30 @@ draft = false
 
 <a href="/gallery/video/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-video-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/55.mp4" type="video/mp4">
+<source data-src="/videos/45.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">فيديوهات وموشن</h2>
+<h2 class="card-title">فيديوهات و موشن</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
 
 <a href="/gallery/logo/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-logo-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/logo-preview.mp4" type="video/mp4">
+<source data-src="/videos/778.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">شعارات وهويات</h2>
+<h2 class="card-title">شعارات و هويات</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
 
 <a href="/gallery/print/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-print-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/print-preview.mp4" type="video/mp4">
+<source data-src="/videos/911.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">مطبوعات ومرئيات</h2>
+<h2 class="card-title">مطبوعات و مرئيات</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
