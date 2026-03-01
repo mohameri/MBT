@@ -47,6 +47,28 @@
 <header class="header">
     
     <style>
+	/* =========================================
+       تثبيت الشريط العلوي (بسيط ومصمت تماماً)
+       ========================================= */
+    .header {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 9999 !important;
+        transform: none !important; /* يمنع الثيم من إخفاء الشريط */
+
+        /* خلفية مصمتة بلون ثيم PaperMod الداكن الافتراضي (بلون الصفحة الطبيعي) */
+        background-color: #1d1e20 !important; 
+        
+        /* إزالة جميع التأثيرات الزجاجية والضبابية */
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        
+        /* إزالة أي حدود أو حواف بالأسفل أو الجوانب */
+        border: none !important; 
+        
+        /* إزالة أي ظلال */
+        box-shadow: none !important; 
+    }
     /* =========================================
        1. تنسيقات الشعار (LOGO) - عاد نصاً كما طلبت
        ========================================= */
@@ -73,15 +95,25 @@
     }
 
     /* =========================================
-       2. تنسيقات محدد العملة
+       2. تنسيقات محدد العملة (بتأثير زجاجي مطابق لصفحة الكلري)
        ========================================= */
     #currency-selector {
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        background-color: rgba(20, 20, 20, 0.9);
-        color: #e1c443;
-        border: 1px solid #e1c443;
+
+        /* التأثير الزجاجي الأساسي */
+        background: rgba(225, 196, 67, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(225, 196, 67, 0.3);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+        /* النص الأساسي أبيض مع ظل خفيف للوضوح */
+        color: #f2e6b1;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+
+        /* الأبعاد والتوسيط */
         padding-top: 7px;
         padding-bottom: 10px;
         padding-right: 15px;    
@@ -94,20 +126,27 @@
         font-size: 0.9rem;
         cursor: pointer;
         outline: none;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         text-align: center; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
-    #currency-selector:hover {
-        background-color: #000;
-        box-shadow: 0 4px 12px rgba(253, 185, 49, 0.4);
-        transform: translateY(-1px);
+    /* تأثير الهوفر: يتوهج باللون الذهبي وتتغير الكتابة للذهبي */
+    #currency-selector:hover, 
+    #currency-selector:focus {
+        color: #e1c443;
+        background: rgba(225, 196, 67, 0.2);
+        border-color: rgba(225, 196, 67, 0.8);
+        box-shadow: 0 5px 20px rgba(225, 196, 67, 0.4);
+        transform: translateY(-2px);
     }
 
+    /* تنسيق القائمة المنسدلة (الخيارات المفتوحة) 
+       يجب أن تكون بلون غامق مصمت لأن التأثير الزجاجي لا يعمل داخل الـ options */
     #currency-selector option {
-        background-color: #222;
-        color: #fff;
+        background-color: #111111;
+        color: #ffffff;
+        font-weight: bold;
+        text-shadow: none; /* إزالة الظل من الخيارات لتكون أوضح */
     }
 
     /* =========================================

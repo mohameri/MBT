@@ -134,7 +134,7 @@ draft = false
 
 <a href="/gallery/logo/" class="cinematic-card protected-card">
 <video class="cinematic-video lazy-video" loop muted playsinline preload="none" poster="/images/poster-logo-temp.jpg" controlslist="nodownload" disablepictureinpicture>
-<source data-src="/videos/778.mp4" type="video/mp4">
+<source data-src="/videos/6767.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
 <h2 class="card-title">شعارات و هويات</h2>
