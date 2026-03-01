@@ -28,7 +28,7 @@ draft = false
     .cinematic-overlay { 
         position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
         background: rgba(0, 0, 0, 0.3); transition: background 0.5s ease; 
-        display: flex; justify-content: center; align-items: center; /* توسيط دقيق 100% */
+        display: flex; justify-content: center; align-items: center; 
     }
 
     /* 5. Title in a Glass Box */
@@ -80,34 +80,36 @@ draft = false
     }
 
     /* =========================================
-       تخصيص الهاتف المحمول (تصغير دقيق وتأثير التمرير)
+       تخصيص الهاتف المحمول (تصغير قسري وجذري)
        ========================================= */
     @media (max-width: 768px) {
         .gallery-portal { padding: 20px 15px; }
-        .cinematic-grid { gap: 25px; }
+        .cinematic-grid { gap: 20px; }
         .cinematic-card { height: 200px; border-radius: 20px; }
         
+        /* التصغير الإجباري هنا */
         .card-title { 
-            font-size: 1.1rem; /* خط أصغر ومناسب */
-            padding: 10px 25px; /* بوكس أصغر وملموم */
-            white-space: nowrap; /* إجبار النص على البقاء بسطر واحد */
-            max-width: 90%; /* حماية إضافية لمنع الخروج من الشاشة */
+            font-size: 15px !important; /* حجم صغير ومناسب جداً للموبايل */
+            padding: 10px 22px !important; /* بوكس صغير وملموم */
+            white-space: nowrap !important; /* منع سطرين نهائياً */
+            max-width: 85% !important; /* منع الخروج عن الشاشة */
+            border-width: 1px !important;
         }
-        .reveal-arrow { font-size: 1.6rem; opacity: 0.8; transform: translateX(0); bottom: 12px; left: 15px; }
+        .reveal-arrow { font-size: 1.5rem !important; opacity: 0.8; transform: translateX(0); bottom: 12px; left: 15px; }
 
-        /* التأثير السحري عند مرور الكارت بمنتصف الشاشة أثناء النزول */
+        /* التأثير السحري عند مرور الكارت بمنتصف الشاشة */
         .cinematic-card.in-focus {
-            border-color: rgba(225, 196, 67, 0.4);
+            border-color: rgba(225, 196, 67, 0.4) !important;
         }
         .cinematic-card.in-focus .cinematic-video {
-            filter: brightness(0.8) contrast(1.1); /* تفتيح الفيديو ناعم */
+            filter: brightness(0.8) contrast(1.1) !important;
         }
         .cinematic-card.in-focus .card-title {
-            background: rgba(225, 196, 67, 0.2);
-            border-color: rgba(225, 196, 67, 0.8);
-            color: #e1c443; /* النص يصبح ذهبي */
-            box-shadow: 0 5px 20px rgba(225, 196, 67, 0.3);
-            transform: scale(1.03); /* الكلمة تبرز قليلاً */
+            background: rgba(225, 196, 67, 0.2) !important;
+            border-color: rgba(225, 196, 67, 0.8) !important;
+            color: #e1c443 !important;
+            box-shadow: 0 5px 20px rgba(225, 196, 67, 0.3) !important;
+            transform: scale(1.02) !important;
         }
     }
 </style>
