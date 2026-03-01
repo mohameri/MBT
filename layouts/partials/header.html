@@ -174,7 +174,7 @@
     }
 
     /* =========================================
-       4. تنسيقات الموبايل (الدائرة الغائرة وحركة الطفو)
+       4. تنسيقات الموبايل (الدائرة الغائرة وحركة الطفو) - النسخة المعدلة
        ========================================= */
     .mobile-bottom-nav {
         display: none; 
@@ -182,12 +182,11 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 68px; /* زيادة الطول قليلاً ليتناسب مع الحفرة */
+        height: 68px; 
         z-index: 99999;
         justify-content: space-between;
         align-items: center;
         padding: 0;
-        /* لا نضع خلفية هنا، الخلفية ستكون في العنصر الوهمي لكي نقصه */
     }
 
     /* صنع الخلفية الزجاجية وحفر الدائرة باستخدام الماسك */
@@ -199,9 +198,9 @@
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         z-index: -1;
-        /* السر هنا: قطع دائرة شفافة في المنتصف الأعلى */
-        -webkit-mask-image: radial-gradient(circle at 50% 0px, transparent 38px, black 39px);
-        mask-image: radial-gradient(circle at 50% 0px, transparent 38px, black 39px);
+        /* تم تكبير القطع (الحفرة) بزيادة الرقم إلى 46px ليعطي مساحة أوسع حول الزر */
+        -webkit-mask-image: radial-gradient(circle at 50% 0px, transparent 46px, black 47px);
+        mask-image: radial-gradient(circle at 50% 0px, transparent 46px, black 47px);
     }
 
     .nav-item {
@@ -215,7 +214,7 @@
         color: #bbb;
         transition: all 0.3s ease;
         gap: 4px;
-        z-index: 1; /* لضمان بقاء الأزرار فوق الخلفية */
+        z-index: 1; 
     }
     
     .nav-item:hover { 
@@ -242,23 +241,24 @@
         align-items: flex-start;
     }
 
-    /* زر الواتساب العائم مع الإطار الذهبي */
+    /* زر الواتساب العائم */
     a.whatsapp-btn {
         width: 60px;
         height: 60px;
-        /* تدرج لوني أنيق للأخضر */
         background: linear-gradient(135deg, #25D366, #128C7E) !important; 
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: -26px; /* يجلس بالضبط فوق الحفرة */
-        border: 2px solid #e1c443; /* إطار ذهبي يربطه بهوية الموقع */
-        /* توهج مزدوج: أخضر للواتساب وذهبي للون الموقع */
-        box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3), 0 0 15px rgba(225, 196, 67, 0.2);
+        top: -26px; 
+        
+        /* 1. إزالة الإطار تماماً كما طلبت */
+        border: none; 
+        
+        /* 2. تحويل التوهج إلى اللون الذهبي الخاص بالهوية فقط */
+        box-shadow: 0 8px 20px rgba(225, 196, 67, 0.3);
         z-index: 1000;
-        /* تشغيل حركة الطفو */
         animation: floating 3.5s ease-in-out infinite;
     }
 
@@ -269,11 +269,11 @@
         object-fit: contain;
     }
 
-    /* حركة الطفو (صعود وهبوط ناعم جداً) */
+    /* 3. حركة الطفو مع توهج ذهبي يتسع ويلمع عند الارتفاع */
     @keyframes floating {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-6px); box-shadow: 0 12px 20px rgba(37, 211, 102, 0.4), 0 0 20px rgba(225, 196, 67, 0.4); } /* يزداد التوهج عند الارتفاع */
-        100% { transform: translateY(0px); }
+        0% { transform: translateY(0px); box-shadow: 0 8px 20px rgba(225, 196, 67, 0.3); }
+        50% { transform: translateY(-6px); box-shadow: 0 15px 25px rgba(225, 196, 67, 0.6); } 
+        100% { transform: translateY(0px); box-shadow: 0 8px 20px rgba(225, 196, 67, 0.3); }
     }
 
     /* =========================================
