@@ -174,47 +174,36 @@
     }
 
     /* =========================================
-       4. تنسيقات الموبايل (المسار الذهبي)
+       4. تنسيقات الموبايل (الدائرة الغائرة وحركة الطفو)
        ========================================= */
     .mobile-bottom-nav {
         display: none; 
         position: fixed;
-        bottom: 0; left: 0; right: 0;
-        background-color: rgba(10, 10, 10, 0.6); /* خلفية داكنة زجاجية */
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        height: 70px; /* شريط أنحف وأكثر أناقة */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 68px; /* زيادة الطول قليلاً ليتناسب مع الحفرة */
         z-index: 99999;
         justify-content: space-between;
         align-items: center;
         padding: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.05); /* حد علوي خفيف جداً */
-        overflow: hidden; /* ضروري لإخفاء الليزر عند خروجه من الشاشة */
+        /* لا نضع خلفية هنا، الخلفية ستكون في العنصر الوهمي لكي نقصه */
     }
 
-    /* --- تأثير المسار الذهبي (الليزر) --- */
-    .golden-laser {
+    /* صنع الخلفية الزجاجية وحفر الدائرة باستخدام الماسك */
+    .mobile-bottom-nav::before {
+        content: "";
         position: absolute;
-        top: 0;
-        right: -100px; /* يبدأ من خارج الشاشة يميناً */
-        width: 80px;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--gold, #e1c443), transparent);
-        box-shadow: 0 2px 10px rgba(225, 196, 67, 0.8), 0 -2px 10px rgba(225, 196, 67, 0.8);
-        z-index: 1000;
-        animation: laserScan 4s infinite linear; /* حركة مستمرة كل 4 ثواني */
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(20, 20, 20, 0.85); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: -1;
+        /* السر هنا: قطع دائرة شفافة في المنتصف الأعلى */
+        -webkit-mask-image: radial-gradient(circle at 50% 0px, transparent 38px, black 39px);
+        mask-image: radial-gradient(circle at 50% 0px, transparent 38px, black 39px);
     }
 
-    @keyframes laserScan {
-        0% { right: -100px; opacity: 0; }
-        10% { opacity: 1; }
-        45% { width: 150px; opacity: 1; } /* يتمدد قليلاً عند اقترابه من المنتصف */
-        50% { right: 50%; width: 100px; opacity: 1; } /* يضرب الزر في المنتصف */
-        90% { opacity: 1; }
-        100% { right: 110%; opacity: 0; } /* يخرج من اليسار */
-    }
-
-    /* --- عناصر التنقل --- */
     .nav-item {
         flex: 1;
         display: flex;
@@ -223,11 +212,10 @@
         justify-content: center;
         text-decoration: none;
         height: 100%;
-        color: #ffffff; /* أبيض نقي للمسة عصرية */
+        color: #bbb;
         transition: all 0.3s ease;
         gap: 4px;
-        position: relative;
-        z-index: 2;
+        z-index: 1; /* لضمان بقاء الأزرار فوق الخلفية */
     }
     
     .nav-item:hover { 
@@ -235,71 +223,57 @@
     }
 
     .nav-item .nav-icon {
-        font-size: 1.4rem;
-        filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        font-size: 1.3rem;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); 
     }
 
     .nav-item .nav-text {
         font-size: 0.75rem;
         font-weight: 500;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.5px; 
     }
 
-    /* --- زر الواتساب (الثقب الأسود الذهبي) --- */
     .whatsapp-container {
         position: relative;
         width: 80px;
         height: 100%;
         display: flex;
         justify-content: center;
-        align-items: center;
-        z-index: 1001;
+        align-items: flex-start;
     }
 
+    /* زر الواتساب العائم مع الإطار الذهبي */
     a.whatsapp-btn {
-        width: 58px;
-        height: 58px;
-        background-color: #050505 !important; /* أسود حالك */
+        width: 60px;
+        height: 60px;
+        /* تدرج لوني أنيق للأخضر */
+        background: linear-gradient(135deg, #25D366, #128C7E) !important; 
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: -18px; /* بروز خفيف بدل البروز القديم المبالغ فيه */
-        border: 2px solid rgba(225, 196, 67, 0.2); /* إطار ذهبي خافت جداً */
-        box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* ظل للأسفل فقط */
-        transition: all 0.3s ease;
-        animation: buttonCharge 4s infinite linear; /* يتزامن الشحن مع مرور الليزر */
+        top: -26px; /* يجلس بالضبط فوق الحفرة */
+        border: 2px solid #e1c443; /* إطار ذهبي يربطه بهوية الموقع */
+        /* توهج مزدوج: أخضر للواتساب وذهبي للون الموقع */
+        box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3), 0 0 15px rgba(225, 196, 67, 0.2);
+        z-index: 1000;
+        /* تشغيل حركة الطفو */
+        animation: floating 3.5s ease-in-out infinite;
     }
 
-    /* تقنية الـ Mask لتحويل صورتك الأصلية إلى لون ذهبي نقي */
-    .wa-icon-gold {
-        background-color: #e1c443; /* اللون الذهبي */
-        -webkit-mask: url('/images/whatsapp-64.png') no-repeat center / contain;
-        mask: url('/images/whatsapp-64.png') no-repeat center / contain;
-        width: 32px;
-        height: 32px;
-        transition: all 0.3s ease;
+    a.whatsapp-btn img {
+        filter: brightness(0) invert(1) !important; 
+        width: 30px !important;
+        height: 30px !important;
+        object-fit: contain;
     }
 
-    a.whatsapp-btn:hover {
-        transform: translateY(-5px);
-        border-color: #e1c443;
-        box-shadow: 0 10px 25px rgba(225, 196, 67, 0.3);
-    }
-
-    /* حركة "الشحن" للزر: يتوهج بالذهبي في اللحظة التي يمر فيها الليزر (عند 50%) */
-    @keyframes buttonCharge {
-        0%, 40%, 60%, 100% {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            border-color: rgba(225, 196, 67, 0.2);
-            transform: scale(1);
-        }
-        50% {
-            box-shadow: 0 0 25px rgba(225, 196, 67, 0.7), inset 0 0 15px rgba(225, 196, 67, 0.4);
-            border-color: #e1c443;
-            transform: scale(1.05); /* نبضة خفيفة للزر */
-        }
+    /* حركة الطفو (صعود وهبوط ناعم جداً) */
+    @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-6px); box-shadow: 0 12px 20px rgba(37, 211, 102, 0.4), 0 0 20px rgba(225, 196, 67, 0.4); } /* يزداد التوهج عند الارتفاع */
+        100% { transform: translateY(0px); }
     }
 
     /* =========================================
@@ -518,8 +492,6 @@
 </div>
 
 <div class="mobile-bottom-nav">
-    <div class="golden-laser"></div>
-
     <a href="/gallery/" class="nav-item">
         <span class="nav-icon">🎬</span>
         <span class="nav-text">أعمالنا</span>
@@ -527,7 +499,7 @@
 
     <div class="whatsapp-container">
         <a href="https://wa.me/9647872840590" target="_blank" class="whatsapp-btn wa-trigger-link" aria-label="WhatsApp">
-            <div class="wa-icon-gold"></div>
+            <img src="/images/whatsapp-64.png" alt="WhatsApp">
         </a>
     </div>
 
