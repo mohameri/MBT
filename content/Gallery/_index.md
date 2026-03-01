@@ -80,35 +80,40 @@ draft = false
     }
 
     /* =========================================
-       تخصيص الهاتف المحمول (تصغير قسري وجذري)
+       تخصيص الهاتف المحمول (تصغير وتقليل شفافية البوكس)
        ========================================= */
     @media (max-width: 768px) {
         .gallery-portal { padding: 20px 15px; }
         .cinematic-grid { gap: 20px; }
         .cinematic-card { height: 200px; border-radius: 20px; }
         
-        /* التصغير الإجباري هنا */
         .card-title { 
-            font-size: 15px !important; /* حجم صغير ومناسب جداً للموبايل */
-            padding: 10px 22px !important; /* بوكس صغير وملموم */
-            white-space: nowrap !important; /* منع سطرين نهائياً */
-            max-width: 85% !important; /* منع الخروج عن الشاشة */
+            font-size: 15px !important; 
+            padding: 10px 22px !important; 
+            white-space: nowrap !important; 
+            max-width: 85% !important; 
             border-width: 1px !important;
+            
+            /* --- التعديل الجديد: تقليل الشفافية والبلور --- */
+            background: rgba(225, 196, 67, 0.05) !important; /* كان 0.1 وصار أشف */
+            backdrop-filter: blur(5px) !important; /* بلور أنعم */
+            -webkit-backdrop-filter: blur(5px) !important;
+            border-color: rgba(225, 196, 67, 0.15) !important; /* إطار أهدأ */
         }
         .reveal-arrow { font-size: 1.5rem !important; opacity: 0.8; transform: translateX(0); bottom: 12px; left: 15px; }
 
-        /* التأثير السحري عند مرور الكارت بمنتصف الشاشة */
+        /* التأثير السحري عند مرور الكارت بمنتصف الشاشة (إضاءة أنعم) */
         .cinematic-card.in-focus {
-            border-color: rgba(225, 196, 67, 0.4) !important;
+            border-color: rgba(225, 196, 67, 0.3) !important;
         }
         .cinematic-card.in-focus .cinematic-video {
             filter: brightness(0.8) contrast(1.1) !important;
         }
         .cinematic-card.in-focus .card-title {
-            background: rgba(225, 196, 67, 0.2) !important;
-            border-color: rgba(225, 196, 67, 0.8) !important;
+            background: rgba(225, 196, 67, 0.15) !important; /* كان 0.2 */
+            border-color: rgba(225, 196, 67, 0.5) !important; /* كان 0.8 */
             color: #e1c443 !important;
-            box-shadow: 0 5px 20px rgba(225, 196, 67, 0.3) !important;
+            box-shadow: 0 5px 15px rgba(225, 196, 67, 0.2) !important; /* ظل أخف */
             transform: scale(1.02) !important;
         }
     }
