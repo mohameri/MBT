@@ -17,9 +17,23 @@ draft = false
         text-decoration: none; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.05); 
         box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); display: block; 
     }
-    .cinematic-card:hover { 
-        transform: translateY(-8px); border-color: rgba(225, 196, 67, 0.4); 
-        box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(225, 196, 67, 0.1); 
+    /* تأثير الهوفر الأساسي للشاشات الكبيرة فقط */
+    @media (min-width: 769px) {
+        .cinematic-card:hover { 
+            transform: translateY(-8px); border-color: rgba(225, 196, 67, 0.4); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(225, 196, 67, 0.1); 
+        }
+        .cinematic-card:hover .card-title {
+            animation: pulseGoldBox 1.5s infinite ease-in-out;
+        }
+        .cinematic-card:active .card-title {
+            animation: none;
+            color: #1a2855; 
+            background: #e1c443; 
+            border-color: #e1c443;
+            transform: scale(0.95);
+        }
+        .cinematic-card:hover .reveal-arrow { opacity: 1; transform: translateX(0); }
     }
 
     /* 3. Video */
@@ -29,7 +43,7 @@ draft = false
     }
     .cinematic-card:hover .cinematic-video { transform: scale(1.05); filter: brightness(0.8) contrast(1.1); }
 
-    /* 4. Overlay - هنا سر السنترة المثالية (Flexbox) */
+    /* 4. Overlay */
     .cinematic-overlay { 
         position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
         background: rgba(0, 0, 0, 0.3); transition: background 0.5s ease; 
@@ -37,7 +51,7 @@ draft = false
     }
     .cinematic-card:hover .cinematic-overlay { background: rgba(0, 0, 0, 0.5); }
 
-    /* 5. Title in a Glass Box */
+    /* 5. Title in a Glass Box (مربع الكلمة الزجاجي) */
     .card-title {
         /* البوكس الزجاجي الذهبي */
         background: rgba(225, 196, 67, 0.1);
@@ -64,57 +78,40 @@ draft = false
 
     /* 6. Pulsation Animation for Box & Text */
     @keyframes pulseGoldBox {
-        0% { 
-            color: #ffffff; 
-            background: rgba(225, 196, 67, 0.1); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: rgba(225, 196, 67, 0.3);
-        }
-        50% { 
-            color: #e1c443; 
-            background: rgba(225, 196, 67, 0.2); 
-            box-shadow: 0 10px 40px rgba(225, 196, 67, 0.4);
-            border-color: rgba(225, 196, 67, 0.8);
-        }
-        100% { 
-            color: #ffffff; 
-            background: rgba(225, 196, 67, 0.1); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: rgba(225, 196, 67, 0.3);
-        }
-    }
-
-    .cinematic-card:hover .card-title {
-        animation: pulseGoldBox 1.5s infinite ease-in-out;
-    }
-    
-    /* ومضة قوية وحركة زر عند النقر */
-    .cinematic-card:active .card-title {
-        animation: none;
-        color: #1a2855; 
-        background: #e1c443; 
-        border-color: #e1c443;
-        transform: scale(0.95); /* تأثير الضغطة بدون التأثير على التوسيط */
+        0% { color: #ffffff; background: rgba(225, 196, 67, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(225, 196, 67, 0.3); }
+        50% { color: #e1c443; background: rgba(225, 196, 67, 0.2); box-shadow: 0 10px 40px rgba(225, 196, 67, 0.4); border-color: rgba(225, 196, 67, 0.8); }
+        100% { color: #ffffff; background: rgba(225, 196, 67, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(225, 196, 67, 0.3); }
     }
 
     /* 7. Arrow Position */
     .reveal-arrow {
         color: #e1c443; font-size: 2.8rem; font-weight: bold; text-shadow: 0 0 15px rgba(225, 196, 67, 0.4);
         opacity: 0; transform: translateX(30px); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        position: absolute; bottom: 30px; left: 30px; /* السهم محمي بمكانه */
+        position: absolute; bottom: 30px; left: 30px;
     }
-    .cinematic-card:hover .reveal-arrow { opacity: 1; transform: translateX(0); }
 
-    /* 8. Mobile Customization */
+    /* =========================================
+       8. Mobile Customization (تعديلات الهاتف الدقيقة)
+       ========================================= */
     @media (max-width: 768px) {
         .gallery-portal { padding: 20px 15px; }
-        .cinematic-card { height: 280px; border-radius: 25px; }
-        .card-title { 
-            font-size: 1.4rem; 
-            padding: 12px 30px; 
-            white-space: nowrap; 
+        .cinematic-card {
+            height: 220px; /* Wider rectangular format */
+            border-radius: 25px;
+        }
+        .card-title {
+            font-size: 1.2rem; /* Reduced font size to prevent overflow */
+            padding: 10px 20px; /* Reduced padding for mobile */
+            max-width: 95%; /* More generous max-width */
+            white-space: nowrap; /* Keep it on one line if possible, but reduced size helps */
         }
         .reveal-arrow { font-size: 2rem; opacity: 0.6; transform: translateX(0); bottom: 15px; left: 15px; }
+
+        /* Subtle style for when a card passes through the central target area */
+        .cinematic-card.in-focus {
+            border-color: rgba(225, 196, 67, 0.6) !important; /* Brighter gold border */
+            box-shadow: 0 5px 15px rgba(225, 196, 67, 0.1) !important; /* Subtle gold shadow */
+        }
     }
 </style>
 
@@ -126,7 +123,7 @@ draft = false
 <source data-src="/videos/45.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">فيديوهات وموشن</h2>
+<h2 class="card-title">فيديوهات و موشن</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
@@ -136,7 +133,7 @@ draft = false
 <source data-src="/videos/778.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">شعارات وهويات</h2>
+<h2 class="card-title">شعارات و هويات</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
@@ -146,7 +143,7 @@ draft = false
 <source data-src="/videos/911.mp4" type="video/mp4">
 </video>
 <div class="cinematic-overlay">
-<h2 class="card-title">مطبوعات ومرئيات</h2>
+<h2 class="card-title">مطبوعات و مرئيات</h2>
 <div class="reveal-arrow">←</div>
 </div>
 </a>
@@ -156,6 +153,7 @@ draft = false
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    // Existing lazy-video script
     const lazyVideos = document.querySelectorAll('.lazy-video');
     if ('IntersectionObserver' in window) {
         const videoObserver = new IntersectionObserver((entries) => {
@@ -178,6 +176,54 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // New script for mobile highlighting on pass
+    const galleryCards = document.querySelectorAll('.cinematic-card');
+    const highlightArea = document.querySelector('.cinematic-grid'); // Highlight central card relative to this container
+
+    // Function to calculate IntersectionObserver threshold based on screen height
+    function getMobileThreshold() {
+        return window.innerHeight * 0.4; // Target central 40% of screen
+    }
+
+    if ('IntersectionObserver' in window) {
+        // Highlighting observer
+        const highlightObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Find the first and last card to handle edge cases smoothly
+                    const cards = Array.from(galleryCards);
+                    const isFirstCard = entry.target === cards[0];
+                    const isLastCard = entry.target === cards[cards.length - 1];
+
+                    // Check if card is roughly in the center of the viewport
+                    const rect = entry.target.getBoundingClientRect();
+                    const viewHeight = window.innerHeight;
+                    const centralTarget = getMobileThreshold();
+                    const cardCenterY = rect.top + rect.height / 2;
+
+                    // Clear previous highlights
+                    galleryCards.forEach(c => c.classList.remove('in-focus'));
+
+                    // Add highlight to central card
+                    if (isFirstCard || isLastCard || (cardCenterY > centralTarget && cardCenterY < (viewHeight - centralTarget))) {
+                        entry.target.classList.add('in-focus');
+                    }
+
+                }
+            });
+        }, {
+            root: null, // Use viewport
+            rootMargin: `-${getMobileThreshold()}px 0px -${getMobileThreshold()}px 0px`, // Inward margin creates target area
+            threshold: 0 // Trigger on any entry/exit
+        });
+
+        // Start observing cards for highlighting
+        galleryCards.forEach(card => {
+            highlightObserver.observe(card);
+        });
+    }
+
+    // Existing contextmenu protection
     const protectedCards = document.querySelectorAll('.protected-card');
     protectedCards.forEach(card => {
         card.addEventListener('contextmenu', function(e) {
