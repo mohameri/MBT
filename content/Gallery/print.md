@@ -179,23 +179,18 @@ draft = false
 
     @media (max-width: 992px) { .mbt-print-grid { column-count: 2; } }
     @media (max-width: 768px) {
-    .page-header h1, 
-    .entry-header h1 {
-        /* 1. تصغير ديناميكي يتكيف مع عرض الشاشة بالضبط */
-        font-size: clamp(1.1rem, 5vw, 1.5rem) !important; 
-        
-        /* 2. السر: منع نزول النص لسطر ثاني نهائياً */
-        white-space: nowrap !important; 
-        
-        /* 3. ترتيب المسافات ليكون الشكل مرتب */
-        line-height: 1.2 !important;
-        margin-bottom: 5px !important;
-        
-        /* 4. حماية إضافية: لو الشاشة صغيرة جداً، يضع (...) بدل ما يخرب التصميم */
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        /* استهداف كل الكلاسات الممكنة للعناوين في PaperMod */
+        .page-header h1, 
+        .entry-header h1,
+        .post-title {
+            font-size: 1.2rem !important; /* حجم الخط الصغير */
+            white-space: nowrap !important; /* إجبار النص على البقاء في سطر واحد */
+            overflow: hidden !important; /* إخفاء أي جزء يخرج عن الشاشة */
+            text-overflow: ellipsis !important; /* وضع ثلاث نقاط (...) إذا كانت شاشة الهاتف صغيرة جداً */
+            line-height: 1.3 !important;
+            margin-bottom: 10px !important;
+        }
     }
-}
 </style>
 
 <div class="print-gallery-container">
