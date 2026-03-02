@@ -205,7 +205,7 @@ window.openVideoModal = (url) => {
     lbVideo.src = url;
     lightbox.classList.add('active');
     showControlsBar();
-    lbVideo.play().then(() => playBtn.innerText = "⏸").catch(() => playBtn.innerText = "▶");
+    lbVideo.play().then(() => playBtn.innerHTML = '<img src="/icons/pause.svg" class="mbt-icon" alt="pause">').catch(() => playBtn.innerHTML = '<img src="/icons/play.svg" class="mbt-icon" alt="play">');
 };
 
 window.closeVideoModal = () => {
