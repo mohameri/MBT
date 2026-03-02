@@ -198,10 +198,14 @@ window.handleVideoClick = () => {
 
 window.openVideoModal = (url) => {
     if (!lightbox || !lbVideo) return;
+    
+    // --> السطر الجديد: إيقاف كل المصغرات في الخلفية لتفريغ المعالج تماماً للهاتف
+    document.querySelectorAll('.thumb-video').forEach(v => v.pause());
+    
     lbVideo.src = url;
     lightbox.classList.add('active');
     showControlsBar();
-    lbVideo.play().then(() => playBtn.innerHTML = '<img src="/icons/pause.svg" class="mbt-icon" alt="pause">').catch(() => playBtn.innerHTML = '<img src="/icons/play.svg" class="mbt-icon" alt="play">');
+    lbVideo.play().then(() => playBtn.innerText = "⏸").catch(() => playBtn.innerText = "▶");
 };
 
 window.closeVideoModal = () => {
