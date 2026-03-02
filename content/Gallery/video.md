@@ -78,7 +78,6 @@ draft = false
 <script>
 let controlsTimeout;
 
-// دالة لإظهار الأزرار وبدء عداد الاختفاء (3 ثواني)
 window.showControlsBar = function() {
     const bar = document.getElementById('controls-bar');
     if(bar) {
@@ -90,15 +89,11 @@ window.showControlsBar = function() {
     }
 };
 
-// التعامل مع النقر على الفيديو (الدرع الواقي)
 window.handleVideoClick = function() {
     const bar = document.getElementById('controls-bar');
-    
-    // إذا كانت الأزرار مخفية، أظهرها فقط
     if (bar && bar.style.opacity === '0') {
         window.showControlsBar();
     } else {
-        // إذا كانت ظاهرة مسبقاً، أوقف/شغل الفيديو وجدد العداد
         window.toggleVideoPlay();
         window.showControlsBar();
     }
@@ -112,7 +107,7 @@ window.openVideoModal = function(highResUrl) {
     if (lightbox && lbVideo) {
         lbVideo.src = highResUrl;
         lightbox.classList.add('active');
-        window.showControlsBar(); // إظهار الأزرار فور فتح النافذة
+        window.showControlsBar(); 
         
         lbVideo.play().then(() => {
             if(playBtn) playBtn.innerText = "⏸";
@@ -151,7 +146,7 @@ window.toggleVideoPlay = function() {
             if(playBtn) playBtn.innerText = "▶";
         }
     }
-    window.showControlsBar(); // إبقاء الأزرار ظاهرة عند استخدامها
+    window.showControlsBar();
 };
 
 window.toggleVideoMute = function() {
@@ -162,7 +157,7 @@ window.toggleVideoMute = function() {
         lbVideo.muted = !lbVideo.muted;
         muteBtn.innerText = lbVideo.muted ? "🔇" : "🔊";
     }
-    window.showControlsBar(); // إبقاء الأزرار ظاهرة عند استخدامها
+    window.showControlsBar(); 
 };
 
 window.restartVideo = function() {
@@ -174,26 +169,29 @@ window.restartVideo = function() {
         lbVideo.play();
         if(playBtn) playBtn.innerText = "⏸";
     }
-    window.showControlsBar(); // إبقاء الأزرار ظاهرة عند استخدامها
+    window.showControlsBar(); 
 };
 
 function buildGallery() {
     const gridContainer = document.getElementById('mbt-dynamic-grid');
     if (!gridContainer || gridContainer.innerHTML.trim() !== "") return; 
     
+    // ==========================================
+    // ضع ملفات الفيديو هنا
+    // ==========================================
     const myVideos = [
         { file: "55756868.mp4", type: "v" },
-		{ file: "454543545h78435.mp4", type: "v" },
+        { file: "454543545h78435.mp4", type: "v" },
         { file: "2134535465.mp4", type: "v" },
-		{ file: "6456456.mp4", type: "h" },
-		{ file: "5435.mp4", type: "h" },
-		{ file: "٣٧٣٧٨٣.mp4", type: "v" },
-		{ file: "798685754.mp4", type: "v" },
-		{ file: "6876785785.mp4", type: "h" },
-		{ file: "23423737878543.mp4", type: "v" },
-		{ file: "54345435435.mp4", type: "v" },
-		{ file: "697764.mp4", type: "v" },
-		{ file: "444567.mp4", type: "h" },
+        { file: "6456456.mp4", type: "h" },
+        { file: "5435.mp4", type: "h" },
+        { file: "٣٧٣٧٨٣.mp4", type: "v" },
+        { file: "798685754.mp4", type: "v" },
+        { file: "6876785785.mp4", type: "h" },
+        { file: "23423737878543.mp4", type: "v" },
+        { file: "54345435435.mp4", type: "v" },
+        { file: "697764.mp4", type: "v" },
+        { file: "444567.mp4", type: "h" },
     ];
     
     const r2_base = "https://media.mbt.ad/";
@@ -226,7 +224,13 @@ function buildGallery() {
         item.ondragstart = e => e.preventDefault();
     });
 
+    // ==========================================
+    // الآلية الجديدة للتحميل الذكي والتشغيل باللمس/المرور
+    // ==========================================
     const lazyThumbs = document.querySelectorAll('.lazy-thumb');
+    let currentlyPlayingThumb = null; 
+
+    // 1. مراقب التحميل (يحمل أول فريم كصورة ثابتة فقط لتوفير البيانات)
     if ('IntersectionObserver' in window) {
         const thumbObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -235,17 +239,58 @@ function buildGallery() {
                     const source = video.querySelector('source');
                     if (source && !source.src) {
                         source.src = source.dataset.src;
-                        video.load();
+                        video.load(); 
                     }
-                    video.play().catch(() => {});
                 } else {
                     video.pause();
+                    if (currentlyPlayingThumb === video) currentlyPlayingThumb = null;
                 }
             });
         }, { threshold: 0.1 });
         
         lazyThumbs.forEach(video => thumbObserver.observe(video));
     }
+
+    // 2. أحداث التشغيل (Hover & Long Press)
+    const thumbCards = document.querySelectorAll('.video-thumb-card');
+    let pressTimer;
+
+    thumbCards.forEach(card => {
+        const video = card.querySelector('.thumb-video');
+
+        const startPreview = () => {
+            // إيقاف أي فيديو آخر يعمل حالياً
+            if (currentlyPlayingThumb && currentlyPlayingThumb !== video) {
+                currentlyPlayingThumb.pause();
+            }
+            video.play().catch(() => {});
+            currentlyPlayingThumb = video;
+        };
+
+        const stopPreview = () => {
+            video.pause();
+        };
+
+        // أحداث الكمبيوتر (المرور بالماوس)
+        card.addEventListener('mouseenter', startPreview);
+        card.addEventListener('mouseleave', stopPreview);
+
+        // أحداث الموبايل (لمسة مطولة)
+        card.addEventListener('touchstart', () => {
+            // يبدأ التشغيل بعد 300 جزء من الثانية من وضع الإصبع (لمسة مطولة)
+            pressTimer = setTimeout(startPreview, 300);
+        }, { passive: true });
+
+        card.addEventListener('touchend', () => {
+            clearTimeout(pressTimer);
+            stopPreview();
+        });
+
+        card.addEventListener('touchmove', () => {
+            clearTimeout(pressTimer);
+            stopPreview(); // إيقاف التشغيل إذا سحب إصبعه للتمرير (Scroll)
+        });
+    });
 }
 
 buildGallery();
