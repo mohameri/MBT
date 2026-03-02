@@ -10,7 +10,7 @@ draft = false
     @media (max-width: 768px) {
         .page-header h1, 
         .entry-header h1 {
-            font-size: 1.5rem !important; /* حجم مخصص لهذا القسم */
+            font-size: 1.2rem !important; /* حجم مخصص لهذا القسم */
             line-height: 1.3 !important;
         }
     }

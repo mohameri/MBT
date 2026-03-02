@@ -10,7 +10,7 @@ draft = false
     @media (max-width: 768px) {
         .page-header h1, 
         .entry-header h1 {
-            font-size: 1.6rem !important; /* يمكنك تكبير أو تصغير هذا الرقم (مثلاً 1.4 أو 1.8) */
+            font-size: 1.2rem !important; /* يمكنك تكبير أو تصغير هذا الرقم (مثلاً 1.4 أو 1.8) */
             line-height: 1.3 !important;
         }
     }
