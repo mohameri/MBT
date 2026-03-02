@@ -6,7 +6,7 @@ draft = false
 +++
 
 <style>
-.page-description, .post-description { display: none !important; }
+.page-description, .post-description, .post-entry, .pagination { display: none !important; }
 .gallery-portal { padding: 40px 20px; max-width: 1000px; margin: 0 auto; direction: rtl; font-family: inherit; }
 .cinematic-grid { display: flex; flex-direction: column; gap: 40px; }
 

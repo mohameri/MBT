@@ -179,12 +179,23 @@ draft = false
 
     @media (max-width: 992px) { .mbt-logo-grid { column-count: 2; } }
     @media (max-width: 768px) {
-        .mbt-logo-grid { column-count: 2; column-gap: 10px; }
-        .lb-nav { width: 40px; height: 40px; font-size: 1rem; }
-        .right-nav { right: 10px; }
-        .left-nav { left: 10px; }
-        .lb-top-bar { padding: 15px; }
+    .page-header h1, 
+    .entry-header h1 {
+        /* 1. تصغير ديناميكي يتكيف مع عرض الشاشة بالضبط */
+        font-size: clamp(1.1rem, 5vw, 1.5rem) !important; 
+        
+        /* 2. السر: منع نزول النص لسطر ثاني نهائياً */
+        white-space: nowrap !important; 
+        
+        /* 3. ترتيب المسافات ليكون الشكل مرتب */
+        line-height: 1.2 !important;
+        margin-bottom: 5px !important;
+        
+        /* 4. حماية إضافية: لو الشاشة صغيرة جداً، يضع (...) بدل ما يخرب التصميم */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
+}
 </style>
 
 <div class="logo-gallery-container">
