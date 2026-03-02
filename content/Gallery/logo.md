@@ -6,6 +6,14 @@ draft = false
 +++
 
 <style>
+/* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض الشعارات */
+    @media (max-width: 768px) {
+        .page-header h1, 
+        .entry-header h1 {
+            font-size: 1.6rem !important; /* يمكنك تكبير أو تصغير هذا الرقم (مثلاً 1.4 أو 1.8) */
+            line-height: 1.3 !important;
+        }
+    }
     /* =========================================
        1. الإعدادات الأساسية وشبكة Masonry
        ========================================= */
@@ -171,7 +179,7 @@ draft = false
 
     @media (max-width: 992px) { .mbt-logo-grid { column-count: 2; } }
     @media (max-width: 768px) {
-        .mbt-logo-grid { column-count: 1; }
+        .mbt-logo-grid { column-count: 2; column-gap: 10px; }
         .lb-nav { width: 40px; height: 40px; font-size: 1rem; }
         .right-nav { right: 10px; }
         .left-nav { left: 10px; }

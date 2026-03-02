@@ -6,6 +6,14 @@ draft = false
 +++
 
 <style>
+/* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض الفيديوهات */
+    @media (max-width: 768px) {
+        .page-header h1, 
+        .entry-header h1 {
+            font-size: 1.7rem !important; /* حجم مخصص لهذا القسم */
+            line-height: 1.3 !important;
+        }
+    }
     .page-description, .post-description { display: none !important; }
     .video-gallery-container { padding: 40px 20px; max-width: 1300px; margin: 0 auto; direction: rtl; }
     
@@ -43,7 +51,7 @@ draft = false
     
     @media (max-width: 992px) { .mbt-video-grid { column-count: 2; } }
     @media (max-width: 576px) { 
-        .mbt-video-grid { column-count: 1; } 
+        .mbt-video-grid { column-count: 2; column-gap: 10px; } 
         .custom-controls-bar { padding: 15px; gap: 15px; } 
         .control-btn { width: 45px; height: 45px; font-size: 1.3rem; }
         .lightbox-close { top: 15px; right: 15px; } 
