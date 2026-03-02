@@ -69,8 +69,10 @@ draft = false
         <video id="lb-video-player" class="lightbox-video" controlslist="nodownload noremoteplayback nofullscreen" disablepictureinpicture playsinline></video>
         <div class="protection-shield" id="video-shield" onclick="handleVideoClick()"></div>
         <div class="custom-controls-bar" id="controls-bar">
-            <button class="control-btn" onclick="restartVideo()" title="إعادة من البداية">🔄</button>
-            <button class="control-btn" id="custom-play-btn" onclick="toggleVideoPlay()" title="إيقاف / تشغيل">⏸</button>
+            <button class="control-btn" onclick="restartVideo()" title="إعادة من البداية"><img src="/icons/restart.svg" class="mbt-icon"></button>
+            <button class="control-btn" id="custom-play-btn" onclick="toggleVideoPlay()" title="إيقاف / تشغيل">
+    <img src="/icons/pause.svg" class="mbt-icon" alt="pause">
+</button>
             <button class="control-btn" id="custom-mute-btn" onclick="toggleVideoMute()" title="الصوت">🔊</button>
         </div>
     </div>
@@ -128,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (currentlyPlaying === video) currentlyPlaying = null;
                 }
             });
-        }, { rootMargin: "100px", threshold: 0.1 }); // إضافة rootMargin للتحميل المسبق السلس
+        }, { rootMargin: "100px", threshold: 0.1 }); 
         
         lazyThumbs.forEach(v => thumbObserver.observe(v));
     }
@@ -183,10 +185,13 @@ window.showControlsBar = () => {
 };
 
 window.handleVideoClick = () => {
-    if (controlsBar && controlsBar.style.opacity === '0') {
-        showControlsBar();
+    if (!controlsBar) return;
+    if (controlsBar.style.opacity === '1') {
+        // إذا كانت الأزرار ظاهرة، يتم إخفاؤها فوراً وإلغاء المؤقت
+        controlsBar.style.opacity = '0';
+        clearTimeout(controlsTimeout);
     } else {
-        toggleVideoPlay();
+        // إذا كانت مخفية، يتم إظهارها وتشغيل مؤقت الاختفاء
         showControlsBar();
     }
 };
@@ -196,7 +201,7 @@ window.openVideoModal = (url) => {
     lbVideo.src = url;
     lightbox.classList.add('active');
     showControlsBar();
-    lbVideo.play().then(() => playBtn.innerText = "⏸").catch(() => playBtn.innerText = "▶");
+    lbVideo.play().then(() => playBtn.innerHTML = '<img src="/icons/pause.svg" class="mbt-icon" alt="pause">').catch(() => playBtn.innerHTML = '<img src="/icons/play.svg" class="mbt-icon" alt="play">');
 };
 
 window.closeVideoModal = () => {
@@ -211,7 +216,11 @@ window.closeVideoModal = () => {
 window.toggleVideoPlay = () => {
     if (!lbVideo) return;
     lbVideo.paused ? lbVideo.play() : lbVideo.pause();
-    if(playBtn) playBtn.innerText = lbVideo.paused ? "▶" : "⏸";
+    if(playBtn) {
+        // تغيير مسار الصورة بناءً على حالة الفيديو
+        const iconPath = lbVideo.paused ? "/icons/play.svg" : "/icons/pause.svg";
+        playBtn.innerHTML = `<img src="${iconPath}" class="mbt-icon">`;
+    }
     showControlsBar();
 };
 
@@ -226,7 +235,7 @@ window.restartVideo = () => {
     if (!lbVideo) return;
     lbVideo.currentTime = 0;
     lbVideo.play();
-    if(playBtn) playBtn.innerText = "⏸";
+    if(playBtn) playBtn.innerHTML = '<img src="/icons/pause.svg" class="mbt-icon" alt="pause">';
     showControlsBar();
 };
 </script>

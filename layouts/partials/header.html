@@ -394,6 +394,18 @@
     @media screen and (min-width: 769px) {
         .mobile-bottom-nav { display: none !important; }
     }
+	.mbt-icon {
+    width: 1.3em;  /* يأخذ حجمه من حجم الخط الحالي */
+    height: 1.3em;
+    vertical-align: middle; /* لموازاته مع النص */
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* تأثير تحويم اختياري للأيقونات */
+a:hover .mbt-icon, .glass-card:hover .mbt-icon {
+    transform: scale(1.1);
+}
     </style>
 
     <nav class="nav">
