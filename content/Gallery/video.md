@@ -6,15 +6,14 @@ draft = false
 +++
 
 <style>
-    /* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض الفيديوهات */
+/* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض الفيديوهات */
     @media (max-width: 768px) {
         .page-header h1, 
         .entry-header h1 {
-            font-size: 1.2rem !important; 
+            font-size: 1.2rem !important; /* حجم مخصص لهذا القسم */
             line-height: 1.3 !important;
         }
     }
-
     .page-description, .post-description { display: none !important; }
     .video-gallery-container { padding: 40px 20px; max-width: 1300px; margin: 0 auto; direction: rtl; }
     
@@ -36,39 +35,26 @@ draft = false
     .mbt-lightbox { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(5, 5, 5, 0.98); z-index: 999999; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease; }
     .mbt-lightbox.active { display: flex; opacity: 1; }
     
-    .lightbox-close { position: absolute; top: 25px; right: 25px; width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; transition: all 0.3s; }
+    .lightbox-close { position: absolute; top: 25px; right: 25px; width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: all 0.3s; }
     .lightbox-close:hover { background: #e1c443; color: #000; transform: rotate(90deg); }
     .lightbox-content-wrapper { width: 95%; max-width: 1200px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.8); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 10px; overflow: hidden; background: transparent; }
     .mbt-lightbox.active .lightbox-content-wrapper { transform: scale(1); }
     .lightbox-video { width: 100%; max-height: 85vh; display: block; object-fit: contain; }
     .protection-shield { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 2; cursor: pointer; }
     
+    /* تعديل شريط الأزرار لإلغاء تأثير الهوفر وتفعيل الاختفاء الذكي */
     .custom-controls-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 25px; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); z-index: 3; display: flex; gap: 20px; justify-content: center; opacity: 0; transition: opacity 0.4s ease; }
+    
+    /* تصميم الأزرار الدائرية للأيقونات */
     .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); transition: all 0.3s; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; padding: 0; }
     .control-btn:hover { background: #e1c443; color: #000; border-color: #e1c443; transform: scale(1.1); }
     
-    /* ستايل أسهم التنقل الجديدة */
-    .lb-nav { 
-        position: absolute; top: 50%; transform: translateY(-50%); 
-        background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; 
-        width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-        font-size: 1.2rem; cursor: pointer; z-index: 100; transition: all 0.3s; 
-        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-        direction: ltr !important;
-    }
-    .lb-nav:hover { background: #e1c443; color: #000; border-color: #e1c443; transform: translateY(-50%) scale(1.1); }
-    .right-nav { right: 20px; }
-    .left-nav { left: 20px; }
-
     @media (max-width: 992px) { .mbt-video-grid { column-count: 2; } }
     @media (max-width: 576px) { 
-        .mbt-video-grid { column-count: 1; } 
+        .mbt-video-grid { column-count: 2; column-gap: 10px; } 
         .custom-controls-bar { padding: 15px; gap: 15px; } 
         .control-btn { width: 45px; height: 45px; font-size: 1.3rem; }
         .lightbox-close { top: 15px; right: 15px; } 
-        .lb-nav { width: 40px; height: 40px; font-size: 1rem; }
-        .right-nav { right: 10px; }
-        .left-nav { left: 10px; }
     }
 </style>
 
@@ -76,11 +62,21 @@ draft = false
     <div class="mbt-video-grid" id="mbt-dynamic-grid"></div>
 </div>
 
-<div class="mbt-lightbox" id="main-lightbox"><div class="lightbox-close" onclick="window.closeVideoModal()">✕</div><button class="lb-nav right-nav" onclick="window.prevVideo(event)">&#10095;</button><button class="lb-nav left-nav" onclick="window.nextVideo(event)">&#10094;</button><div class="lightbox-content-wrapper"><video id="lb-video-player" class="lightbox-video" controlslist="nodownload noremoteplayback nofullscreen" disablepictureinpicture playsinline></video><div class="protection-shield" id="video-shield" onclick="window.handleVideoClick()"></div><div class="custom-controls-bar" id="controls-bar"><button class="control-btn" id="custom-restart-btn" onclick="window.restartVideo()" title="إعادة من البداية">🔄</button><button class="control-btn" id="custom-play-btn" onclick="window.toggleVideoPlay()" title="إيقاف / تشغيل">⏸</button><button class="control-btn" id="custom-mute-btn" onclick="window.toggleVideoMute()" title="الصوت">🔊</button></div></div></div>
+<div class="mbt-lightbox" id="main-lightbox">
+    <div class="lightbox-close" onclick="window.closeVideoModal()">✕</div>
+    <div class="lightbox-content-wrapper">
+        <video id="lb-video-player" class="lightbox-video" controlslist="nodownload noremoteplayback nofullscreen" disablepictureinpicture playsinline></video>
+        <div class="protection-shield" id="video-shield" onclick="window.handleVideoClick()"></div>
+        <div class="custom-controls-bar" id="controls-bar">
+            <button class="control-btn" id="custom-restart-btn" onclick="window.restartVideo()" title="إعادة من البداية">🔄</button>
+            <button class="control-btn" id="custom-play-btn" onclick="window.toggleVideoPlay()" title="إيقاف / تشغيل">⏸</button>
+            <button class="control-btn" id="custom-mute-btn" onclick="window.toggleVideoMute()" title="الصوت">🔊</button>
+        </div>
+    </div>
+</div>
+
 <script>
 let controlsTimeout;
-let globalVideoList = []; // لتخزين مسارات الفيديوهات للتنقل
-let currentVideoIndex = 0; // لحفظ رقم الفيديو الحالي
 
 window.showControlsBar = function() {
     const bar = document.getElementById('controls-bar');
@@ -103,17 +99,14 @@ window.handleVideoClick = function() {
     }
 };
 
-// تم التعديل: أصبح يستقبل "رقم" الفيديو بدل الرابط المباشر
-window.openVideoModal = function(index) {
-    currentVideoIndex = index;
+window.openVideoModal = function(highResUrl) {
     const lightbox = document.getElementById('main-lightbox');
     const lbVideo = document.getElementById('lb-video-player');
     const playBtn = document.getElementById('custom-play-btn');
 
-    if (lightbox && lbVideo && globalVideoList[currentVideoIndex]) {
-        lbVideo.src = globalVideoList[currentVideoIndex];
+    if (lightbox && lbVideo) {
+        lbVideo.src = highResUrl;
         lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden'; // منع سكرول الصفحة
         window.showControlsBar(); 
         
         lbVideo.play().then(() => {
@@ -124,27 +117,12 @@ window.openVideoModal = function(index) {
     }
 };
 
-// تشغيل الفيديو التالي
-window.nextVideo = function(e) {
-    if(e) e.stopPropagation();
-    currentVideoIndex = (currentVideoIndex + 1) % globalVideoList.length;
-    window.openVideoModal(currentVideoIndex);
-};
-
-// تشغيل الفيديو السابق
-window.prevVideo = function(e) {
-    if(e) e.stopPropagation();
-    currentVideoIndex = (currentVideoIndex - 1 + globalVideoList.length) % globalVideoList.length;
-    window.openVideoModal(currentVideoIndex);
-};
-
 window.closeVideoModal = function() {
     const lightbox = document.getElementById('main-lightbox');
     const lbVideo = document.getElementById('lb-video-player');
     
     if (lightbox) {
         lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto'; // إعادة سكرول الصفحة
         clearTimeout(controlsTimeout);
         setTimeout(() => {
             if(lbVideo) {
@@ -218,14 +196,12 @@ function buildGallery() {
     
     const r2_base = "https://media.mbt.ad/";
 
-    // تخزين الروابط في القائمة العالمية للاستخدام في أسهم التنقل
-    globalVideoList = myVideos.map(vid => r2_base + vid.file);
-
-    myVideos.forEach((vid, index) => {
+    myVideos.forEach(vid => {
+        const highResUrl = r2_base + vid.file;
         const lowResUrl = r2_base + vid.file.replace('.mp4', '-low.mp4');
         
         const cardHTML = `
-            <a href="javascript:void(0);" onclick="window.openVideoModal(${index})" class="video-thumb-card ${vid.type} protected-item">
+            <a href="javascript:void(0);" onclick="window.openVideoModal('${highResUrl}')" class="video-thumb-card ${vid.type} protected-item">
                 <video class="thumb-video lazy-thumb" loop muted playsinline preload="none">
                     <source data-src="${lowResUrl}" type="video/mp4">
                 </video>
@@ -238,7 +214,6 @@ function buildGallery() {
     const lightbox = document.getElementById('main-lightbox');
     if (lightbox) {
         lightbox.addEventListener('click', function(e) {
-            // الإغلاق عند الضغط على الخلفية فقط وليس على الأسهم أو الفيديو
             if (e.target === lightbox) window.closeVideoModal();
         });
     }
@@ -249,10 +224,13 @@ function buildGallery() {
         item.ondragstart = e => e.preventDefault();
     });
 
-    // آلية التحميل الذكي والتشغيل باللمس/المرور
+    // ==========================================
+    // الآلية الجديدة للتحميل الذكي والتشغيل باللمس/المرور
+    // ==========================================
     const lazyThumbs = document.querySelectorAll('.lazy-thumb');
     let currentlyPlayingThumb = null; 
 
+    // 1. مراقب التحميل (يحمل أول فريم كصورة ثابتة فقط لتوفير البيانات)
     if ('IntersectionObserver' in window) {
         const thumbObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -273,6 +251,7 @@ function buildGallery() {
         lazyThumbs.forEach(video => thumbObserver.observe(video));
     }
 
+    // 2. أحداث التشغيل (Hover & Long Press)
     const thumbCards = document.querySelectorAll('.video-thumb-card');
     let pressTimer;
 
@@ -280,6 +259,7 @@ function buildGallery() {
         const video = card.querySelector('.thumb-video');
 
         const startPreview = () => {
+            // إيقاف أي فيديو آخر يعمل حالياً
             if (currentlyPlayingThumb && currentlyPlayingThumb !== video) {
                 currentlyPlayingThumb.pause();
             }
@@ -291,10 +271,13 @@ function buildGallery() {
             video.pause();
         };
 
+        // أحداث الكمبيوتر (المرور بالماوس)
         card.addEventListener('mouseenter', startPreview);
         card.addEventListener('mouseleave', stopPreview);
 
+        // أحداث الموبايل (لمسة مطولة)
         card.addEventListener('touchstart', () => {
+            // يبدأ التشغيل بعد 5 جزء من الثانية من وضع الإصبع (لمسة مطولة)
             pressTimer = setTimeout(startPreview, 5);
         }, { passive: true });
 
@@ -305,7 +288,7 @@ function buildGallery() {
 
         card.addEventListener('touchmove', () => {
             clearTimeout(pressTimer);
-            stopPreview(); 
+            stopPreview(); // إيقاف التشغيل إذا سحب إصبعه للتمرير (Scroll)
         });
     });
 }
