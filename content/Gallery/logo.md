@@ -26,12 +26,19 @@ draft = false
         direction: rtl; 
     }
     
-    /* التعديل هنا: استخدام Grid للترتيب الأفقي */
+    /* التعديل الجذري لنظام الشبكة (Flexbox Columns) */
     .mbt-logo-grid { 
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
         gap: 25px;
-        align-items: center; /* لتوسيط الشعارات ذات الارتفاعات المختلفة */
+        align-items: flex-start; /* مهم جداً لعدم تمدد الأعمدة */
+    }
+    
+    .masonry-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: 100%;
     }
 
     /* =========================================
@@ -294,13 +301,21 @@ function applyTransform() {
 }
 
 // ==========================================
-// 3. بناء المعرض وإضافة تأثير الظهور الذكي
+// 3. بناء المعرض المطور (True Masonry Array)
 // ==========================================
 function buildLogoGallery() {
     const gridContainer = document.getElementById('mbt-logo-grid');
     if (!gridContainer || gridContainer.innerHTML.trim() !== "") return; 
 
-    // تم إزالة style="animation-delay" لحل مشكلة التأخير
+    // تحديد عدد الأعمدة بناءً على حجم الشاشة (3 للكمبيوتر، 2 للهاتف)
+    let columnCount = window.innerWidth <= 992 ? 2 : 3;
+
+    // إنشاء الأعمدة الوهمية داخل الحاوية
+    for (let i = 0; i < columnCount; i++) {
+        gridContainer.insertAdjacentHTML('beforeend', `<div class="masonry-column" id="masonry-col-${i}"></div>`);
+    }
+
+    // توزيع الصور على الأعمدة بالترتيب الأفقي
     imageList.forEach((fullImageUrl, index) => {
         const cardHTML = `
             <a href="javascript:void(0);" onclick="window.openImageModal(${index})" class="logo-thumb-card protected-item">
@@ -308,23 +323,28 @@ function buildLogoGallery() {
                 <div class="zoom-icon-glass"></div>
             </a>
         `;
-        gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+        
+        // معادلة التوزيع: الصورة 0 بالعمود 0، الصورة 1 بالعمود 1...
+        const targetColIndex = index % columnCount;
+        const targetCol = document.getElementById(`masonry-col-${targetColIndex}`);
+        targetCol.insertAdjacentHTML('beforeend', cardHTML);
     });
 
+    // حماية الصور من النقر الأيمن والسحب
     document.querySelectorAll('.protected-item, .lightbox-image').forEach(item => {
         item.oncontextmenu = e => e.preventDefault();
         item.ondragstart = e => e.preventDefault();
     });
 
-    // تفعيل تأثير الظهور عند الوصول للصور (Intersection Observer)
+    // تأثير الظهور الناعم عند النزول (Smooth Scroll)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
-                observer.unobserve(entry.target); // إيقاف المراقبة بعد ظهورها
+                observer.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.1 }); // تظهرเมื่อ يظهر 10% منها في الشاشة
+    }, { threshold: 0.1 }); 
 
     document.querySelectorAll('.logo-thumb-card').forEach(card => {
         observer.observe(card);
