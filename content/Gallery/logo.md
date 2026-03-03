@@ -6,16 +6,17 @@ draft = false
 +++
 
 <style>
-/* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض الشعارات */
+    /* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض الشعارات */
     @media (max-width: 768px) {
         .page-header h1, 
         .entry-header h1 {
-            font-size: 1.2rem !important; /* يمكنك تكبير أو تصغير هذا الرقم (مثلاً 1.4 أو 1.8) */
+            font-size: 1.2rem !important;
             line-height: 1.3 !important;
         }
     }
+    
     /* =========================================
-       1. الإعدادات الأساسية وشبكة Masonry
+       1. الإعدادات الأساسية وشبكة Grid بدلاً من Masonry
        ========================================= */
     .page-description, .post-description { display: none !important; }
     .logo-gallery-container { 
@@ -25,22 +26,18 @@ draft = false
         direction: rtl; 
     }
     
+    /* التعديل هنا: استخدام Grid للترتيب الأفقي */
     .mbt-logo-grid { 
-        column-count: 3; 
-        column-gap: 25px; 
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        align-items: center; /* لتوسيط الشعارات ذات الارتفاعات المختلفة */
     }
 
     /* =========================================
-       2. كروت الصور (مضبوطة 100% لصور PNG)
+       2. كروت الصور 
        ========================================= */
-    @keyframes cardAppear {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
     .logo-thumb-card { 
-        break-inside: avoid;
-        margin-bottom: 25px; 
         position: relative; 
         border-radius: 20px; 
         overflow: hidden; 
@@ -52,12 +49,19 @@ draft = false
         
         box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
         cursor: pointer; 
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
         display: block !important; 
         text-decoration: none; 
         
-        /* حركة الظهور المضمونة */
-        animation: cardAppear 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        /* التعديل هنا: إعدادات الحركة للظهور عند النزول */
+        opacity: 0;
+        transform: translateY(40px);
+        transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease-out, box-shadow 0.4s ease, background 0.4s ease;
+    }
+
+    /* الكلاس الذي سيتم إضافته عبر JS عند ظهور العنصر في الشاشة */
+    .logo-thumb-card.show {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .thumb-image { 
@@ -95,15 +99,15 @@ draft = false
     }
     
     @media (min-width: 769px) {
-        .logo-thumb-card:hover { 
+        .logo-thumb-card.show:hover { 
             transform: translateY(-8px); 
             box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 25px rgba(225, 196, 67, 0.15); 
             background: rgba(20, 20, 20, 0.4) !important; 
         }
-        .logo-thumb-card:hover .thumb-image { 
+        .logo-thumb-card.show:hover .thumb-image { 
             transform: scale(1.03); 
         }
-        .logo-thumb-card:hover .zoom-icon-glass { 
+        .logo-thumb-card.show:hover .zoom-icon-glass { 
             transform: translate(-50%, -50%) scale(1); 
             opacity: 1; 
         }
@@ -125,10 +129,7 @@ draft = false
         transition: opacity 0.4s ease; 
         overflow: hidden;
     }
-    .mbt-lightbox.active { 
-        display: flex; 
-        opacity: 1; 
-    }
+    .mbt-lightbox.active { display: flex; opacity: 1; }
 
     .lb-top-bar { 
         position: absolute; top: 0; left: 0; right: 0; padding: 20px 30px; 
@@ -153,7 +154,7 @@ draft = false
         width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
         font-size: 1.2rem; cursor: pointer; z-index: 100; transition: all 0.3s; 
         backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-        direction: ltr !important; /* هذا السطر يمنع انعكاس الأسهم */
+        direction: ltr !important; 
     }
     .lb-nav:hover { background: #e1c443; color: #000; border-color: #e1c443; transform: translateY(-50%) scale(1.1); }
     .right-nav { right: 20px; }
@@ -177,16 +178,17 @@ draft = false
     }
     .lightbox-image:active { cursor: grabbing; }
 
-    @media (max-width: 992px) { .mbt-logo-grid { column-count: 2; } }
+    /* التعديل هنا: تحويل Grid إلى عمودين في الهواتف */
+    @media (max-width: 992px) { .mbt-logo-grid { grid-template-columns: repeat(2, 1fr); } }
+    
     @media (max-width: 768px) {
-        /* استهداف كل الكلاسات الممكنة للعناوين في PaperMod */
         .page-header h1, 
         .entry-header h1,
         .post-title {
-            font-size: 1.2rem !important; /* حجم الخط الصغير */
-            white-space: nowrap !important; /* إجبار النص على البقاء في سطر واحد */
-            overflow: hidden !important; /* إخفاء أي جزء يخرج عن الشاشة */
-            text-overflow: ellipsis !important; /* وضع ثلاث نقاط (...) إذا كانت شاشة الهاتف صغيرة جداً */
+            font-size: 1.2rem !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
             line-height: 1.3 !important;
             margin-bottom: 10px !important;
         }
@@ -201,47 +203,22 @@ draft = false
 
 <script>
 // ==========================================
-// 1. قائمة الصور (استبدلها بأسماء صورك الحقيقية)
+// 1. قائمة الصور 
 // ==========================================
 const myLogos = [
-    "645654654.png",
-    "546456456456.png",
-	"56547567rr.png",
-    "6457568.png",
-	"46546546.png",
-    "شعار.png",
-	"6456546546uu.png",
-    "457657568uy.png",
-	"546546546.png",
-    "5454543545.png",
-	"75756567567.png",
-    "بروفايل.png",
-	"tyu676.png",
-    "64575756rtg.png",
-	"655765egrgr.png",
-    "57566bhh.png",
-	"535435.png",
-    "rgtry776.png",
-	"tytuyuii.png",
-    "5654654654.png",
-	"76768798hg١.png",
-    "4565.png",
-	"47575.png",
-    "5656567.png",
-	"4645757.png",
-    "6567686.png",
-	"575676uc.png",
-    "hyuyiuiui88.png",
-	"756767.png",
-    "576ght.png",
-	"45454.png",
-    "556uyu.png",
+    "645654654.png", "546456456456.png", "56547567rr.png", "6457568.png",
+    "46546546.png", "شعار.png", "6456546546uu.png", "457657568uy.png",
+    "546546546.png", "5454543545.png", "75756567567.png", "بروفايل.png",
+    "tyu676.png", "64575756rtg.png", "655765egrgr.png", "57566bhh.png",
+    "535435.png", "rgtry776.png", "tytuyuii.png", "5654654654.png",
+    "76768798hg١.png", "4565.png", "47575.png", "5656567.png",
+    "4645757.png", "6567686.png", "575676uc.png", "hyuyiuiui88.png",
+    "756767.png", "576ght.png", "45454.png", "556uyu.png",
 ];
 
 const r2_base = "https://media.mbt.ad/";
 const imageList = myLogos.map(file => r2_base + file);
 
-// متغيرات عامة (Global Variables)
 let currentIndex = 0;
 let slideshowInterval = null;
 let isPlaying = false;
@@ -290,9 +267,6 @@ window.prevImage = function(e) {
     window.resetZoom();
 };
 
-// ==========================================
-// 3. العرض التلقائي (Slideshow)
-// ==========================================
 window.toggleSlideshow = function(e) {
     if(e) e.stopPropagation();
     const btn = document.getElementById('lb-play');
@@ -307,9 +281,6 @@ window.toggleSlideshow = function(e) {
     }
 };
 
-// ==========================================
-// 4. نظام التكبير والسحب (Zoom & Pan)
-// ==========================================
 window.resetZoom = function(e) {
     if(e) e.stopPropagation();
     scale = 1; translateX = 0; translateY = 0;
@@ -323,15 +294,16 @@ function applyTransform() {
 }
 
 // ==========================================
-// 5. بناء المعرض وإضافة الصور
+// 3. بناء المعرض وإضافة تأثير الظهور الذكي
 // ==========================================
 function buildLogoGallery() {
     const gridContainer = document.getElementById('mbt-logo-grid');
     if (!gridContainer || gridContainer.innerHTML.trim() !== "") return; 
 
+    // تم إزالة style="animation-delay" لحل مشكلة التأخير
     imageList.forEach((fullImageUrl, index) => {
         const cardHTML = `
-            <a href="javascript:void(0);" onclick="window.openImageModal(${index})" class="logo-thumb-card protected-item" style="animation-delay: ${index * 0.1}s">
+            <a href="javascript:void(0);" onclick="window.openImageModal(${index})" class="logo-thumb-card protected-item">
                 <img class="thumb-image" src="${fullImageUrl}" loading="lazy" alt="MBT Logo Design">
                 <div class="zoom-icon-glass"></div>
             </a>
@@ -343,10 +315,24 @@ function buildLogoGallery() {
         item.oncontextmenu = e => e.preventDefault();
         item.ondragstart = e => e.preventDefault();
     });
+
+    // تفعيل تأثير الظهور عند الوصول للصور (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target); // إيقاف المراقبة بعد ظهورها
+            }
+        });
+    }, { threshold: 0.1 }); // تظهرเมื่อ يظهر 10% منها في الشاشة
+
+    document.querySelectorAll('.logo-thumb-card').forEach(card => {
+        observer.observe(card);
+    });
 }
 
 // ==========================================
-// 6. ربط أحداث التكبير والسحب
+// 4. ربط أحداث التكبير والسحب
 // ==========================================
 setTimeout(() => {
     const lbWrapper = document.getElementById('lb-wrapper');
@@ -354,7 +340,6 @@ setTimeout(() => {
     const lightbox = document.getElementById('image-lightbox');
 
     if(lbWrapper && lbImage) {
-        // الماوس (الكمبيوتر)
         lbWrapper.addEventListener('wheel', (e) => {
             e.preventDefault();
             const delta = e.deltaY < 0 ? 1 : -1;
@@ -381,7 +366,6 @@ setTimeout(() => {
         });
         window.addEventListener('mouseup', () => { isDragging = false; });
 
-        // اللمس (الهواتف)
         let initialDistance = null;
         let initialScale = 1;
 
@@ -424,7 +408,5 @@ setTimeout(() => {
     }
 }, 300);
 
-// تشغيل البناء
 buildLogoGallery();
-setTimeout(buildLogoGallery, 300);
 </script>
