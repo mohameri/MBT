@@ -222,7 +222,14 @@ draft = false
     ];
     
     const r2_base = "https://media.mbt.ad/";
-    const imageList = myPrints.map(file => r2_base + file);
+    
+    // التعديل هنا: إنشاء رابطين لكل صورة (نسخة مصغرة للمعرض، ونسخة أصلية للعارض)
+    const images = myPrints.map(file => {
+        const fullUrl = r2_base + file;
+        // استخدام خدمة wsrv.nl لإنشاء نسخة مصغرة بعرض 400 بكسل وصيغة WebP سريعة التحميل
+        const thumbUrl = `https://wsrv.nl/?url=${fullUrl}&w=400&output=webp&q=75`;
+        return { fullUrl, thumbUrl };
+    });
 
     let currentIndex = 0;
     let slideshowInterval = null;
@@ -233,25 +240,23 @@ draft = false
     let startX, startY, translateX = 0, translateY = 0;
     
     // ==========================================
-    // 2. بناء المعرض المطور (True Masonry Array)
+    // 2. بناء المعرض المطور 
     // ==========================================
     function buildPrintGallery() {
         const gridContainer = document.getElementById('mbt-print-grid');
         if (!gridContainer || gridContainer.innerHTML.trim() !== "") return; 
 
-        // تحديد عدد الأعمدة بناءً على حجم الشاشة
         let columnCount = window.innerWidth <= 992 ? 2 : 3;
 
-        // إنشاء الأعمدة الوهمية داخل الحاوية
         for (let i = 0; i < columnCount; i++) {
             gridContainer.insertAdjacentHTML('beforeend', `<div class="masonry-column" id="masonry-col-${i}"></div>`);
         }
 
-        // توزيع الصور على الأعمدة بالترتيب الأفقي
-        imageList.forEach((fullImageUrl, index) => {
+        // التعديل هنا: استخدام imgObj.thumbUrl للصور المصغرة في المعرض
+        images.forEach((imgObj, index) => {
             const cardHTML = `
                 <a href="javascript:void(0);" onclick="window.openImageModal(${index})" class="print-thumb-card protected-item">
-                    <img class="thumb-image" src="${fullImageUrl}" loading="lazy" alt="MBT Print Design">
+                    <img class="thumb-image" src="${imgObj.thumbUrl}" loading="lazy" alt="MBT Print Design">
                     <div class="zoom-icon-glass"></div>
                 </a>
             `;
@@ -260,13 +265,11 @@ draft = false
             targetCol.insertAdjacentHTML('beforeend', cardHTML);
         });
 
-        // حماية الصور
         document.querySelectorAll('.protected-item, .lightbox-image').forEach(item => {
             item.oncontextmenu = e => e.preventDefault();
             item.ondragstart = e => e.preventDefault();
         });
 
-        // تأثير الظهور الناعم عند النزول (Intersection Observer)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -282,12 +285,13 @@ draft = false
     }
 
     // ==========================================
-    // 3. دوال التحكم بالنافذة
+    // 3. دوال التحكم بالنافذة (استخدام الدقة العالية)
     // ==========================================
     window.openImageModal = function(index) {
         currentIndex = index;
         const lbImage = document.getElementById('lb-image-viewer');
-        if(lbImage) lbImage.src = imageList[currentIndex];
+        // التعديل هنا: استخدام الدقة العالية عند فتح الـ Lightbox
+        if(lbImage) lbImage.src = images[currentIndex].fullUrl;
         window.resetZoom();
         const lightbox = document.getElementById('image-lightbox');
         if(lightbox) lightbox.classList.add('active');
@@ -308,22 +312,24 @@ draft = false
 
     window.nextImage = function(e) {
         if(e) e.stopPropagation();
-        currentIndex = (currentIndex + 1) % imageList.length;
+        currentIndex = (currentIndex + 1) % images.length;
         const lbImage = document.getElementById('lb-image-viewer');
-        if(lbImage) lbImage.src = imageList[currentIndex];
+        // التعديل هنا: تحميل الدقة العالية للصورة التالية
+        if(lbImage) lbImage.src = images[currentIndex].fullUrl;
         window.resetZoom();
     };
 
     window.prevImage = function(e) {
         if(e) e.stopPropagation();
-        currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
         const lbImage = document.getElementById('lb-image-viewer');
-        if(lbImage) lbImage.src = imageList[currentIndex];
+        // التعديل هنا: تحميل الدقة العالية للصورة السابقة
+        if(lbImage) lbImage.src = images[currentIndex].fullUrl;
         window.resetZoom();
     };
 
     // ==========================================
-    // 4. العرض التلقائي (Slideshow)
+    // 4. العرض التلقائي و نظام السحب والتكبير 
     // ==========================================
     window.toggleSlideshow = function(e) {
         if(e) e.stopPropagation();
@@ -339,9 +345,6 @@ draft = false
         }
     };
 
-    // ==========================================
-    // 5. نظام التكبير والسحب (Zoom & Pan)
-    // ==========================================
     window.resetZoom = function(e) {
         if(e) e.stopPropagation();
         scale = 1; translateX = 0; translateY = 0;
@@ -353,7 +356,6 @@ draft = false
         if(lbImage) lbImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     }
 
-    // الانتظار حتى اكتمال تحميل عناصر الصفحة لربط الأحداث
     setTimeout(() => {
         const lbWrapper = document.getElementById('lb-wrapper');
         const lbImage = document.getElementById('lb-image-viewer');
@@ -428,7 +430,6 @@ draft = false
         }
     }, 100);
 
-    // تشغيل البناء
     buildPrintGallery();
 
 })();
