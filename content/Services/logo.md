@@ -215,6 +215,12 @@ background: #fff;
 
 .swipe-indicator {
 display: none;
+transition: opacity 0.4s ease; /* إضافة نعومة عند التلاشي */
+}
+
+.swipe-indicator.hidden-indicator {
+opacity: 0;
+pointer-events: none; /* لمنع التفاعل معها وهي مخفية */
 }
 
 @keyframes swipeHint {
@@ -224,7 +230,8 @@ display: none;
 
 @media (max-width: 768px) {
 .hero-title { font-size: 2.2rem; }
-.pricing-wrapper { margin-top: -50px; padding: 0; }
+/* رفعنا الكروت للأعلى بتغيير المارجن إلى -110 */
+.pricing-wrapper { margin-top: -110px; padding: 0; }
 .pricing-grid {
 display: flex;
 flex-wrap: nowrap;
@@ -309,3 +316,21 @@ animation: swipeHint 1.5s infinite ease-in-out;
 👈 اسحب لرؤية المزيد
 </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+const grid = document.querySelector(".pricing-grid");
+const indicator = document.querySelector(".swipe-indicator");
+if (grid && indicator) {
+grid.addEventListener("scroll", function() {
+// إذا تم السحب ولو بمسافة بسيطة، يتم إخفاء العبارة
+if (Math.abs(grid.scrollLeft) > 10) {
+indicator.classList.add("hidden-indicator");
+} else {
+// إعادة إظهارها إذا رجع للبداية
+indicator.classList.remove("hidden-indicator");
+}
+});
+}
+});
+</script>
