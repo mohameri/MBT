@@ -32,7 +32,6 @@ object-position: top center;
 z-index: 1;
 filter: brightness(0.4) contrast(1.1);
 pointer-events: none;
-/* تم تقليل التلاشي بشكل كبير ليؤثر على الحافة السفلية فقط */
 -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
@@ -147,9 +146,6 @@ background: rgba(0,0,0,0.4);
 border-color: rgba(225, 196, 67, 0.3);
 }
 
-/* =========================================
-   الحل الجذري للقائمة والنصوص المقطعة 
-   ========================================= */
 .features-list {
 list-style: none;
 padding: 0;
@@ -158,41 +154,25 @@ flex-grow: 1;
 }
 
 .features-list li {
-    color: #ccc;
-    font-size: 0.95rem;
-    margin-bottom: 26px; /* 👈 كبرنا المسافة بين النقاط (كانت 18) */
-    position: relative;
-    padding-right: 36px; /* 👈 أبعدنا النص شوية عن علامة الصح ليرتاح أكثر */
-    line-height: 1.8; /* 👈 زيدنا التباعد بين الأسطر جوا النقطة الواحدة */
-    display: block;
+color: #ccc;
+font-size: 0.95rem;
+margin-bottom: 26px;
+position: relative;
+padding-right: 36px;
+line-height: 1.8;
+display: block;
 }
 
 .features-list li strong {
-    color: #fff;
-    font-weight: bold;
-}
-
-.features-list li::before {
-    content: "✓";
-    color: #e1c443;
-    font-weight: bold;
-    background: rgba(225, 196, 67, 0.1);
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    right: 0;
-    top: 4px; /* 👈 نزلنا الصح شعراية حتى يتوسط السطر الأول بشكل مثالي بعد التعديل */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+color: #fff;
+font-weight: bold;
 }
 
 .features-list li::before {
 content: "✓";
 position: absolute;
 right: 0;
-top: 0; /* محاذاة الأيقونة مع أعلى السطر */
+top: 0;
 color: #e1c443;
 font-weight: bold;
 background: rgba(225, 196, 67, 0.1);
@@ -203,7 +183,6 @@ align-items: center;
 justify-content: center;
 border-radius: 50%;
 }
-/* ========================================= */
 
 .price-btn {
 display: block;
@@ -234,11 +213,46 @@ color: #1a2855;
 background: #fff;
 }
 
+.swipe-indicator {
+display: none;
+}
+
+@keyframes swipeHint {
+0%, 100% { transform: translateX(0); }
+50% { transform: translateX(-8px); }
+}
+
 @media (max-width: 768px) {
-.pricing-wrapper { margin-top: -50px; }
+.hero-title { font-size: 2.2rem; }
+.pricing-wrapper { margin-top: -50px; padding: 0; }
+.pricing-grid {
+display: flex;
+flex-wrap: nowrap;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+gap: 15px;
+padding: 20px;
+scrollbar-width: none; 
+-ms-overflow-style: none; 
+}
+.pricing-grid::-webkit-scrollbar { display: none; }
+.price-card {
+flex: 0 0 88%; 
+scroll-snap-align: center;
+}
 .price-card.premium { transform: scale(1); }
 .price-card.premium:hover { transform: translateY(-5px); }
-.hero-title { font-size: 2.2rem; }
+.swipe-indicator {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+color: #e1c443;
+font-size: 0.95rem;
+margin-top: -10px;
+margin-bottom: 30px;
+animation: swipeHint 1.5s infinite ease-in-out;
+}
 }
 </style>
 
@@ -289,5 +303,9 @@ background: #fff;
 <a href="https://wa.me/9647872840590?text=مرحباً، أود طلب الباقة الاحترافية لتصميم الشعار" class="price-btn btn-solid wa-trigger-link">ابدأ مشروعك الاحترافي</a>
 </div>
 
+</div>
+
+<div class="swipe-indicator">
+👈 اسحب لرؤية المزيد
 </div>
 </div>
