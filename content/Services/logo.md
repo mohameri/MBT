@@ -78,13 +78,14 @@ grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 gap: 30px;
 }
 
+/* تعديل الهوامش الأساسية للبطاقة */
 .price-card {
 background: rgba(20, 20, 20, 0.85);
 border: 1px solid rgba(255, 255, 255, 0.08);
 backdrop-filter: blur(15px);
 -webkit-backdrop-filter: blur(15px);
 border-radius: 25px;
-padding: 40px 30px;
+padding: 35px 25px; /* تم تقليل المساحة الجانبية لتوفير مساحة للنص */
 display: flex;
 flex-direction: column;
 transition: transform 0.4s ease, border-color 0.4s ease;
@@ -125,20 +126,33 @@ box-shadow: 0 5px 15px rgba(225, 196, 67, 0.4);
 .package-name {
 font-size: 1.5rem;
 color: #fff;
-margin-bottom: 30px;
+margin-bottom: 20px;
 font-weight: bold;
 text-align: center;
 }
 
+/* =========================================
+   إعدادات السعر (إجباره على سطر واحد وحجم مناسب)
+   ========================================= */
 .price-shortcode-wrapper {
 display: flex;
 justify-content: center;
 align-items: center;
-margin-bottom: 35px;
-padding: 15px;
+margin-bottom: 25px;
+padding: 10px;
 background: rgba(0,0,0,0.3);
 border-radius: 15px;
 border: 1px dashed rgba(255,255,255,0.1);
+width: 100%;
+box-sizing: border-box;
+overflow: hidden; /* لمنع خروج العناصر عن الإطار */
+}
+
+/* إجبار محتوى الشورت كود على عدم النزول لسطر جديد وتصغيره ديناميكياً */
+.price-shortcode-wrapper * {
+white-space: nowrap !important; 
+font-size: clamp(0.9rem, 4vw, 1.2rem) !important; 
+margin: 0 !important;
 }
 
 .price-card.premium .price-shortcode-wrapper {
@@ -146,6 +160,9 @@ background: rgba(0,0,0,0.4);
 border-color: rgba(225, 196, 67, 0.3);
 }
 
+/* =========================================
+   إعدادات قائمة الميزات (تقليل الهوامش يمين ويسار)
+   ========================================= */
 .features-list {
 list-style: none;
 padding: 0;
@@ -156,10 +173,10 @@ flex-grow: 1;
 .features-list li {
 color: #ccc;
 font-size: 0.95rem;
-margin-bottom: 26px;
+margin-bottom: 20px;
 position: relative;
-padding-right: 36px;
-line-height: 1.8;
+padding-right: 28px; /* تقليل المسافة بين النص وعلامة الصح */
+line-height: 1.7;
 display: block;
 }
 
@@ -172,12 +189,13 @@ font-weight: bold;
 content: "✓";
 position: absolute;
 right: 0;
-top: 0;
+top: 2px;
 color: #e1c443;
 font-weight: bold;
 background: rgba(225, 196, 67, 0.1);
-width: 24px;
-height: 24px;
+width: 20px; /* تصغير حجم دائرة الصح لتوفير مساحة */
+height: 20px; /* تصغير الحجم */
+font-size: 0.8rem;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -215,12 +233,12 @@ background: #fff;
 
 .swipe-indicator {
 display: none;
-transition: opacity 0.4s ease; /* إضافة نعومة عند التلاشي */
+transition: opacity 0.4s ease;
 }
 
 .swipe-indicator.hidden-indicator {
 opacity: 0;
-pointer-events: none; /* لمنع التفاعل معها وهي مخفية */
+pointer-events: none;
 }
 
 @keyframes swipeHint {
@@ -230,7 +248,6 @@ pointer-events: none; /* لمنع التفاعل معها وهي مخفية */
 
 @media (max-width: 768px) {
 .hero-title { font-size: 2.2rem; }
-/* رفعنا الكروت للأعلى بتغيير المارجن إلى -110 */
 .pricing-wrapper { margin-top: -110px; padding: 0; }
 .pricing-grid {
 display: flex;
@@ -243,10 +260,14 @@ scrollbar-width: none;
 -ms-overflow-style: none; 
 }
 .pricing-grid::-webkit-scrollbar { display: none; }
+
+/* أهم جزء للموبايل: تقليل الهوامش داخل البطاقة ليتسع النص */
 .price-card {
 flex: 0 0 88%; 
 scroll-snap-align: center;
+padding: 30px 15px; /* تقليل قوي للهوامش الجانبية في الموبايل فقط */
 }
+
 .price-card.premium { transform: scale(1); }
 .price-card.premium:hover { transform: translateY(-5px); }
 .swipe-indicator {
@@ -323,11 +344,9 @@ const grid = document.querySelector(".pricing-grid");
 const indicator = document.querySelector(".swipe-indicator");
 if (grid && indicator) {
 grid.addEventListener("scroll", function() {
-// إذا تم السحب ولو بمسافة بسيطة، يتم إخفاء العبارة
 if (Math.abs(grid.scrollLeft) > 10) {
 indicator.classList.add("hidden-indicator");
 } else {
-// إعادة إظهارها إذا رجع للبداية
 indicator.classList.remove("hidden-indicator");
 }
 });
