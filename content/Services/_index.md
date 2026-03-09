@@ -182,11 +182,11 @@ gap: 10px;
 <span class="price-box-title">السعر:</span>
 <div class="price-row">
 <span class="price-word">من</span>
-<span class="price-display" data-base-price="50000">30,000 د.ع</span>
+<span class="price-display" data-base-price="30000">30,000 د.ع</span>
 </div>
 <div class="price-row">
 <span class="price-word">إلى</span>
-<span class="price-display" data-base-price="150000">60,000 د.ع</span>
+<span class="price-display" data-base-price="65000">65,000 د.ع</span>
 </div>
 </div>
 </div>
