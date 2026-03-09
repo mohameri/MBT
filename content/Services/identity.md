@@ -1,6 +1,6 @@
 ---
-title: "تصميم الشعارات"
-description: "اختر الباقة التي تتناسبك."
+title: "الهوية البصرية"
+description: "اختر باقة الهوية التي تناسب مشروعك."
 ---
 
 <style>
@@ -50,6 +50,7 @@ font-size: clamp(2.5rem, 6vw, 4rem);
 font-weight: 900;
 margin-bottom: 20px;
 text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+white-space: nowrap;
 }
 
 .hero-title span {
@@ -64,28 +65,30 @@ text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 .pricing-wrapper {
-max-width: 1000px;
+max-width: 1450px; 
+width: 95%;
 margin: -120px auto 60px; 
 position: relative;
 z-index: 10;
 direction: rtl;
-padding: 0 20px;
 }
 
 .pricing-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+display: flex;
+flex-wrap: nowrap;
+justify-content: center;
 gap: 30px;
 }
 
-/* تعديل الهوامش الأساسية للبطاقة */
 .price-card {
+flex: 1;
+min-width: 320px; 
 background: rgba(20, 20, 20, 0.85);
 border: 1px solid rgba(255, 255, 255, 0.08);
 backdrop-filter: blur(15px);
 -webkit-backdrop-filter: blur(15px);
 border-radius: 25px;
-padding: 35px 25px; /* تم تقليل المساحة الجانبية لتوفير مساحة للنص */
+padding: 35px 25px; 
 display: flex;
 flex-direction: column;
 transition: transform 0.4s ease, border-color 0.4s ease;
@@ -121,19 +124,31 @@ border-radius: 50px;
 font-weight: 800;
 font-size: 0.85rem;
 box-shadow: 0 5px 15px rgba(225, 196, 67, 0.4);
+white-space: nowrap;
 }
 
+/* التعديل الجذري هنا لإجبار العنوان على سطر واحد دائماً */
 .package-name {
-font-size: 1.5rem;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap; /* إجبار قاطع لعدم النزول لسطر جديد */
+justify-content: center;
+align-items: baseline;
+gap: 6px;
+font-size: clamp(0.85rem, 1.3vw, 1.15rem); /* تصغير مدروس */
 color: #fff;
 margin-bottom: 20px;
 font-weight: bold;
-text-align: center;
+white-space: nowrap; /* منع التفاف النص */
 }
 
-/* =========================================
-   إعدادات السعر (إجباره على سطر واحد وحجم مناسب)
-   ========================================= */
+.package-name .sub-title {
+font-weight: 400;
+font-size: 0.75em;
+color: #bbb;
+white-space: nowrap;
+}
+
 .price-shortcode-wrapper {
 display: flex;
 justify-content: center;
@@ -145,14 +160,19 @@ border-radius: 15px;
 border: 1px dashed rgba(255,255,255,0.1);
 width: 100%;
 box-sizing: border-box;
-overflow: hidden; /* لمنع خروج العناصر عن الإطار */
+overflow: hidden; 
 }
 
-/* إجبار محتوى الشورت كود على عدم النزول لسطر جديد وتصغيره ديناميكياً */
 .price-shortcode-wrapper * {
 white-space: nowrap !important; 
 font-size: clamp(0.9rem, 4vw, 1.2rem) !important; 
 margin: 0 !important;
+}
+
+.custom-price-text {
+color: #e1c443 !important;
+font-weight: bold;
+font-size: 1.1rem !important;
 }
 
 .price-card.premium .price-shortcode-wrapper {
@@ -160,9 +180,6 @@ background: rgba(0,0,0,0.4);
 border-color: rgba(225, 196, 67, 0.3);
 }
 
-/* =========================================
-   إعدادات قائمة الميزات (تقليل الهوامش يمين ويسار)
-   ========================================= */
 .features-list {
 list-style: none;
 padding: 0;
@@ -173,11 +190,18 @@ flex-grow: 1;
 .features-list li {
 color: #ccc;
 font-size: 0.95rem;
-margin-bottom: 20px;
-position: relative;
-padding-right: 28px; /* تقليل المسافة بين النص وعلامة الصح */
+margin-bottom: 15px;
 line-height: 1.7;
 display: block;
+text-align: right;
+padding-bottom: 12px;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+position: relative;
+}
+
+.features-list li:last-child {
+border-bottom: none;
+margin-bottom: 0;
 }
 
 .features-list li strong {
@@ -185,7 +209,19 @@ color: #fff;
 font-weight: bold;
 }
 
-.features-list li::before {
+.features-list li:first-child {
+padding-right: 0;
+color: #fff;
+text-align: center;
+font-weight: 500;
+font-size: 0.9rem;
+}
+
+.features-list li:not(:first-child) {
+padding-right: 28px;
+}
+
+.features-list li:not(:first-child)::before {
 content: "✓";
 position: absolute;
 right: 0;
@@ -193,8 +229,8 @@ top: 2px;
 color: #e1c443;
 font-weight: bold;
 background: rgba(225, 196, 67, 0.1);
-width: 20px; /* تصغير حجم دائرة الصح لتوفير مساحة */
-height: 20px; /* تصغير الحجم */
+width: 20px; 
+height: 20px; 
 font-size: 0.8rem;
 display: flex;
 align-items: center;
@@ -210,6 +246,7 @@ border-radius: 12px;
 font-weight: bold;
 text-decoration: none;
 transition: all 0.3s ease;
+white-space: nowrap;
 }
 
 .btn-outline {
@@ -246,14 +283,13 @@ pointer-events: none;
 50% { transform: translateX(-8px); }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 .hero-title { font-size: 2.2rem; }
-.pricing-wrapper { margin-top: -110px; padding: 0; }
+.pricing-wrapper { margin-top: -110px; width: 100%; padding: 0; }
 .pricing-grid {
-display: flex;
-flex-wrap: nowrap;
 overflow-x: auto;
 scroll-snap-type: x mandatory;
+justify-content: flex-start;
 gap: 15px;
 padding: 20px;
 scrollbar-width: none; 
@@ -261,11 +297,10 @@ scrollbar-width: none;
 }
 .pricing-grid::-webkit-scrollbar { display: none; }
 
-/* أهم جزء للموبايل: تقليل الهوامش داخل البطاقة ليتسع النص */
 .price-card {
 flex: 0 0 88%; 
 scroll-snap-align: center;
-padding: 30px 15px; /* تقليل قوي للهوامش الجانبية في الموبايل فقط */
+padding: 30px 15px; 
 }
 
 .price-card.premium { transform: scale(1); }
@@ -285,12 +320,12 @@ animation: swipeHint 1.5s infinite ease-in-out;
 </style>
 
 <div class="cinematic-hero">
-<video class="hero-video" autoplay loop muted playsinline poster="/images/poster-logo-temp.jpg">
-<source src="/videos/6767.mp4" type="video/mp4">
+<video class="hero-video" autoplay loop muted playsinline poster="/images/poster-brand-temp.jpg">
+<source src="/videos/brand-hero.mp4" type="video/mp4">
 </video>
 <div class="hero-content">
-<h1 class="hero-title">تصميم <span>الشعارات</span></h1>
-<p class="hero-desc">اختر الباقة التي تتناسبك.</p>
+<h1 class="hero-title">تصميم <span>الهوية</span></h1>
+<p class="hero-desc">اختر باقة الهوية التي تناسب مشروعك.</p>
 </div>
 </div>
 
@@ -298,37 +333,60 @@ animation: swipeHint 1.5s infinite ease-in-out;
 <div class="pricing-grid">
 
 <div class="price-card">
-<h3 class="package-name">الباقة الاقتصادية</h3>
+<h3 class="package-name">تنسيق الهوية <span class="sub-title">(بدون شعار)</span></h3>
 
 <div class="price-shortcode-wrapper">
-{{< price 15000 >}}
+{{< price 30000 >}}
 </div>
 
 <ul class="features-list">
-<li><strong>الهدف:</strong> إنجاز عملي وسريع يلبي تطلعاتك بشكل مباشر.</li>
-<li><strong>آلية التصميم:</strong> تصميم مستوحى من رؤيتك؛ اختر نموذجاً من سابقة أعمالنا، أو أرسل لنا تصميماً يعجبك وسنقوم بإنشاء شعار مقارب لأسلوبه.</li>
-<li><strong>النتيجة:</strong> شعار أنيق، مباشر، ومناسب لبدء مشروعك فوراً.</li>
+<li>لمن يمتلك شعاراً ويريد ترتيب هويته.</li>
+<li>توحيد الألوان والخطوط لتعزيز احترافيتك</li>
+<li>تصميم المطبوعات الأساسية للمشروع</li>
+<li>قوالب سوشيال ميديا جاهزة للاستخدام</li>
+<li>عرض تطبيقات واقعية (Mockups) جذابة</li>
 </ul>
 
-<a href="https://wa.me/9647872840590?text=مرحباً، أود طلب الباقة الاقتصادية لتصميم الشعار" class="price-btn btn-outline wa-trigger-link">اطلب الآن</a>
+<a href="https://wa.me/9647872840590?text=مرحباً، أود طلب باقة (تنسيق الهوية) لتطوير عملي" class="price-btn btn-outline wa-trigger-link">اطلب الآن</a>
 </div>
 
 <div class="price-card premium">
-<div class="popular-badge">باقة التميز</div>
-<h3 class="package-name">الباقة الاحترافية</h3>
+<div class="popular-badge">الأكثر طلباً</div>
+<h3 class="package-name">التأسيس الشامل <span class="sub-title">(مع شعار)</span></h3>
 
 <div class="price-shortcode-wrapper">
-{{< price 45000 >}}
+{{< price 65000 >}}
 </div>
 
 <ul class="features-list">
-<li><strong>الهدف:</strong> بناء هوية بصرية فريدة تعكس قوة علامتك التجارية وتفردها.</li>
-<li><strong>آلية التصميم:</strong> ابتكار 4 نماذج حصرية بأفكار غير مطروقة ومصممة خصيصاً لك نختار الافضل منها.</li>
-<li><strong>المرونة:</strong> حرية كاملة في التعديلات والإضافات على النماذج حتى نصل معاً إلى النتيجة التي ترضيك 100%.</li>
-<li><strong>النتيجة:</strong> شعار احترافي متكامل يميزك بقوة عن المنافسين.</li>
+<li>لبناء علامة تجارية قوية من الصفر.</li>
+<li><strong>(تشمل جميع ميزات تنسيق الهوية) +</strong></li>
+<li>تصميم شعار احترافي يعكس رؤيتك</li>
+<li>تقديم خيارات متعددة للشعار للمقارنة</li>
+<li>تجهيز الشعار بوضعيات تناسب كل المنصات</li>
+<li>تطبيقات بصرية إضافية مخصصة لمجالك</li>
 </ul>
 
-<a href="https://wa.me/9647872840590?text=مرحباً، أود طلب الباقة الاحترافية لتصميم الشعار" class="price-btn btn-solid wa-trigger-link">ابدأ مشروعك الاحترافي</a>
+<a href="https://wa.me/9647872840590?text=مرحباً، أود طلب باقة (التأسيس الشامل) لبناء هويتي" class="price-btn btn-solid wa-trigger-link">ابدأ التأسيس</a>
+</div>
+
+<div class="price-card">
+<h3 class="package-name">الباقة المخصصة</h3>
+
+<div class="price-shortcode-wrapper">
+<span class="custom-price-text">تُحدد حسب المتطلبات</span>
+</div>
+
+<ul class="features-list">
+<li>للمشاريع ذات الاحتياجات الخاصة.</li>
+<li><strong>(اختيار مرن من الميزات السابقة) +</strong></li>
+<li>دمج خدمات الوكالة (مونتاج، موشن جرافيك...)</li>
+<li>توحيد النمط الفني لكل مخرجاتك المرئية</li>
+<li>أولوية في التنفيذ والدعم المستمر</li>
+<li>خصم حصري يتناسب مع حجم طلبك</li>
+</ul>
+
+<a href="https://wa.me/9647872840590?text=مرحباً، أود مناقشة تفاصيل (الباقة المخصصة) للهوية البصرية" class="price-btn btn-outline wa-trigger-link">تواصل للمناقشة</a>
 </div>
 
 </div>
@@ -342,6 +400,7 @@ animation: swipeHint 1.5s infinite ease-in-out;
 document.addEventListener("DOMContentLoaded", function() {
 const grid = document.querySelector(".pricing-grid");
 const indicator = document.querySelector(".swipe-indicator");
+
 if (grid && indicator) {
 grid.addEventListener("scroll", function() {
 if (Math.abs(grid.scrollLeft) > 10) {
