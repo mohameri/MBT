@@ -65,22 +65,25 @@ text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 .pricing-wrapper {
-max-width: 1150px; 
+max-width: 1450px; 
+width: 95%;
 margin: -120px auto 60px; 
 position: relative;
 z-index: 10;
 direction: rtl;
-padding: 0 20px;
 }
 
-/* إعدادات الكمبيوتر (Desktop) - متجاورة دائماً */
+/* استخدام Flex للحفاظ على الرحابة وعدم حشر الصناديق */
 .pricing-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
+display: flex;
+flex-wrap: nowrap;
+justify-content: center;
 gap: 30px;
 }
 
 .price-card {
+flex: 1;
+min-width: 320px; 
 background: rgba(20, 20, 20, 0.85);
 border: 1px solid rgba(255, 255, 255, 0.08);
 backdrop-filter: blur(15px);
@@ -91,7 +94,6 @@ display: flex;
 flex-direction: column;
 transition: transform 0.4s ease, border-color 0.4s ease;
 box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-overflow: hidden;
 }
 
 .price-card:hover {
@@ -126,22 +128,26 @@ box-shadow: 0 5px 15px rgba(225, 196, 67, 0.4);
 white-space: nowrap;
 }
 
+/* العناوين بسطر واحد دائماً مع خط أنعم للأقواس */
 .package-name {
-font-size: clamp(0.75rem, 1.8vw + 0.5rem, 1.25rem);
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: center;
+align-items: baseline;
+gap: 6px;
+font-size: clamp(0.9rem, 1.4vw, 1.2rem); 
 color: #fff;
 margin-bottom: 20px;
 font-weight: bold;
-text-align: center;
 white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-width: 100%;
 }
 
-.light-text {
+.package-name .sub-title {
 font-weight: 400;
-font-size: 0.9em;
-opacity: 0.85;
+font-size: 0.8em;
+color: #bbb;
+white-space: nowrap;
 }
 
 .price-shortcode-wrapper {
@@ -149,7 +155,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 margin-bottom: 25px;
-padding: 8px;
+padding: 10px;
 background: rgba(0,0,0,0.3);
 border-radius: 15px;
 border: 1px dashed rgba(255,255,255,0.1);
@@ -160,13 +166,14 @@ overflow: hidden;
 
 .price-shortcode-wrapper * {
 white-space: nowrap !important; 
-font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem) !important; 
+font-size: clamp(0.9rem, 4vw, 1.2rem) !important; 
 margin: 0 !important;
 }
 
 .custom-price-text {
 color: #e1c443 !important;
 font-weight: bold;
+font-size: 1.1rem !important;
 }
 
 .price-card.premium .price-shortcode-wrapper {
@@ -174,6 +181,9 @@ background: rgba(0,0,0,0.4);
 border-color: rgba(225, 196, 67, 0.3);
 }
 
+/* =========================================
+   إعدادات قائمة الميزات وعلامات الصح
+   ========================================= */
 .features-list {
 list-style: none;
 padding: 0;
@@ -184,11 +194,19 @@ flex-grow: 1;
 .features-list li {
 color: #ccc;
 font-size: 0.95rem;
-margin-bottom: 12px;
-line-height: 1.6;
+margin-bottom: 15px;
+line-height: 1.7;
 display: block;
-padding-right: 0; 
 text-align: right;
+padding-bottom: 12px;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+position: relative;
+padding-right: 28px; /* مسافة لعلامة الصح */
+}
+
+.features-list li:last-child {
+border-bottom: none;
+margin-bottom: 0;
 }
 
 .features-list li strong {
@@ -196,16 +214,46 @@ color: #fff;
 font-weight: bold;
 }
 
+/* علامة الصح الافتراضية لكل الخانات */
+.features-list li::before {
+content: "✓";
+position: absolute;
+right: 0;
+top: 2px;
+color: #e1c443;
+font-weight: bold;
+background: rgba(225, 196, 67, 0.1);
+width: 20px; 
+height: 20px; 
+font-size: 0.8rem;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+}
+
+/* السطر الأول (وصف الجمهور): يتوسط وتُحذف منه علامة الصح */
+.features-list li:first-child {
+padding-right: 0;
+color: #fff;
+text-align: center;
+font-weight: 500;
+font-size: 0.9rem;
+}
+
+.features-list li:first-child::before {
+display: none;
+}
+
 .price-btn {
 display: block;
 text-align: center;
-padding: 12px;
+padding: 15px;
 border-radius: 12px;
 font-weight: bold;
 text-decoration: none;
 transition: all 0.3s ease;
 white-space: nowrap;
-font-size: clamp(0.75rem, 1.5vw + 0.5rem, 1rem);
 }
 
 .btn-outline {
@@ -227,9 +275,6 @@ color: #1a2855;
 background: #fff;
 }
 
-/* =========================================
-   إعدادات مؤشر السحب (مخفي في الديسكتوب)
-   ========================================= */
 .swipe-indicator {
 display: none;
 transition: opacity 0.4s ease;
@@ -246,18 +291,15 @@ pointer-events: none;
 }
 
 /* =========================================
-   إعدادات الموبايل (سلايدر مع إظهار جزء من البطاقة الثانية)
+   تنسيقات الموبايل (نظام السلايدر والجزء الظاهر)
    ========================================= */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 .hero-title { font-size: 2.2rem; }
-.pricing-wrapper { margin-top: -110px; padding: 0; }
-
-/* تحويل الشبكة إلى سلايدر أفقي */
+.pricing-wrapper { margin-top: -110px; width: 100%; padding: 0; }
 .pricing-grid {
-display: flex;
-flex-wrap: nowrap;
 overflow-x: auto;
 scroll-snap-type: x mandatory;
+justify-content: flex-start;
 gap: 15px;
 padding: 20px;
 scrollbar-width: none; 
@@ -266,16 +308,16 @@ scrollbar-width: none;
 .pricing-grid::-webkit-scrollbar { display: none; }
 
 .price-card {
-flex: 0 0 85%; /* العرض 85% لترك مساحة 15% للبطاقة التالية للظهور */
+/* جعل البطاقة تأخذ 85% من الشاشة ليظهر جزء من البطاقة الثانية */
+flex: 0 0 85%; 
 scroll-snap-align: center;
 padding: 30px 20px; 
 }
 
 .price-card.premium { transform: scale(1); }
-.price-card.premium:hover { transform: translateY(-3px); }
-.popular-badge { font-size: 0.7rem; padding: 4px 12px; top: -12px; }
+.price-card.premium:hover { transform: translateY(-5px); }
 
-/* إظهار مؤشر السحب */
+/* إظهار مؤشر السحب للموبايل فقط */
 .swipe-indicator {
 display: flex;
 align-items: center;
@@ -304,7 +346,7 @@ animation: swipeHint 1.5s infinite ease-in-out;
 <div class="pricing-grid">
 
 <div class="price-card">
-<h3 class="package-name">تنسيق الهوية <span class="light-text">(بدون شعار)</span></h3>
+<h3 class="package-name">تنسيق الهوية <span class="sub-title">(بدون شعار)</span></h3>
 
 <div class="price-shortcode-wrapper">
 {{< price 30000 >}}
@@ -323,7 +365,7 @@ animation: swipeHint 1.5s infinite ease-in-out;
 
 <div class="price-card premium">
 <div class="popular-badge">الأكثر طلباً</div>
-<h3 class="package-name">التأسيس الشامل <span class="light-text">(مع شعار)</span></h3>
+<h3 class="package-name">التأسيس الشامل <span class="sub-title">(مع شعار)</span></h3>
 
 <div class="price-shortcode-wrapper">
 {{< price 60000 >}}
