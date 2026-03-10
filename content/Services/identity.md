@@ -73,7 +73,6 @@ z-index: 10;
 direction: rtl;
 }
 
-/* استخدام Flex للحفاظ على الرحابة وعدم حشر الصناديق */
 .pricing-grid {
 display: flex;
 flex-wrap: nowrap;
@@ -128,7 +127,6 @@ box-shadow: 0 5px 15px rgba(225, 196, 67, 0.4);
 white-space: nowrap;
 }
 
-/* العناوين بسطر واحد دائماً مع خط أنعم للأقواس */
 .package-name {
 display: flex;
 flex-direction: row;
@@ -181,9 +179,6 @@ background: rgba(0,0,0,0.4);
 border-color: rgba(225, 196, 67, 0.3);
 }
 
-/* =========================================
-   إعدادات قائمة الميزات وعلامات الصح
-   ========================================= */
 .features-list {
 list-style: none;
 padding: 0;
@@ -201,7 +196,7 @@ text-align: right;
 padding-bottom: 12px;
 border-bottom: 1px solid rgba(255,255,255,0.05);
 position: relative;
-padding-right: 28px; /* مسافة لعلامة الصح */
+padding-right: 28px;
 }
 
 .features-list li:last-child {
@@ -214,7 +209,6 @@ color: #fff;
 font-weight: bold;
 }
 
-/* علامة الصح الافتراضية لكل الخانات */
 .features-list li::before {
 content: "✓";
 position: absolute;
@@ -232,7 +226,6 @@ justify-content: center;
 border-radius: 50%;
 }
 
-/* السطر الأول (وصف الجمهور): يتوسط وتُحذف منه علامة الصح */
 .features-list li:first-child {
 padding-right: 0;
 color: #fff;
@@ -291,35 +284,41 @@ pointer-events: none;
 }
 
 /* =========================================
-   تنسيقات الموبايل (نظام السلايدر والجزء الظاهر)
+   تنسيقات الهاتف (قوة إجبارية للسلايدر)
    ========================================= */
-@media (max-width: 1024px) {
+@media screen and (max-width: 768px) {
 .hero-title { font-size: 2.2rem; }
-.pricing-wrapper { margin-top: -110px; width: 100%; padding: 0; }
+.pricing-wrapper { 
+width: 100vw !important; 
+max-width: 100vw !important; 
+margin-top: -110px; 
+padding: 0 !important; 
+}
 .pricing-grid {
-overflow-x: auto;
-scroll-snap-type: x mandatory;
-justify-content: flex-start;
-gap: 15px;
-padding: 20px;
+display: flex !important;
+flex-wrap: nowrap !important;
+justify-content: flex-start !important; /* مهم ليعمل السحب من اليمين لليسار */
+overflow-x: auto !important;
+scroll-snap-type: x mandatory !important;
+gap: 15px !important;
+padding: 20px !important;
 scrollbar-width: none; 
 -ms-overflow-style: none; 
 }
 .pricing-grid::-webkit-scrollbar { display: none; }
 
 .price-card {
-/* جعل البطاقة تأخذ 85% من الشاشة ليظهر جزء من البطاقة الثانية */
-flex: 0 0 85%; 
-scroll-snap-align: center;
-padding: 30px 20px; 
+flex: 0 0 82vw !important; /* يجبر البطاقة على أخذ 82% من الشاشة الفعيلة */
+min-width: 82vw !important;
+scroll-snap-align: center !important;
+padding: 30px 20px !important; 
 }
 
-.price-card.premium { transform: scale(1); }
-.price-card.premium:hover { transform: translateY(-5px); }
+.price-card.premium { transform: scale(1) !important; }
+.price-card.premium:hover { transform: translateY(-5px) !important; }
 
-/* إظهار مؤشر السحب للموبايل فقط */
 .swipe-indicator {
-display: flex;
+display: flex !important;
 align-items: center;
 justify-content: center;
 gap: 8px;
