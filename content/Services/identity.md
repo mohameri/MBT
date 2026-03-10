@@ -73,6 +73,9 @@ z-index: 10;
 direction: rtl;
 }
 
+/* =========================================
+   إعدادات الحاسوب (كما هي تماماً بدون تغيير)
+   ========================================= */
 .pricing-grid {
 display: flex;
 flex-wrap: nowrap;
@@ -134,7 +137,7 @@ flex-wrap: nowrap;
 justify-content: center;
 align-items: baseline;
 gap: 6px;
-font-size: clamp(0.9rem, 1.4vw, 1.2rem); 
+font-size: clamp(0.85rem, 1.3vw, 1.15rem); 
 color: #fff;
 margin-bottom: 20px;
 font-weight: bold;
@@ -143,7 +146,7 @@ white-space: nowrap;
 
 .package-name .sub-title {
 font-weight: 400;
-font-size: 0.8em;
+font-size: 0.75em;
 color: #bbb;
 white-space: nowrap;
 }
@@ -196,7 +199,6 @@ text-align: right;
 padding-bottom: 12px;
 border-bottom: 1px solid rgba(255,255,255,0.05);
 position: relative;
-padding-right: 28px;
 }
 
 .features-list li:last-child {
@@ -209,7 +211,19 @@ color: #fff;
 font-weight: bold;
 }
 
-.features-list li::before {
+.features-list li:first-child {
+padding-right: 0;
+color: #fff;
+text-align: center;
+font-weight: 500;
+font-size: 0.9rem;
+}
+
+.features-list li:not(:first-child) {
+padding-right: 28px;
+}
+
+.features-list li:not(:first-child)::before {
 content: "✓";
 position: absolute;
 right: 0;
@@ -224,18 +238,6 @@ display: flex;
 align-items: center;
 justify-content: center;
 border-radius: 50%;
-}
-
-.features-list li:first-child {
-padding-right: 0;
-color: #fff;
-text-align: center;
-font-weight: 500;
-font-size: 0.9rem;
-}
-
-.features-list li:first-child::before {
-display: none;
 }
 
 .price-btn {
@@ -284,39 +286,37 @@ pointer-events: none;
 }
 
 /* =========================================
-   تنسيقات الهاتف (قوة إجبارية للسلايدر)
+   تنسيقات الهاتف (تم إصلاحها وإجبارها للعمل)
    ========================================= */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
 .hero-title { font-size: 2.2rem; }
-.pricing-wrapper { 
-width: 100vw !important; 
-max-width: 100vw !important; 
-margin-top: -110px; 
-padding: 0 !important; 
-}
+.pricing-wrapper { margin-top: -110px; width: 100%; padding: 0; }
+
 .pricing-grid {
 display: flex !important;
 flex-wrap: nowrap !important;
-justify-content: flex-start !important; /* مهم ليعمل السحب من اليمين لليسار */
+justify-content: flex-start !important; /* يلغي توسيط الكمبيوتر ليسمح بالسحب */
 overflow-x: auto !important;
 scroll-snap-type: x mandatory !important;
 gap: 15px !important;
 padding: 20px !important;
 scrollbar-width: none; 
 -ms-overflow-style: none; 
+-webkit-overflow-scrolling: touch; /* سحب سلس للآيفون */
 }
 .pricing-grid::-webkit-scrollbar { display: none; }
 
 .price-card {
-flex: 0 0 82vw !important; /* يجبر البطاقة على أخذ 82% من الشاشة الفعيلة */
-min-width: 82vw !important;
+flex: 0 0 85% !important; /* يجبر البطاقة على أخذ 85% ليظهر جزء من الثانية */
+min-width: 85% !important;
 scroll-snap-align: center !important;
-padding: 30px 20px !important; 
+padding: 30px 15px !important; 
 }
 
 .price-card.premium { transform: scale(1) !important; }
 .price-card.premium:hover { transform: translateY(-5px) !important; }
 
+/* إظهار عبارة السحب وإبعادها عن الصناديق لتظهر بوضوح */
 .swipe-indicator {
 display: flex !important;
 align-items: center;
@@ -324,8 +324,8 @@ justify-content: center;
 gap: 8px;
 color: #e1c443;
 font-size: 0.95rem;
-margin-top: -10px;
-margin-bottom: 30px;
+margin-top: 15px !important; /* مسافة أمان لكي لا تختفي خلف الصناديق */
+margin-bottom: 30px !important;
 animation: swipeHint 1.5s infinite ease-in-out;
 }
 }
