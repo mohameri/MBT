@@ -127,14 +127,15 @@ box-shadow: 0 5px 15px rgba(225, 196, 67, 0.4);
 white-space: nowrap;
 }
 
+/* تم التصغير بنسبة 20% وتقليل الفراغات لتجنب الخروج من الصندوق */
 .package-name {
 display: flex;
 flex-direction: row;
 flex-wrap: nowrap;
 justify-content: center;
-align-items: center; /* توسيط عمودي أفضل للخطوط */
-gap: 6px;
-font-size: clamp(0.85rem, 1.3vw, 1.15rem); 
+align-items: baseline;
+gap: 4px; /* تقليل الفراغ بين الكلمة والأقواس */
+font-size: clamp(0.7rem, 1.1vw, 0.95rem); /* تصغير الحجم */
 color: #fff;
 margin-bottom: 20px;
 font-weight: bold;
@@ -196,7 +197,6 @@ text-align: right;
 padding-bottom: 12px;
 border-bottom: 1px solid rgba(255,255,255,0.05);
 position: relative;
-padding-right: 28px;
 }
 
 .features-list li:last-child {
@@ -209,7 +209,19 @@ color: #fff;
 font-weight: bold;
 }
 
-.features-list li::before {
+.features-list li:first-child {
+padding-right: 0;
+color: #fff;
+text-align: center;
+font-weight: 500;
+font-size: 0.9rem;
+}
+
+.features-list li:not(:first-child) {
+padding-right: 28px;
+}
+
+.features-list li:not(:first-child)::before {
 content: "✓";
 position: absolute;
 right: 0;
@@ -224,18 +236,6 @@ display: flex;
 align-items: center;
 justify-content: center;
 border-radius: 50%;
-}
-
-.features-list li:first-child {
-padding-right: 0;
-color: #fff;
-text-align: center;
-font-weight: 500;
-font-size: 0.9rem;
-}
-
-.features-list li:first-child::before {
-display: none;
 }
 
 .price-btn {
@@ -283,9 +283,6 @@ pointer-events: none;
 50% { transform: translateX(-8px); }
 }
 
-/* =========================================
-   تنسيقات الهاتف 
-   ========================================= */
 @media (max-width: 768px) {
 .hero-title { font-size: 2.2rem; }
 .pricing-wrapper { margin-top: -110px; width: 100%; padding: 0; }
@@ -305,24 +302,22 @@ scrollbar-width: none;
 .pricing-grid::-webkit-scrollbar { display: none; }
 
 .price-card {
-flex: 0 0 88% !important; /* زيادة بسيطة لعرض البطاقة ليتسع النص */
-min-width: 88% !important;
+flex: 0 0 85% !important; 
+min-width: 85% !important;
 scroll-snap-align: center !important;
-padding: 30px 10px !important; /* تقليل الهوامش الجانبية لإعطاء مساحة أكبر للنص */
-}
-
-/* تصغير الخط في الموبايل لإجبار النص على البقاء بسطر واحد داخل الحاوية */
-.package-name {
-font-size: 0.8rem !important;
-gap: 4px !important;
-}
-
-.package-name .sub-title {
-font-size: 0.75em !important;
+padding: 30px 15px !important; 
 }
 
 .price-card.premium { transform: scale(1) !important; }
 .price-card.premium:hover { transform: translateY(-5px) !important; }
+
+/* إجبار إضافي للموبايل لتصغير العنوان إن لزم الأمر */
+.package-name {
+font-size: 0.85rem !important;
+}
+.package-name .sub-title {
+font-size: 0.75em !important;
+}
 
 .swipe-indicator {
 display: flex !important;
