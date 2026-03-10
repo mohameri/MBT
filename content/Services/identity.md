@@ -127,15 +127,15 @@ box-shadow: 0 5px 15px rgba(225, 196, 67, 0.4);
 white-space: nowrap;
 }
 
-/* تم التصغير بنسبة 20% وتقليل الفراغات لتجنب الخروج من الصندوق */
+/* تم تكبير العنوان ليكون متوازناً ومقروءاً بوضوح */
 .package-name {
 display: flex;
 flex-direction: row;
 flex-wrap: nowrap;
 justify-content: center;
 align-items: baseline;
-gap: 4px; /* تقليل الفراغ بين الكلمة والأقواس */
-font-size: clamp(0.7rem, 1.1vw, 0.95rem); /* تصغير الحجم */
+gap: 5px;
+font-size: clamp(1.1rem, 1.6vw, 1.3rem);
 color: #fff;
 margin-bottom: 20px;
 font-weight: bold;
@@ -144,7 +144,7 @@ white-space: nowrap;
 
 .package-name .sub-title {
 font-weight: 400;
-font-size: 0.75em;
+font-size: 0.8em;
 color: #bbb;
 white-space: nowrap;
 }
@@ -311,12 +311,12 @@ padding: 30px 15px !important;
 .price-card.premium { transform: scale(1) !important; }
 .price-card.premium:hover { transform: translateY(-5px) !important; }
 
-/* إجبار إضافي للموبايل لتصغير العنوان إن لزم الأمر */
+/* حجم مثالي للموبايل: ليس كبيراً جداً فيخرج، وليس صغيراً فيختفي */
 .package-name {
-font-size: 0.85rem !important;
+font-size: clamp(1rem, 4vw, 1.15rem) !important;
 }
 .package-name .sub-title {
-font-size: 0.75em !important;
+font-size: 0.8em !important;
 }
 
 .swipe-indicator {
