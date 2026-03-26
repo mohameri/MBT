@@ -1,0 +1,459 @@
++++
+title = 'مطبوعات و مرئيات'
+description = 'تصفح معرض أعمال MBT في تصميم المطبوعات، البوسترات، والهويات المرئية المتكاملة.'
+keywords = 'مطبوعات, مرئيات, تصميم تجاري, بوسترات, كروت شخصية, MBT'
+draft = false
++++
+
+<style>
+/* إخفاء إجباري للهيدر والفوتر (Desktop + Mobile) */
+body > header,
+body > footer,
+header.header, 
+footer.footer,
+.mobile-bottom-nav,
+#whatsapp-modal,
+.logo, .nav, #menu {
+display: none !important; 
+opacity: 0 !important;
+visibility: hidden !important;
+height: 0 !important;
+margin: 0 !important;
+padding: 0 !important;
+pointer-events: none !important;
+}
+
+/* التخلص من المسافات الفارغة */
+.main { 
+padding-top: 20px !important; 
+margin-top: 0 !important; 
+min-height: 100vh !important;
+}
+    /* تصغير عنوان الصفحة الرئيسي في الهاتف لمعرض المطبوعات */
+    @media (max-width: 768px) {
+        .page-header h1, 
+        .entry-header h1 {
+            font-size: 1.2rem !important;
+            line-height: 1.3 !important;
+        }
+    }
+    
+    /* =========================================
+       1. الإعدادات الأساسية وشبكة الأعمدة (Flexbox)
+       ========================================= */
+    .page-description, .post-description { display: none !important; }
+    .print-gallery-container { 
+        padding: 40px 20px; 
+        max-width: 1300px; 
+        margin: 0 auto; 
+        direction: rtl; 
+    }
+    
+    /* التعديل الجذري لنظام الشبكة (Flexbox Columns) */
+    .mbt-print-grid { 
+        display: flex;
+        gap: 25px;
+        align-items: flex-start; 
+    }
+    
+    .masonry-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: 100%;
+    }
+
+    /* =========================================
+       2. كروت الصور 
+       ========================================= */
+    .print-thumb-card { 
+        position: relative; 
+        border-radius: 20px; 
+        overflow: hidden; 
+        
+        height: max-content !important; 
+        aspect-ratio: auto !important;
+        padding: 0 !important;
+        background: transparent !important; 
+        
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+        cursor: pointer; 
+        display: block !important; 
+        text-decoration: none; 
+        
+        /* إعدادات الحركة للظهور عند النزول (Intersection Observer) */
+        opacity: 0;
+        transform: translateY(40px);
+        transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease-out, box-shadow 0.4s ease, background 0.4s ease;
+    }
+
+    /* الكلاس الذي سيتم إضافته عبر JS عند ظهور العنصر في الشاشة */
+    .print-thumb-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .thumb-image { 
+        display: block !important; 
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important; 
+        height: auto !important; 
+        object-fit: cover !important; 
+        z-index: 1; 
+        transition: transform 0.8s ease, filter 0.5s ease; 
+        pointer-events: none; 
+    }
+
+    .zoom-icon-glass { 
+        position: absolute; 
+        top: 50%; left: 50%; 
+        transform: translate(-50%, -50%) scale(0.9); 
+        width: 60px; height: 60px; 
+        background: rgba(225, 196, 67, 0.15); 
+        backdrop-filter: blur(10px); 
+        -webkit-backdrop-filter: blur(10px); 
+        border: 1px solid rgba(225, 196, 67, 0.4); 
+        border-radius: 50%; 
+        display: flex; align-items: center; justify-content: center; 
+        opacity: 0; 
+        transition: all 0.4s ease; 
+        z-index: 2; 
+        pointer-events: none; 
+    }
+    .zoom-icon-glass::after { 
+        content: "🔍"; 
+        font-size: 1.5rem; 
+        text-shadow: 0 0 15px rgba(225, 196, 67, 0.5); 
+    }
+    
+    @media (min-width: 769px) {
+        .print-thumb-card.show:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 25px rgba(225, 196, 67, 0.15); 
+            background: rgba(20, 20, 20, 0.4) !important; 
+        }
+        .print-thumb-card.show:hover .thumb-image { 
+            transform: scale(1.03); 
+        }
+        .print-thumb-card.show:hover .zoom-icon-glass { 
+            transform: translate(-50%, -50%) scale(1); 
+            opacity: 1; 
+        }
+    }
+
+    /* =========================================
+       3. عارض الصور (Lightbox) المطور
+       ========================================= */
+    .mbt-lightbox { 
+        display: none; 
+        position: fixed; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        background: rgba(5, 5, 5, 0.95); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 999999; 
+        align-items: center; justify-content: center; 
+        opacity: 0; 
+        transition: opacity 0.4s ease; 
+        overflow: hidden;
+    }
+    .mbt-lightbox.active { display: flex; opacity: 1; }
+
+    .lb-top-bar { 
+        position: absolute; top: 0; left: 0; right: 0; padding: 20px 30px; 
+        display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+    }
+    .lb-controls { display: flex; gap: 15px; direction: ltr; }
+    
+    .lb-icon-btn, .lightbox-close { 
+        width: 45px; height: 45px; 
+        background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+        border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; 
+        font-size: 1.2rem; cursor: pointer; transition: all 0.3s; 
+        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    }
+    .lb-icon-btn:hover, .lightbox-close:hover { 
+        background: #e1c443; color: #000; border-color: #e1c443; transform: scale(1.1); 
+    }
+
+    .lb-nav { 
+        position: absolute; top: 50%; transform: translateY(-50%); 
+        background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; 
+        width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+        font-size: 1.2rem; cursor: pointer; z-index: 100; transition: all 0.3s; 
+        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        direction: ltr !important;
+    }
+    .lb-nav:hover { background: #e1c443; color: #000; border-color: #e1c443; transform: translateY(-50%) scale(1.1); }
+    .right-nav { right: 20px; }
+    .left-nav { left: 20px; }
+
+    .lightbox-content-wrapper { 
+        width: 100vw; height: 100vh; 
+        display: flex; align-items: center; justify-content: center;
+        position: relative; 
+    }
+    
+    .lightbox-image { 
+        max-width: 90vw; max-height: 85vh; 
+        object-fit: contain; 
+        transition: transform 0.1s ease-out; 
+        transform-origin: center center; 
+        cursor: grab; 
+        user-select: none; 
+        -webkit-user-drag: none;
+        filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+    }
+    .lightbox-image:active { cursor: grabbing; }
+
+    @media (max-width: 768px) {
+        .page-header h1, 
+        .entry-header h1,
+        .post-title {
+            font-size: 1.2rem !important; 
+            white-space: nowrap !important; 
+            overflow: hidden !important; 
+            text-overflow: ellipsis !important; 
+            line-height: 1.3 !important;
+            margin-bottom: 10px !important;
+        }
+    }
+</style>
+
+<div class="print-gallery-container">
+    <div class="mbt-print-grid" id="mbt-print-grid"></div>
+</div>
+
+<div class="mbt-lightbox" id="image-lightbox"><div class="lb-top-bar"><div class="lb-controls"><button class="lb-icon-btn" id="lb-play" onclick="window.toggleSlideshow()" title="تشغيل تلقائي">▶</button><button class="lb-icon-btn" onclick="window.resetZoom()" title="استعادة الحجم الأصلي">⛶</button></div><div class="lightbox-close" onclick="window.closeImageModal()" title="إغلاق">✕</div></div><button class="lb-nav right-nav" onclick="window.prevImage(event)">&#10095;</button><button class="lb-nav left-nav" onclick="window.nextImage(event)">&#10094;</button><div class="lightbox-content-wrapper" id="lb-wrapper"><img id="lb-image-viewer" class="lightbox-image" src="" alt="MBT Print Design"></div></div>
+
+<script>
+(function() {
+    // ==========================================
+    // 1. قائمة صور المطبوعات والمرئيات
+    // ==========================================
+    const myPrints = [
+        "765876868.png", "Letterhead-on-Table-Mockup.png", "65567658-0١.png", "457657567-0١.png",
+        "46575765876567 (1).png", "high-quality-menu-mockup-2025-12-05-06-24-54-utc (1).png",
+        "4554656 (1).png", "6457657.png", "456546546.png", "45575688.png",
+        "456564576645 (1).png", "WhatsAppImage2025-07-08at8.53.01PM.jpeg",
+        "WhatsAppImage2025-07-08at8.53.01PM(1).jpeg", "67567567567.png",
+        "456546546546.png", "فاتورة.jpg", "456646456.png", "FreeBusinessCardStackMockup.jpg",
+        "20adb518-08bd-4dc6-98aa-4c9b004e7685.jpg", "64576756.png", "554654654.png",
+        "6456575 (1).png", "657567676.png", "68678 (1).png", "1 (6).png", "5.png",
+    ];
+    
+    const r2_base = "https://media.mbt.ad/";
+    
+    // التعديل هنا: إنشاء رابطين لكل صورة (نسخة مصغرة للمعرض، ونسخة أصلية للعارض)
+    const images = myPrints.map(file => {
+        const fullUrl = r2_base + file;
+        // استخدام خدمة wsrv.nl لإنشاء نسخة مصغرة بعرض 400 بكسل وصيغة WebP سريعة التحميل
+        const thumbUrl = `https://wsrv.nl/?url=${fullUrl}&w=400&output=webp&q=75`;
+        return { fullUrl, thumbUrl };
+    });
+
+    let currentIndex = 0;
+    let slideshowInterval = null;
+    let isPlaying = false;
+
+    let scale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+    
+    // ==========================================
+    // 2. بناء المعرض المطور 
+    // ==========================================
+    function buildPrintGallery() {
+        const gridContainer = document.getElementById('mbt-print-grid');
+        if (!gridContainer || gridContainer.innerHTML.trim() !== "") return; 
+
+        let columnCount = window.innerWidth <= 992 ? 2 : 3;
+
+        for (let i = 0; i < columnCount; i++) {
+            gridContainer.insertAdjacentHTML('beforeend', `<div class="masonry-column" id="masonry-col-${i}"></div>`);
+        }
+
+        // التعديل هنا: استخدام imgObj.thumbUrl للصور المصغرة في المعرض
+        images.forEach((imgObj, index) => {
+            const cardHTML = `
+                <a href="javascript:void(0);" onclick="window.openImageModal(${index})" class="print-thumb-card protected-item">
+                    <img class="thumb-image" src="${imgObj.thumbUrl}" loading="lazy" alt="MBT Print Design">
+                    <div class="zoom-icon-glass"></div>
+                </a>
+            `;
+            const targetColIndex = index % columnCount;
+            const targetCol = document.getElementById(`masonry-col-${targetColIndex}`);
+            targetCol.insertAdjacentHTML('beforeend', cardHTML);
+        });
+
+        document.querySelectorAll('.protected-item, .lightbox-image').forEach(item => {
+            item.oncontextmenu = e => e.preventDefault();
+            item.ondragstart = e => e.preventDefault();
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.1 }); 
+
+        document.querySelectorAll('.print-thumb-card').forEach(card => {
+            observer.observe(card);
+        });
+    }
+
+    // ==========================================
+    // 3. دوال التحكم بالنافذة (استخدام الدقة العالية)
+    // ==========================================
+    window.openImageModal = function(index) {
+        currentIndex = index;
+        const lbImage = document.getElementById('lb-image-viewer');
+        // التعديل هنا: استخدام الدقة العالية عند فتح الـ Lightbox
+        if(lbImage) lbImage.src = images[currentIndex].fullUrl;
+        window.resetZoom();
+        const lightbox = document.getElementById('image-lightbox');
+        if(lightbox) lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeImageModal = function() {
+        const lightbox = document.getElementById('image-lightbox');
+        if(lightbox) lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        if(isPlaying) window.toggleSlideshow(); 
+        setTimeout(() => { 
+            const lbImage = document.getElementById('lb-image-viewer');
+            if(lbImage) lbImage.src = ""; 
+            window.resetZoom(); 
+        }, 400);
+    };
+
+    window.nextImage = function(e) {
+        if(e) e.stopPropagation();
+        currentIndex = (currentIndex + 1) % images.length;
+        const lbImage = document.getElementById('lb-image-viewer');
+        // التعديل هنا: تحميل الدقة العالية للصورة التالية
+        if(lbImage) lbImage.src = images[currentIndex].fullUrl;
+        window.resetZoom();
+    };
+
+    window.prevImage = function(e) {
+        if(e) e.stopPropagation();
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        const lbImage = document.getElementById('lb-image-viewer');
+        // التعديل هنا: تحميل الدقة العالية للصورة السابقة
+        if(lbImage) lbImage.src = images[currentIndex].fullUrl;
+        window.resetZoom();
+    };
+
+    // ==========================================
+    // 4. العرض التلقائي و نظام السحب والتكبير 
+    // ==========================================
+    window.toggleSlideshow = function(e) {
+        if(e) e.stopPropagation();
+        const btn = document.getElementById('lb-play');
+        if (isPlaying) {
+            clearInterval(slideshowInterval);
+            if(btn) btn.innerHTML = '▶';
+            isPlaying = false;
+        } else {
+            slideshowInterval = setInterval(() => window.nextImage(), 3000); 
+            if(btn) btn.innerHTML = '⏸';
+            isPlaying = true;
+        }
+    };
+
+    window.resetZoom = function(e) {
+        if(e) e.stopPropagation();
+        scale = 1; translateX = 0; translateY = 0;
+        applyTransform();
+    };
+
+    function applyTransform() {
+        const lbImage = document.getElementById('lb-image-viewer');
+        if(lbImage) lbImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    setTimeout(() => {
+        const lbWrapper = document.getElementById('lb-wrapper');
+        const lbImage = document.getElementById('lb-image-viewer');
+        const lightbox = document.getElementById('image-lightbox');
+
+        if(lbWrapper && lbImage) {
+            lbWrapper.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? 1 : -1;
+                scale += delta * 0.15; 
+                scale = Math.min(Math.max(1, scale), 5); 
+                if(scale === 1) { translateX = 0; translateY = 0; } 
+                applyTransform();
+            });
+
+            lbWrapper.addEventListener('mousedown', (e) => {
+                if (scale > 1 && e.target === lbImage) {
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                }
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    translateX = e.clientX - startX;
+                    translateY = e.clientY - startY;
+                    applyTransform();
+                }
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            let initialDistance = null;
+            let initialScale = 1;
+
+            lbWrapper.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    initialDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+                    initialScale = scale;
+                } else if (e.touches.length === 1 && scale > 1 && e.target === lbImage) {
+                    isDragging = true;
+                    startX = e.touches[0].clientX - translateX;
+                    startY = e.touches[0].clientY - translateY;
+                }
+            });
+
+            lbWrapper.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2) {
+                    e.preventDefault(); 
+                    const currentDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+                    const delta = currentDistance / initialDistance;
+                    scale = Math.min(Math.max(1, initialScale * delta), 5);
+                    if(scale === 1) { translateX = 0; translateY = 0; }
+                    applyTransform();
+                } else if (e.touches.length === 1 && isDragging) {
+                    e.preventDefault();
+                    translateX = e.touches[0].clientX - startX;
+                    translateY = e.touches[0].clientY - startY;
+                    applyTransform();
+                }
+            });
+
+            lbWrapper.addEventListener('touchend', () => { isDragging = false; });
+        }
+
+        if(lightbox) {
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === this || e.target.id === 'lb-wrapper') {
+                    window.closeImageModal();
+                }
+            });
+        }
+    }, 100);
+
+    buildPrintGallery();
+
+})();
+</script>
