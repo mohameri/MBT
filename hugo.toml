@@ -37,7 +37,7 @@ publishDir = "docs"
 [[menu.main]]
   identifier = "whatsapp"
   name = "الواتساب"
-  url = "https://wa.me/9647872840590"
+  url = "https://wa.me/9647814300387"
   weight = 10
 
 [[menu.main]]
